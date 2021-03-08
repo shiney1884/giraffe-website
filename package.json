@@ -1,0 +1,19 @@
+{
+  "name": "website",
+  "version": "1.0.0",
+  "description": "An e-commerce site for Giraffe",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/shiney1884/giraffe-website.git"
+  },
+  "author": "Scott Massie, Shaun Harper",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/shiney1884/giraffe-website/issues"
+  },
+  "homepage": "https://github.com/shiney1884/giraffe-website#readme"
+}
