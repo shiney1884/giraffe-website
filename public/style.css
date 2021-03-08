@@ -17,11 +17,34 @@ html {
     padding: 10px;
 }
 
+nav {
+    position: relative;
+    /* border: 2px solid blue; */
+}
+
+.burger {
+    position: absolute;
+    top: 3px;
+}
+
+.burger:hover {
+    cursor: pointer;
+}
+
+.burger span {
+    display: block;
+    background: #fff;
+    height: 3px;
+    width: 25px;
+    border-radius: 2px;
+    margin: 5px;
+}
+
 .links {
     display: flex;
     flex-direction: column;
     align-items: center;
-    border: 2px solid blue;
+    /* border: 2px solid blue; */
     background-color: #B46325;
     height: 33.33vw;
     justify-content: space-between;
@@ -35,14 +58,3 @@ html {
     text-align: center;
     padding: 10px;
 }
-
-header {
-    border: 2px solid red;
-}
-
-/* footer {
-    border: 2px solid red;
-    position: absolute;
-    bottom: 0;
-    width: 100%;
-} */
