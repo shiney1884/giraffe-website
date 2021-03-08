@@ -19,16 +19,14 @@ html {
 
 nav {
     position: relative;
+    background-color: #B46325;
+    height: 70px;
     /* border: 2px solid blue; */
 }
 
 .burger {
     position: absolute;
-    top: 3px;
-}
-
-.burger:hover {
-    cursor: pointer;
+    top: 20px;
 }
 
 .burger span {
@@ -40,6 +38,11 @@ nav {
     margin: 5px;
 }
 
+.burger:hover {
+    cursor: pointer;
+}
+
+
 .links {
     display: flex;
     flex-direction: column;
@@ -48,6 +51,13 @@ nav {
     background-color: #B46325;
     height: 33.33vw;
     justify-content: space-between;
+    position: relative;
+    top: -500px;
+    transition: 0.3s;
+}
+
+.down {
+    top: 0;
 }
 
 .links a {
