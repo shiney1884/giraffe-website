@@ -66,6 +66,10 @@ nav {
     top: 0;
 }
 
+.hide {
+    opacity: 0;
+}
+
 .links a {
     all: unset;
     color: white;
