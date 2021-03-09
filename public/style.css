@@ -139,11 +139,10 @@ footer a {
 .helpful-info, .account, .other {
     display: flex;
     flex-direction: column;
-    margin-top: 15px;
 }
 
 .social-media {
-    margin: 15px;
+    margin-top: 15px;
 }
 
 .fab {
@@ -212,5 +211,78 @@ footer a {
 .categories {
     display: flex;
     flex-direction: column;
-    border: 2px solid red;
+    justify-content: space-evenly;
+    /* border: 2px solid red; */
+    padding: 10px 0;
+}
+
+.category-1,
+.category-2,
+.category-3 {
+    width: 50vw;
+    height: 25vh;
+    position: relative;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin: 0 auto;
+}
+
+.category-1::after {
+    content: '';
+    background: url(images/notebook-cat-img.jpg);
+    background-size: cover;
+    background-position: center;
+    height: 25vh;
+    position: absolute;
+    right: 0;
+    left: 0;
+    z-index: -1;
+    opacity: 0.5;
+}
+
+.category-2::after {
+    content: '';
+    background: url(images/pens-img.jpg);
+    background-size: cover;
+    background-position: center;
+    height: 25vh;
+    position: absolute;
+    right: 0;
+    left: 0;
+    z-index: -1;
+    opacity: 0.5;
+}
+
+.category-3::after {
+    content: '';
+    background: url(images/stationery-img.jpg);
+    background-size: cover;
+    background-position: center;
+    height: 25vh;
+    position: absolute;
+    right: 0;
+    left: 0;
+    z-index: -1;
+    opacity: 0.5;
+}
+
+.categories a {
+    all: unset;
+    background-color: #F2B613;
+    padding: 10px 7.5px;
+    color: #000;
+    border-radius: 4.5px;
+}
+
+.categories a:hover {
+    cursor: pointer;
+}
+
+.category-1,
+.category-2,
+.category-3 {
+    margin-top: 10px;
+    margin-bottom: 10px;
+    border: 2px solid #B46325;
 }
