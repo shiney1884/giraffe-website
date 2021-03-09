@@ -107,3 +107,57 @@ nav {
 .fa-search:hover, .fa-shopping-basket:hover {
     cursor: pointer;
 }
+
+
+
+/* footer */
+
+footer {
+    position: absolute;
+    bottom: 0;
+    background-color: #B46325;
+    width: 100%;
+    text-align: center;
+}
+
+footer, h3, a {
+    color: #fff;
+}
+
+footer h3 {
+    text-decoration: underline;
+}
+
+footer a {
+    all: unset;
+    cursor: pointer;
+    margin-top: 5px;
+}
+
+.helpful-info, .account, .other {
+    display: flex;
+    flex-direction: column;
+    margin-top: 15px;
+}
+
+.social-media {
+    margin: 15px;
+}
+
+.fab {
+    font-size: 30px;
+    margin: 5px;
+}
+
+.fa-facebook-square {
+    color: #4267B2;
+}
+
+.fa-twitter-square {
+    color: #1DA1F2;
+}
+
+.fa-instagram-square {
+    color: #5851DB;
+}
+
