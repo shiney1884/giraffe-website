@@ -150,6 +150,10 @@ footer a {
     margin: 5px;
 }
 
+.fab:hover {
+    cursor: pointer;
+}
+
 .fa-facebook-square {
     color: #4267B2;
 }
@@ -226,6 +230,10 @@ footer a {
     justify-content: center;
     align-items: center;
     margin: 0 auto;
+    margin-top: 10px;
+    margin-bottom: 10px;
+    border: 2px solid #B46325;
+    border-radius: 4.5px;
 }
 
 .category-1::after {
@@ -279,10 +287,50 @@ footer a {
     cursor: pointer;
 }
 
-.category-1,
-.category-2,
-.category-3 {
-    margin-top: 10px;
-    margin-bottom: 10px;
-    border: 2px solid #B46325;
+
+
+/* midpage hero */
+
+.midpage-hero::after {
+    content: '';
+    background: url(images/art-equipment.jpg);
+    background-size: cover;
+    background-position: center;
+    height: 25vh;
+    position: absolute;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    left: 0;
+    z-index: -1;
+    opacity: 0.7;
 }
+
+
+
+/* social media section */
+
+.social-media-sec {
+    text-align: center;
+    /* border: 2px solid black; */
+    width: 50vw;
+    margin: 10px auto;
+}
+
+.social-media-sec h6 {
+    font-size: 1.25em;
+    font-weight: 400;
+    text-decoration: underline;
+}
+
+.social-media-sec .fab {
+    font-size: 50px;
+    margin: 5px;
+}
+
+
+
+/* fact zone */
+
+
+
