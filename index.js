@@ -13,6 +13,6 @@ app.get('/', (req, res)=> {
     res.render('index');
 })
 
-// app.get('/products', (req, res)=> {
-//     res.render('products');
-// })
+app.get('/products', (req, res)=> {
+    res.render('products');
+})
