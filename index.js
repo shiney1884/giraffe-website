@@ -26,3 +26,9 @@ app.get('/pens', (req, res)=> {
     let header = 'Pens';
     res.render('products', {title: title, header: header});
 });
+
+app.get('/artcontest', (req, res)=> {
+    let title = 'Art Contest | Giraffe Website';
+    let header = 'Art Contest';
+    res.render('contest', {title: title, header: header});
+});
