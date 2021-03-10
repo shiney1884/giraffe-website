@@ -488,15 +488,15 @@ footer a {
     opacity: 0.5;
 }
 
-/* artcontest page */
+/* artcontest guide */
 
 .artcontest-guide {
-    border: 2px solid red;
+    /* border: 2px solid red; */
     width: 80vw;
     margin: 10px auto;
 }
 
-.artcontest-guide h4 {
+.title h4 {
     text-align: center;
     font-size: 1.25em;
     color: #B46325;
@@ -529,9 +529,46 @@ footer a {
     margin-top: 10px;
 }
 
+hr {
+    height: 5px;
+    background-color: #B46325;
+    width: 80vw;
+    margin: 10px auto;
+}
+
+/* artcontest gallery */
 
 
-/* responsive product grid concept */
+.gallery {
+    width: 80vw;
+    margin: 0 auto;
+}
+
+.title h4 {
+    margin-bottom: 25px;
+}
+
+.winner {
+    /* border: 2px solid red; */
+    margin: 20px 0;
+}
+
+.winner img {
+    width: 100%;
+}
+
+.winner-info .name {
+    font-weight: 700;
+    margin-bottom: 7.5px;
+}
+
+.winner-info {
+    margin-top: 10px;
+}
+
+
+
+/* responsive concept */
 
 @media(min-width: 1000px) {
     .product {
@@ -551,6 +588,16 @@ footer a {
     .circle {
         width: 2.5vw;
         height: 2.5vw;
+    }
+
+    .winners {
+        display: flex;
+        flex-flow: row wrap;
+        justify-content: space-evenly;
+    }
+
+    .winner {
+        flex-basis: 40%;
     }
 }
 
