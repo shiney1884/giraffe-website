@@ -10,9 +10,18 @@ app.listen(3000, ()=> {
 });
 
 app.get('/', (req, res)=> {
-    res.render('index');
+    let title = 'Home | Giraffe Website';
+    res.render('index', {title: title});
 })
 
-app.get('/products', (req, res)=> {
-    res.render('products');
-})
+app.get('/pencils', (req, res)=> {
+    let title = 'Pencils | Giraffe Website';
+    let header = 'Pencils';
+    res.render('products', {title: title, header: header});
+});
+
+app.get('/pens', (req, res)=> {
+    let title = 'Pens | Giraffe Website';
+    let header = 'Pens';
+    res.render('products', {title: title, header: header});
+});

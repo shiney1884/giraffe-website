@@ -424,14 +424,15 @@ footer a {
     width: 80vw;
     margin: 10px auto;
     display: flex;
-    flex-direction: row;
-    justify-content: space-between;
+    flex-flow: row wrap;
+    justify-content: space-evenly;
     /* border: 2px solid green; */
 }
 
 
 .product {
     width: 33.33vw;
+    flex-basis: 40%;
 }
 
 .product-img{
@@ -466,4 +467,11 @@ footer a {
 
 .actions i {
     margin: 2.5px;
+}
+
+
+@media(min-width: 1000px) {
+    .product {
+        flex-basis: 22.5%;
+    }
 }
