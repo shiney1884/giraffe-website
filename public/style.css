@@ -604,8 +604,10 @@ hr {
 
 .details {
     /* border: 2px solid green; */
-    width: 75%;
     margin: 0 auto;
+    background-color: #B46325;
+    color: #fff;
+    padding: 15px;
 }
 
 .number, .email, .address, .form-method {
