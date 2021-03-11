@@ -40,3 +40,12 @@ app.get('/contact', (req, res)=> {
     res.render('contact', {title: title, header: header});
 });
 
+app.get('/createaccount', (req, res)=> {
+    let title = 'Create an Account | Giraffe Website';
+    res.render('createaccount', {title: title});
+});
+
+app.get('/login', (req, res)=> {
+    let title = 'Login | Giraffe Website';
+    res.render('login', {title: title});
+});

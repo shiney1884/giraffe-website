@@ -14,6 +14,11 @@ html {
 }
 
 
+
+
+
+
+
 /* header */
 
 .banner {
@@ -111,6 +116,8 @@ nav {
 
 
 
+
+
 /* footer */
 
 footer {
@@ -168,6 +175,8 @@ footer a {
 
 
 
+
+
 /* hero */
 
 .hero {
@@ -206,6 +215,8 @@ footer a {
 .hero a:hover {
     cursor: pointer;
 }
+
+
 
 
 
@@ -289,6 +300,8 @@ footer a {
 
 
 
+
+
 /* midpage hero */
 
 .midpage-hero::after {
@@ -305,6 +318,8 @@ footer a {
     z-index: -1;
     opacity: 0.7;
 }
+
+
 
 
 
@@ -328,6 +343,8 @@ footer a {
     font-size: 50px;
     margin: 5px;
 }
+
+
 
 
 
@@ -363,6 +380,9 @@ footer a {
 }
 
 
+
+
+
 /* product hero */
 
 .product-hero::after {
@@ -384,6 +404,9 @@ footer a {
     font-size: 1.5em;
     color: #B46325;
 }
+
+
+
 
 
 /* filter */
@@ -417,6 +440,10 @@ footer a {
     all: unset;
     padding: 7.5px;
 }
+
+
+
+
 
 /* products */
 
@@ -472,6 +499,7 @@ footer a {
 
 
 
+
 /* artcontest hero */
 
 .artcontest-hero::after {
@@ -488,6 +516,9 @@ footer a {
     z-index: -1;
     opacity: 0.5;
 }
+
+
+
 
 /* artcontest guide */
 
@@ -539,6 +570,7 @@ hr {
 
 
 
+
 /* artcontest gallery */
 
 .gallery {
@@ -570,6 +602,7 @@ hr {
 
 
 
+
 /* contact page hero */
 
 .contact-hero::after {
@@ -586,6 +619,7 @@ hr {
     z-index: -1;
     opacity: 0.5;
 }
+
 
 
 
@@ -653,6 +687,32 @@ hr {
     border: 1.5px solid grey;
     padding: 10px 5px;
 }
+
+
+
+
+
+
+/* create account/login page*/
+
+.form-holder {
+    /* border: 2px solid red; */
+    width: 80vw;
+    margin: 10px auto;
+}
+
+.form-holder form {
+    margin-top: 20px;
+}
+
+.form-holder h4 {
+    font-size: 1.25em;
+    text-align: center;
+}
+
+
+
+
 
 
 /* responsive concept */
