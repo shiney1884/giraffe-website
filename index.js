@@ -49,3 +49,10 @@ app.get('/login', (req, res)=> {
     let title = 'Login | Giraffe Website';
     res.render('login', {title: title});
 });
+
+app.get('/basket', (req, res)=> {
+    let title = 'Your Basket | Giraffe Website';
+    res.render('basket', {title: title});
+});
+
+

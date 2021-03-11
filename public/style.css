@@ -715,6 +715,67 @@ hr {
 
 
 
+/* basket page */
+
+.basket {
+    /* border: 2px solid red; */
+    width: 80vw;
+    margin: 10px auto;
+}
+
+.basket h4 {
+    text-align: center;
+    font-size: 1.25em;
+    margin: 25px 0;
+}
+
+.basket-items {
+    border: 2px solid orange;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.basket-item {
+    /* border: 2px solid green; */
+    display: flex;
+    margin-top: 15px; 
+}
+
+.image-holder {
+    width: 50vw;
+}
+
+.image-holder img {
+    width: 100%;
+    height: 100%;
+}
+
+.basket-item-details {
+    /* border: 2px solid yellow; */
+    width: 100%;
+    margin: 10px;
+}
+
+.basket-item-delete button {
+    all: unset;
+}
+
+.basket-item-name {
+    font-weight: 700;
+}
+
+.basket-item-price, .basket-item-delete {
+    font-size: .85em;
+}
+
+
+
+
+
+
+
+
 /* responsive concept */
 
 @media(min-width: 1000px) {
