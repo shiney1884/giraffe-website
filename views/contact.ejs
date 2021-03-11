@@ -1,5 +1,35 @@
 <%- include('header'); -%>
 
-
-
+<div class="contact-hero hero">
+    <h4 class="product-header white"><%= header %></h4>
+</div>
+<div class="form-and-details">
+    <div class="details">
+        <h4>How to Contact Us!</h4>
+        <div class="number">
+            <i class="fas fa-phone"></i>
+            <p> 01250 872871</p>
+        </div>
+        <div class="email">
+            <i class="fas fa-envelope"></i>
+            <p> scott0406@outlook.com</p>
+        </div>
+        <div class="address">
+            <i class="fas fa-map-marker-alt"></i>
+            <p> Craiglynne, Victoria Street, Rattray, PH10 7AG</p>
+        </div>
+        <div class="form-method">
+            <i class="fas fa-info-circle"></i>
+            <p> Below or Left!</p>
+        </div>
+    </div>
+    <form class="form" action="" method="post">
+        <h4>Get in Touch!</h4>
+        <label for="email">Email</label>
+        <input type="email" name="email" id="">
+        <label for="details">Details</label>
+        <textarea name="details" id="" cols="30" rows="10"></textarea>
+        <button type="submit">Submit</button>
+    </form>
+</div>
 <%- include('footer'); -%>

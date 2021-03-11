@@ -34,8 +34,8 @@ app.get('/artcontest', (req, res)=> {
 });
 
 
-app.get('/contactus', (req, res)=> {
-    let title = 'Contact Us | Giraffe Website';
+app.get('/contact', (req, res)=> {
+    let title = 'Contact | Giraffe Website';
     let header = 'Contact Us';
     res.render('contact', {title: title, header: header});
 });
