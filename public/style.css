@@ -315,6 +315,7 @@ footer a {
     border: 2px solid #B46325;   
     margin: 10px auto;
     padding: 12.5px;
+    width: 80vw;
 }
 
 .social-media-sec h6 {
@@ -624,7 +625,7 @@ hr {
 
 .form {
     /* border: 2px solid blue; */
-    margin-top: 50px;
+    margin: 50px 0;
     display: flex;
     flex-direction: column;
 }
@@ -684,6 +685,25 @@ hr {
 
     .winner {
         flex-basis: 40%;
+    }
+
+    .form-and-details {
+        display: flex;
+        justify-content: space-between;
+        /* border: 2px solid black; */
+        flex-flow: row;
+    }
+
+    .form {
+        margin: 0;
+        flex-basis: 50%;
+    }
+
+    .details {
+        order: 1;
+        margin: 0;
+        flex-basis: 33.33%;
+        height: 50%;
     }
 }
 
