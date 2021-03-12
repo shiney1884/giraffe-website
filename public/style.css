@@ -730,7 +730,7 @@ hr {
 }
 
 .basket-items {
-    border: 2px solid orange;
+    /* border: 2px solid orange; */
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -755,6 +755,17 @@ hr {
     /* border: 2px solid yellow; */
     width: 100%;
     margin: 10px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-evenly;
+}
+
+.basket-item-details select {
+    all: unset;
+    border: 2px solid grey;
+    padding: 5px;
+    text-align: center;
+    width: 20%;
 }
 
 .basket-item-delete button {
@@ -772,6 +783,65 @@ hr {
 
 
 
+
+/* checkout page */
+
+
+.order-details {
+    /* border: 2px solid red; */
+    width: 90vw;
+    margin: 20px auto;
+}
+
+.order-details h4 {
+    font-size: 1.25em;
+    text-decoration: underline;
+}
+
+.order-items {
+    /* border: 2px solid green; */
+    margin-top: 10px;
+}
+
+.order-item {
+    /* border: 2px solid blue; */
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    margin-top: 10px;
+}
+
+.order-item img {
+    width: 25%;
+    margin-right: 7.5px;
+    /* border: 2px solid red; */
+}
+
+.item-details {
+    /* border: 2px solid yellow; */
+    display: flex;
+    align-items: center;
+    width: 100%;
+}
+
+.order-item hr {
+    height: 2px;
+    background-color:grey;
+    width: 90vw;
+    /* margin: 10px auto; */
+}
+
+.item-name span,
+.item-price span,
+.item-quantity span {
+    font-weight: 700;
+}
+
+.item-name, 
+.item-price, 
+.item-quantity {
+    margin-right: 7.5px;
+}
 
 
 
@@ -826,5 +896,6 @@ hr {
         flex-basis: 33.33%;
         height: 50%;
     }
+
 }
 

@@ -55,4 +55,10 @@ app.get('/basket', (req, res)=> {
     res.render('basket', {title: title});
 });
 
+app.get('/checkout', (req, res)=> {
+    let title = 'Checkout | Giraffe Website';
+    res.render('checkout', {title: title});
+});
+
+
 
