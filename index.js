@@ -61,4 +61,11 @@ app.get('/checkout', (req, res)=> {
 });
 
 
+app.get('/youraccount', (req, res)=> {
+    let title = 'Your Account | Giraffe Website';
+    let header = 'Your Account';
+    res.render('youraccount', {title: title, header: header});
+});
+
+
 
