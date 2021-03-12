@@ -67,5 +67,15 @@ app.get('/youraccount', (req, res)=> {
     res.render('youraccount', {title: title, header: header});
 });
 
+app.get('/orders', (req, res)=> {
+    let title = 'Your Orders | Giraffe Website';
+    res.render('orders', {title: title});
+});
+
+app.get('/wishlist', (req, res)=> {
+    let title = 'Wishlist | Giraffe Website';
+    res.render('wishlist', {title: title});
+});
+
 
 
