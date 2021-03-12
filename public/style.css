@@ -787,18 +787,25 @@ hr {
 /* checkout page */
 
 
-.order-details {
+.order-details,
+.delivery-address,
+.payment-method,
+.final-cost {
     /* border: 2px solid red; */
     width: 90vw;
     margin: 20px auto;
 }
 
-.order-details h4 {
+.order-details h4, 
+.delivery-address h4,
+.payment-method h4,
+.final-cost h4 {
     font-size: 1.25em;
     text-decoration: underline;
 }
 
-.order-items {
+.order-items,
+.delivery-address-details {
     /* border: 2px solid green; */
     margin-top: 10px;
 }
@@ -844,7 +851,42 @@ hr {
 }
 
 
+.delivery-address-detail {
+    display: flex;
+    flex-direction: column;
+    margin-top: 15px;
+}
 
+.delivery-address-detail input, select, textarea {
+    all: unset;
+    border: 1px solid grey;
+    padding: 10px 5px;
+}
+
+.final-cost p {
+    margin-top: 10px;
+    font-size: 1.25em;
+}
+
+.complete-order {
+    display: flex;
+    align-items: center;
+    margin-bottom: 20px;
+}
+
+.complete-order button {
+    all: unset;
+    background-color: #F2B613;
+    padding: 10px 7.5px;
+    color: #000;
+    border-radius: 4.5px;
+    margin: 0 auto;
+    margin-top: 20px;
+}
+
+.complete-order button:hover {
+    cursor: pointer;
+}
 
 /* responsive concept */
 
