@@ -909,6 +909,34 @@ hr {
     opacity: 0.5;
 }
 
+.boxes {
+    width: 80vw;
+    margin: 10px auto;
+    display: flex;
+    flex-flow: row wrap;
+    justify-content: space-evenly;
+    /* border: 2px solid green; */
+}
+
+.account-box {
+    flex-basis: 100%;
+    border: 2px solid #B46325;
+    padding: 10px;
+    border-radius: 5px;
+    margin-top: 10px;
+}
+
+.account-box a {
+    all: unset;
+    color: #B46325;
+    display: flex;
+    flex-direction: column;
+    margin-top: 10px;
+}
+
+.account-box a:hover {
+    cursor: pointer;
+}
 
 
 /* responsive concept */
@@ -960,6 +988,10 @@ hr {
         margin: 0;
         flex-basis: 33.33%;
         height: 50%;
+    }
+
+    .account-box {
+        flex-basis: 30%;
     }
 
 }
