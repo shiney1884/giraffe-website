@@ -3,6 +3,7 @@ const mySQL = require('mysql');
 const ejs = require('ejs');
 const app = express();
 let clickedProduct = 'Pencil3';
+let searchQuery = 'Pencil';
 app.use(express.static("public"));
 app.set('view engine', 'ejs');
 
@@ -72,10 +73,19 @@ app.get('/orders', (req, res)=> {
     res.render('orders', {title: title});
 });
 
-app.get('/wishlist', (req, res)=> {
-    let title = 'Wishlist | Giraffe Website';
-    res.render('wishlist', {title: title});
+app.get(`/${searchQuery}`, (req, res)=> {
+    let title = 'Your Search | Giraffe Website';
+    let header = 'Search Results';
+    res.render('products', {title: title, header: header});
 });
+
+app.get('/wishlist', (req, res)=> {
+    let title = 'Your Wishlist | Giraffe Website';
+    let header = 'Wishlist';
+    res.render('wishlist', {title: title, header: header});
+});
+
+
 
 
 
