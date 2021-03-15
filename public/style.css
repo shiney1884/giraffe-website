@@ -125,6 +125,10 @@ nav {
     color: #fff;
 }
 
+.logo a {
+     text-decoration: none;
+}
+
 .fa-search {
     position: absolute;
     top: 25px;
@@ -1030,6 +1034,8 @@ td {
 
     .sign-in-link {
         border-radius: 4.5px;
+        position: relative;
+        top: 0;
     }
 
 
@@ -1105,7 +1111,7 @@ td {
     }
 
     .factbox {
-        width: 50vw;
+        width: 57.5vw;
         margin: 0;
     }
 
@@ -1114,7 +1120,7 @@ td {
     }
 
     .desktop-socials {
-        width: 33vw;
+        width: 25vw;
     }
 
     .product {

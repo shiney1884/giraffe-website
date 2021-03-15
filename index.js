@@ -3,7 +3,7 @@ const mySQL = require('mysql');
 const ejs = require('ejs');
 const app = express();
 let clickedProduct = 'Pencil3';
-let searchQuery = 'Pencil';
+let searchQuery = 'pencils';
 app.use(express.static("public"));
 app.set('view engine', 'ejs');
 
