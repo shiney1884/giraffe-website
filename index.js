@@ -2,7 +2,7 @@ const express = require('express');
 const mySQL = require('mysql');
 const ejs = require('ejs');
 const app = express();
-let clickedProduct = 'Pencil3';
+let product = 'Black-Pencil';
 let searchQuery = 'pencils';
 app.use(express.static("public"));
 app.set('view engine', 'ejs');
@@ -17,15 +17,6 @@ app.get('/', (req, res) => {
         title: title
     });
 })
-
-app.get(`/${clickedProduct}`, (req, res) => {
-    let title = `${clickedProduct} | Giraffe Website`;
-    let header = `${clickedProduct}`;
-    res.render('products', {
-        title: title,
-        header: header
-    });
-});
 
 app.get('/pens', (req, res) => {
     let title = 'Pens | Giraffe Website';
@@ -117,3 +108,10 @@ app.get('/wishlist', (req, res) => {
         header: header
     });
 });
+
+app.get(`/${product}`, (req, res) => {
+    let title = `${product} | Giraffe Website`;
+    res.render('product', {title: title});
+});
+
+
