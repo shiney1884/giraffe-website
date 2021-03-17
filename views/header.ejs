@@ -7,30 +7,30 @@
     <title><%= title %></title>
     <link rel="stylesheet" href="style.css">
     <script src="https://kit.fontawesome.com/3d64925a9f.js" crossorigin="anonymous"></script>
-    <script src="scripts/nav.js"></script>
 </head>
 <body>
     <header class="header">
         <div class="banner">
             <p>10% OFF ALL STORE PRODUCTS NOW!</p>
         </div>
-        <nav class="nav">
-            <div class="burger">
-                <span class="first-bar"></span>
-                <span class="second-bar"></span>
-                <span class="third-bar"></span>
+        <nav id="nav" class="nav">
+            <div id="burger" class="burger">
+                <span id="first-bar" class=""></span>
+                <span id="second-bar" class=""></span>
+                <span id="third-bar" class=""></span>
             </div>
             <div class="logo">
                 <a href="/"><h2>Giraffe</h2></a>
             </div>
-            <div class="links">
+            <div id="links" class="links">
                 <a href="pens">Our Products</a>
                 <a href="artcontest">Art Contests</a>
                 <a href="contact">Contact Us</a>
             </div>
             <input class="searchbar" type="search" name="" id="" placeholder="Search Products...">
             <i class="fas fa-search"></i>
-            <a class="sign-in-link" href="login">Sign In</a>
+            <a id="sign-in-link" class="sign-in-link" href="login">Sign In</a>
             <a href="basket"><i class="fas fa-shopping-basket"></i></a>
         </nav>
     </header>
+    <script src="scripts/nav.js"></script>

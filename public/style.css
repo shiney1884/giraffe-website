@@ -49,6 +49,21 @@ nav {
     width: 25px;
     border-radius: 2px;
     margin: 5px;
+    position: relative;
+}
+
+.first-bar {
+    top: 11px;
+    transform: rotate(45deg);
+}
+
+.second-bar {
+    opacity: 0;
+}
+
+.third-bar {
+    bottom: 5px;
+    transform: rotate(-45deg);
 }
 
 .burger:hover {
@@ -91,10 +106,6 @@ nav {
     top: -500px;
     transition: 0.3s;
     z-index: 100;
-}
-
-.down {
-    top: 0px;
 }
 
 .down {
