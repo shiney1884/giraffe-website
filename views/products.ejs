@@ -15,13 +15,14 @@
         </div>
     </div>
     <div class="products">
-        <div class="product">
+       <% for(let i = 0; i < data.length; i++) { %>
+           <div class="product">
             <img class="product-img" src="images/pencil-1.jpg" alt="">
-            <a href="#">Pencil 1</a>
+            <a href="#"><%= data[i]['description'] %></a>
             <div class="product-info">
                 <div class="price">
-                    <span>£</span>4.50
-                    <div class="old-price"><span>£</span>5.00</div>
+                    <span>£</span><%= data[i]['price'] %>
+                    <div class="old-price"><span>£</span><%= data[i]['supp_id'] %></div>
                 </div>
                 <div class="actions">
                     <i class="far fa-heart"></i>
@@ -29,203 +30,10 @@
                 </div>
             </div>
         </div>
-        <div class="product">
-            <img class="product-img" src="images/pencil-1.jpg" alt="">
-            <a href="#">Pencil 1</a>
-            <div class="product-info">
-                <div class="price">
-                    <span>£</span>4.50
-                    <div class="old-price"><span>£</span>5.00</div>
-                </div>
-                <div class="actions">
-                    <i class="far fa-heart"></i>
-                    <i class="fas fa-cart-plus"></i>
-                </div>
-            </div>
-        </div>
-        <div class="product">
-            <img class="product-img" src="images/pencil-1.jpg" alt="">
-            <a href="#">Pencil 1</a>
-            <div class="product-info">
-                <div class="price">
-                    <span>£</span>4.50
-                    <div class="old-price"><span>£</span>5.00</div>
-                </div>
-                <div class="actions">
-                    <i class="far fa-heart"></i>
-                    <i class="fas fa-cart-plus"></i>
-                </div>
-            </div>
-        </div>
-        <div class="product">
-            <img class="product-img" src="images/pencil-1.jpg" alt="">
-            <a href="#">Pencil 1</a>
-            <div class="product-info">
-                <div class="price">
-                    <span>£</span>4.50
-                    <div class="old-price"><span>£</span>5.00</div>
-                </div>
-                <div class="actions">
-                    <i class="far fa-heart"></i>
-                    <i class="fas fa-cart-plus"></i>
-                </div>
-            </div>
-        </div>
-        <div class="product">
-            <img class="product-img" src="images/pencil-1.jpg" alt="">
-            <a href="#">Pencil 1</a>
-            <div class="product-info">
-                <div class="price">
-                    <span>£</span>4.50
-                    <div class="old-price"><span>£</span>5.00</div>
-                </div>
-                <div class="actions">
-                    <i class="far fa-heart"></i>
-                    <i class="fas fa-cart-plus"></i>
-                </div>
-            </div>
-        </div>
-        <div class="product">
-            <img class="product-img" src="images/pencil-1.jpg" alt="">
-            <a href="#">Pencil 1</a>
-            <div class="product-info">
-                <div class="price">
-                    <span>£</span>4.50
-                    <div class="old-price"><span>£</span>5.00</div>
-                </div>
-                <div class="actions">
-                    <i class="far fa-heart"></i>
-                    <i class="fas fa-cart-plus"></i>
-                </div>
-            </div>
-        </div>
-        <div class="product">
-            <img class="product-img" src="images/pencil-1.jpg" alt="">
-            <a href="#">Pencil 1</a>
-            <div class="product-info">
-                <div class="price">
-                    <span>£</span>4.50
-                    <div class="old-price"><span>£</span>5.00</div>
-                </div>
-                <div class="actions">
-                    <i class="far fa-heart"></i>
-                    <i class="fas fa-cart-plus"></i>
-                </div>
-            </div>
-        </div>
-        <div class="product">
-            <img class="product-img" src="images/pencil-1.jpg" alt="">
-            <a href="#">Pencil 1</a>
-            <div class="product-info">
-                <div class="price">
-                    <span>£</span>4.50
-                    <div class="old-price"><span>£</span>5.00</div>
-                </div>
-                <div class="actions">
-                    <i class="far fa-heart"></i>
-                    <i class="fas fa-cart-plus"></i>
-                </div>
-            </div>
-        </div>
-        <div class="product">
-            <img class="product-img" src="images/pencil-1.jpg" alt="">
-            <a href="#">Pencil 1</a>
-            <div class="product-info">
-                <div class="price">
-                    <span>£</span>4.50
-                    <div class="old-price"><span>£</span>5.00</div>
-                </div>
-                <div class="actions">
-                    <i class="far fa-heart"></i>
-                    <i class="fas fa-cart-plus"></i>
-                </div>
-            </div>
-        </div>
-        <div class="product">
-            <img class="product-img" src="images/pencil-1.jpg" alt="">
-            <a href="#">Pencil 1</a>
-            <div class="product-info">
-                <div class="price">
-                    <span>£</span>4.50
-                    <div class="old-price"><span>£</span>5.00</div>
-                </div>
-                <div class="actions">
-                    <i class="far fa-heart"></i>
-                    <i class="fas fa-cart-plus"></i>
-                </div>
-            </div>
-        </div>
-        <div class="product">
-            <img class="product-img" src="images/pencil-1.jpg" alt="">
-            <a href="#">Pencil 1</a>
-            <div class="product-info">
-                <div class="price">
-                    <span>£</span>4.50
-                    <div class="old-price"><span>£</span>5.00</div>
-                </div>
-                <div class="actions">
-                    <i class="far fa-heart"></i>
-                    <i class="fas fa-cart-plus"></i>
-                </div>
-            </div>
-        </div>
-        <div class="product">
-            <img class="product-img" src="images/pencil-1.jpg" alt="">
-            <a href="#">Pencil 1</a>
-            <div class="product-info">
-                <div class="price">
-                    <span>£</span>4.50
-                    <div class="old-price"><span>£</span>5.00</div>
-                </div>
-                <div class="actions">
-                    <i class="far fa-heart"></i>
-                    <i class="fas fa-cart-plus"></i>
-                </div>
-            </div>
-        </div>
-        <div class="product">
-            <img class="product-img" src="images/pencil-1.jpg" alt="">
-            <a href="#">Pencil 1</a>
-            <div class="product-info">
-                <div class="price">
-                    <span>£</span>4.50
-                    <div class="old-price"><span>£</span>5.00</div>
-                </div>
-                <div class="actions">
-                    <i class="far fa-heart"></i>
-                    <i class="fas fa-cart-plus"></i>
-                </div>
-            </div>
-        </div>
-        <div class="product">
-            <img class="product-img" src="images/pencil-1.jpg" alt="">
-            <a href="#">Pencil 1</a>
-            <div class="product-info">
-                <div class="price">
-                    <span>£</span>4.50
-                    <div class="old-price"><span>£</span>5.00</div>
-                </div>
-                <div class="actions">
-                    <i class="far fa-heart"></i>
-                    <i class="fas fa-cart-plus"></i>
-                </div>
-            </div>
-        </div>
-        <div class="product">
-            <img class="product-img" src="images/pencil-1.jpg" alt="">
-            <a href="#">Pencil 1</a>
-            <div class="product-info">
-                <div class="price">
-                    <span>£</span>4.50
-                    <div class="old-price"><span>£</span>5.00</div>
-                </div>
-                <div class="actions">
-                    <i class="far fa-heart"></i>
-                    <i class="fas fa-cart-plus"></i>
-                </div>
-            </div>
-        </div>
+        <% } %>
     </div>
+
+            
 </div>
 
 

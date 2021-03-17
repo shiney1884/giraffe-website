@@ -20,7 +20,7 @@ db.connect((err) => {
         throw err;
     }
     console.log('mysql connected');
-})
+});
 
 app.listen(3000, () => {
     console.log('server started on port 3000');
@@ -36,10 +36,17 @@ app.get('/', (req, res) => {
 app.get('/pens', (req, res) => {
     let title = 'Pens | Giraffe Website';
     let header = 'Pens';
-    res.render('products', {
-        title: title,
-        header: header
+    let data;
+    let sql = 'SELECT * FROM o2products';
+    db.query(sql, (err, result)=> {
+        if(err) throw err;
+        res.render('products', {
+            title: title,
+            header: header,
+            data: result
     });
+    })
+    
 });
 
 app.get('/artcontest', (req, res) => {
