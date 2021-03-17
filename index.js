@@ -2,10 +2,25 @@ const express = require('express');
 const mySQL = require('mysql');
 const ejs = require('ejs');
 const app = express();
-let product = 'Black-Pencil';
-let searchQuery = 'pencils';
 app.use(express.static("public"));
 app.set('view engine', 'ejs');
+
+let product = 'Black-Pencil';
+let searchQuery = 'pencils';
+
+const db = mySQL.createConnection({
+    host: 'localhost',
+    user: 'root',
+    password: '',
+    database: 'o2_o3_review'
+});
+
+db.connect((err) => {
+    if (err) {
+        throw err;
+    }
+    console.log('mysql connected');
+})
 
 app.listen(3000, () => {
     console.log('server started on port 3000');
@@ -111,7 +126,7 @@ app.get('/wishlist', (req, res) => {
 
 app.get(`/${product}`, (req, res) => {
     let title = `${product} | Giraffe Website`;
-    res.render('product', {title: title});
+    res.render('product', {
+        title: title
+    });
 });
-
-
