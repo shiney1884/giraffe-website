@@ -17,12 +17,12 @@
     <div class="products">
        <% for(let i = 0; i < data.length; i++) { %>
            <div class="product">
-            <img class="product-img" src="images/pencil-1.jpg" alt="">
-            <a href="#"><%= data[i]['description'] %></a>
+            <img class="product-img" src="images/<%= data[i]['imageSrc'] %>" alt="">
+            <a href= '<%= data[i]["url"] %>'><%= data[i]['name'] %></a>
             <div class="product-info">
                 <div class="price">
                     <span>£</span><%= data[i]['price'] %>
-                    <div class="old-price"><span>£</span><%= data[i]['supp_id'] %></div>
+                    <div class="old-price"><span>£</span><%= data[i]['stock'] %></div>
                 </div>
                 <div class="actions">
                     <i class="far fa-heart"></i>

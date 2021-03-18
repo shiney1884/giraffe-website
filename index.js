@@ -2,6 +2,8 @@ const express = require('express');
 const mySQL = require('mysql');
 const ejs = require('ejs');
 const app = express();
+let orderID = 0;
+
 app.use(express.static("public"));
 app.set('view engine', 'ejs');
 
@@ -12,7 +14,7 @@ const db = mySQL.createConnection({
     host: 'localhost',
     user: 'root',
     password: '',
-    database: 'o2_o3_review'
+    database: 'giraffe-data'
 });
 
 db.connect((err) => {
@@ -36,8 +38,8 @@ app.get('/', (req, res) => {
 app.get('/pens', (req, res) => {
     let title = 'Pens | Giraffe Website';
     let header = 'Pens';
-    let data;
-    let sql = 'SELECT * FROM o2products';
+    let sql = 'SELECT * FROM products';
+
     db.query(sql, (err, result)=> {
         if(err) throw err;
         res.render('products', {
