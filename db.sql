@@ -91,3 +91,10 @@ Nulla tempus tincidunt.', 45.99, 50, 'black-pen', 'stationery-img.jpg', 1),
 ('Black Notebook', 'Lorem ipsum dolor sit amet 
 tortor tortor faucibus erat, eu mattis nisi risus vel sapien. 
 Nulla tempus tincidunt.', 5.99, 100, 'black-notebook', 'notebook-img.jpg', 3);
+
+
+
+INSERT INTO orders (customerID, orderTotal, dateOfOrder, status, paymentMethod)
+VALUES ('shiney1884', 30.00, '2021/03/19', 'Complete', 'Paypal'),
+('shiney04067', 50.99, '2021/03/18', 'Pending', 'Debit Card'),
+('shiney0406', 10.00, '2021/03/18', 'Delivered', 'Crypto');

@@ -10,12 +10,14 @@
                 <th>Order Date</th>
                 <th>Order Status</th>
             </tr>
+            <% for (let i = 0; i < data.length; i++) { %>
             <tr class="order">
-                <td class="order-id">dy3y3xbxb</td>
-                <td class="order-price">£<span>25.00</span></td>
-                <td class="order-date">12/07/2021</td>
-                <td class="order-status">Done</td>
+                <td class="order-id"><%= data[i]['id']  %></td>
+                <td class="order-price">£<span><%= data[i]['orderTotal'] %></span></td>
+                <td class="order-date"><%= data[i]['dateOfOrder'] %></td>
+                <td class="order-status"><%= data[i]['status'] %></td>
             </tr>
+      <%  } %>
         </table>
     </div>
 

@@ -110,9 +110,15 @@ app.get('/youraccount', (req, res) => {
 
 app.get('/orders', (req, res) => {
     let title = 'Your Orders | Giraffe Website';
-    res.render('orders', {
-        title: title
+    let sql = 'SELECT * FROM orders';
+
+    db.query(sql, (err, result)=> {
+        if(err) throw err;
+        res.render('orders', {
+            title: title,
+            data: result
     });
+    })
 });
 
 app.get(`/${searchQuery}`, (req, res) => {
