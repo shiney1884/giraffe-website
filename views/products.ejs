@@ -21,8 +21,8 @@
             <a href= '<%= data[i]["url"] %>'><%= data[i]['name'] %></a>
             <div class="product-info">
                 <div class="price">
-                    <span>£</span><%= data[i]['price'] %>
-                    <div class="old-price"><span>£</span><%= data[i]['stock'] %></div>
+                    <span>£</span><%= (Math.round(data[i]['price'] * 0.9 * 100) / 100).toFixed(2) %>
+                    <div class="old-price"><span>£</span><%= data[i]['price'] %></div>
                 </div>
                 <div class="actions">
                     <i class="far fa-heart"></i>
