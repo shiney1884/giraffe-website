@@ -1,17 +1,6 @@
 const express = require('express');
 const mySQL = require('mysql');
 const router = express.Router();
-const bodyparser = require('body-parser')
-const session = require('express-session');
-
-router.use(session({
-	secret: 'secret',
-	resave: true,
-	saveUninitialized: true
-}));
-
-router.use(bodyparser.urlencoded({extended : true}));
-router.use(bodyparser.json());
 
 const db = mySQL.createConnection({
     host: 'localhost',
@@ -82,26 +71,6 @@ router.get('/login', (req, res) => {
         title: title
     });
 });
-
-router.post('/auth', (req, res)=> {
-    let username = req.body.username;
-    let password = req.body.password;
-    if(username && password) {
-        db.query('SELECT * FROM customers WHERE username = ? AND password = ?', [username, password], (error, results, fields)=> {
-            if(results.length > 0) {
-                req.session.loggedin = true;
-                req.session.username = username;
-                res.redirect('/');
-            } else {
-                res.send('Incorrect username and/or password');
-            }
-            res.end()
-        });
-    } else {
-        res.send('Please enter username and password');
-        res.end();
-    }
-})
 
 router.get('/basket', (req, res) => {
     let title = 'Your Basket | Giraffe Website';
