@@ -1,19 +1,25 @@
 const express = require('express');
 const mySQL = require('mysql');
 const router = express.Router();
+const bodyparser = require('body-parser')
+const session = require('express-session')
+
+router.use(session({
+    secret: 'secret',
+    resave: true,
+    saveUninitialized: true
+}));
+
+router.use(bodyparser.urlencoded({
+    extended: true
+}));
+router.use(bodyparser.json());
 
 const db = mySQL.createConnection({
     host: 'localhost',
     user: 'root',
     password: '',
     database: 'giraffe-data'
-});
-
-db.connect((err) => {
-    if (err) {
-        throw err;
-    }
-    console.log('mysql connected');
 });
 
 router.get('/', (req, res) => {
@@ -28,15 +34,15 @@ router.get('/pens', (req, res) => {
     let header = 'Pens';
     let sql = 'SELECT * FROM products';
 
-    db.query(sql, (err, result)=> {
-        if(err) throw err;
+    db.query(sql, (err, result) => {
+        if (err) throw err;
         res.render('products', {
             title: title,
             header: header,
             data: result
-    });
+        });
     })
-    
+
 });
 
 router.get('/artcontest', (req, res) => {
@@ -72,6 +78,28 @@ router.get('/login', (req, res) => {
     });
 });
 
+router.post('/login', (req, res) => {
+    let username = req.body.username;
+    let password = req.body.password;
+    if (username && password) {
+        db.query('SELECT * FROM customers WHERE username = ? AND password = ?', [username, password], (error, results, fields) => {
+            if (results.length > 0) {
+                req.session.loggedin = true;
+                req.session.username = username;
+                res.redirect('/');
+            } else {
+                res.send('Error');
+            }
+            res.end()
+        });
+    } else {
+        res.send('Please enter username and password');
+        res.end();
+    }
+});
+
+
+
 router.get('/basket', (req, res) => {
     let title = 'Your Basket | Giraffe Website';
     res.render('basket', {
@@ -100,12 +128,12 @@ router.get('/orders', (req, res) => {
     let title = 'Your Orders | Giraffe Website';
     let sql = 'SELECT * FROM orders';
 
-    db.query(sql, (err, result)=> {
-        if(err) throw err;
+    db.query(sql, (err, result) => {
+        if (err) throw err;
         res.render('orders', {
             title: title,
             data: result
-    });
+        });
     })
 });
 

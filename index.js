@@ -6,8 +6,6 @@ app.use(express.static("public"));
 app.set('view engine', 'ejs');
 
 app.use('/', require('./routes/routes'));
-app.use('/auth', require('./routes/auth'));
-
 
 app.listen(3000, () => {
     console.log('server started on port 3000');
