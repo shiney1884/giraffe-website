@@ -4,6 +4,20 @@ const router = express.Router();
 const bodyparser = require('body-parser')
 const session = require('express-session')
 
+const ifLoggedIn = (req, res, next) => {
+    if(req.session.loggedin) {
+        res.redirect('/');
+    }
+    next();
+}
+
+const ifNotLoggedIn = (req, res, next) => {
+    if(!req.session.loggedin) {
+        res.redirect('/login');
+    }
+    next();
+}
+
 router.use(session({
     secret: 'secret',
     resave: true,
@@ -27,6 +41,7 @@ router.get('/', (req, res) => {
     res.render('index', {
         title: title
     });
+    console.log(req.session.loggedin);
 })
 
 router.get('/pens', (req, res) => {
@@ -42,7 +57,6 @@ router.get('/pens', (req, res) => {
             data: result
         });
     })
-
 });
 
 router.get('/artcontest', (req, res) => {
@@ -64,18 +78,19 @@ router.get('/contact', (req, res) => {
     });
 });
 
-router.get('/createaccount', (req, res) => {
+router.get('/createaccount', ifLoggedIn,  (req, res) => {
     let title = 'Create an Account | Giraffe Website';
     res.render('createaccount', {
         title: title
     });
 });
 
-router.get('/login', (req, res) => {
+router.get('/login', ifLoggedIn ,(req, res) => {
     let title = 'Login | Giraffe Website';
     res.render('login', {
         title: title
     });
+    console.log(req.session.loggedin)
 });
 
 router.post('/login', (req, res) => {
@@ -115,7 +130,7 @@ router.get('/checkout', (req, res) => {
 });
 
 
-router.get('/youraccount', (req, res) => {
+router.get('/youraccount', ifNotLoggedIn, (req, res) => {
     let title = 'Your Account | Giraffe Website';
     let header = 'Your Account';
     res.render('youraccount', {
@@ -124,7 +139,7 @@ router.get('/youraccount', (req, res) => {
     });
 });
 
-router.get('/orders', (req, res) => {
+router.get('/orders', ifNotLoggedIn, (req, res) => {
     let title = 'Your Orders | Giraffe Website';
     let sql = 'SELECT * FROM orders';
 
@@ -137,7 +152,7 @@ router.get('/orders', (req, res) => {
     })
 });
 
-router.get('/wishlist', (req, res) => {
+router.get('/wishlist', ifLoggedIn, (req, res) => {
     let title = 'Your Wishlist | Giraffe Website';
     let header = 'Wishlist';
     res.render('wishlist', {
