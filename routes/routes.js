@@ -5,14 +5,14 @@ const bodyparser = require('body-parser')
 const session = require('express-session')
 
 const ifLoggedIn = (req, res, next) => {
-    if(req.session.loggedin) {
+    if (req.session.loggedin) {
         res.redirect('/');
     }
     next();
 }
 
 const ifNotLoggedIn = (req, res, next) => {
-    if(!req.session.loggedin) {
+    if (!req.session.loggedin) {
         res.redirect('/login');
     }
     next();
@@ -41,7 +41,6 @@ router.get('/', (req, res) => {
     res.render('index', {
         title: title
     });
-    console.log(req.session.loggedin);
 })
 
 router.get('/pens', (req, res) => {
@@ -78,14 +77,14 @@ router.get('/contact', (req, res) => {
     });
 });
 
-router.get('/createaccount', ifLoggedIn,  (req, res) => {
+router.get('/createaccount', ifLoggedIn, (req, res) => {
     let title = 'Create an Account | Giraffe Website';
     res.render('createaccount', {
         title: title
     });
 });
 
-router.get('/login', ifLoggedIn ,(req, res) => {
+router.get('/login', ifLoggedIn, (req, res) => {
     let title = 'Login | Giraffe Website';
     res.render('login', {
         title: title
