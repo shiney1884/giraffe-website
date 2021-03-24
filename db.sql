@@ -98,3 +98,9 @@ INSERT INTO orders (customerID, orderTotal, dateOfOrder, status, paymentMethod)
 VALUES ('shiney1884', 30.00, '2021/03/19', 'Complete', 'Paypal'),
 ('shiney04067', 50.99, '2021/03/18', 'Pending', 'Debit Card'),
 ('shiney0406', 10.00, '2021/03/18', 'Delivered', 'Crypto');
+
+INSERT INTO orders (customerID, orderTotal, dateOfOrder, status, paymentMethod )
+VALUES ('shiney0406', 20.00, '2021/03/24', 'Complete', 'Paypal'),
+('shiney0406', 400.00, '2021/03/20', 'Complete', 'Paypal'),
+('shiney0406', 225.00, '2021/03/16', 'Complete', 'Paypal');
+

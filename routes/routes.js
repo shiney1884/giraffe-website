@@ -41,6 +41,7 @@ router.get('/', (req, res) => {
     res.render('index', {
         title: title
     });
+    console.log(req.session);
 })
 
 router.get('/pens', (req, res) => {
@@ -89,7 +90,6 @@ router.get('/login', ifLoggedIn, (req, res) => {
     res.render('login', {
         title: title
     });
-    console.log(req.session.loggedin)
 });
 
 router.post('/login', (req, res) => {
@@ -140,15 +140,14 @@ router.get('/youraccount', ifNotLoggedIn, (req, res) => {
 
 router.get('/orders', ifNotLoggedIn, (req, res) => {
     let title = 'Your Orders | Giraffe Website';
-    let sql = 'SELECT * FROM orders';
+    let id = req.session.username;
 
-    db.query(sql, (err, result) => {
-        if (err) throw err;
+    db.query('SELECT * FROM orders WHERE customerID = ?', [id], (error, data, fields) => {
         res.render('orders', {
             title: title,
-            data: result
+            data: data
         });
-    })
+    });
 });
 
 router.get('/wishlist', ifLoggedIn, (req, res) => {
@@ -158,6 +157,12 @@ router.get('/wishlist', ifLoggedIn, (req, res) => {
         title: title,
         header: header
     });
+});
+
+router.get('/logout', ifLoggedIn, (req, res) => {
+    req.session.loggedin = false;
+    req.session.destroy();
+    res.redirect('/');
 });
 
 
