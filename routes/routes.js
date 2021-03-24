@@ -107,31 +107,38 @@ router.post('/createaccount', (req, res) => {
             console.log(error);
         }
         if (results.length > 0) {
-            res.render('createaccount', {
+            return res.render('createaccount', {
                 title: 'Error | Giraffe Website',
                 username: req.session.username,
                 loggedin: req.session.loggedin,
                 error: 'This email and/or username is already in use'
             });
+        } else if (password !== passwordReEnter) {
+            return res.render('createaccount', {
+                title: 'Error | Giraffe Website',
+                username: req.session.username,
+                loggedin: req.session.loggedin,
+                error: 'Passwords do not match'
+            });
         }
+
+        db.query('INSERT INTO customers SET ?', {
+            username: username,
+            email: email,
+            password: password
+        }, (error, results) => {
+            if (error) {
+                console.log(error);
+            } else {
+                return res.render('createaccount', {
+                    title: 'Success | Giraffe Website',
+                    username: req.session.username,
+                    loggedin: req.session.loggedin,
+                    error: 'You have registered an account'
+                });
+            }
+        })
     })
-    // let username = req.body.username;
-    // let password = req.body.password;
-    // if (username && password) {
-    //     db.query('SELECT * FROM customers WHERE username = ? AND password = ?', [username, password], (error, results, fields) => {
-    //         if (results.length > 0) {
-    //             req.session.loggedin = true;
-    //             req.session.username = username;
-    //             res.redirect('/');
-    //         } else {
-    //             res.send('Error');
-    //         }
-    //         res.end()
-    //     });
-    // } else {
-    //     res.send('Please enter username and password');
-    //     res.end();
-    // }
 });
 
 router.get('/login', ifLoggedIn, (req, res) => {
