@@ -150,7 +150,7 @@ router.get('/orders', ifNotLoggedIn, (req, res) => {
     });
 });
 
-router.get('/wishlist', ifLoggedIn, (req, res) => {
+router.get('/wishlist', ifNotLoggedIn, (req, res) => {
     let title = 'Your Wishlist | Giraffe Website';
     let header = 'Wishlist';
     res.render('wishlist', {
