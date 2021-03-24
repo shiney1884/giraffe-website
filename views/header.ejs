@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -8,6 +9,7 @@
     <link rel="stylesheet" href="style.css">
     <script src="https://kit.fontawesome.com/3d64925a9f.js" crossorigin="anonymous"></script>
 </head>
+
 <body>
     <header class="header">
         <div class="banner">
@@ -20,7 +22,9 @@
                 <span id="third-bar" class=""></span>
             </div>
             <div class="logo">
-                <a href="/"><h2>Giraffe</h2></a>
+                <a href="/">
+                    <h2>Giraffe</h2>
+                </a>
             </div>
             <div id="links" class="links">
                 <a href="pens">Our Products</a>
@@ -29,7 +33,11 @@
             </div>
             <input class="searchbar" type="search" name="" id="" placeholder="Search Products...">
             <i class="fas fa-search"></i>
-            <a id="sign-in-link" class="sign-in-link" href="login">Sign In</a>
+            <% if(loggedin) { %>
+            <a id="item" class="sign-in-link" href="youraccount"><%= username %></a>
+            <%     } else { %>
+            <a id="item" class="sign-in-link" href="login">Sign In</a>
+            <%    } %>
             <a href="basket"><i class="fas fa-shopping-basket"></i></a>
         </nav>
     </header>

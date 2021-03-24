@@ -39,7 +39,9 @@ const db = mySQL.createConnection({
 router.get('/', (req, res) => {
     let title = 'Home | Giraffe Website';
     res.render('index', {
-        title: title
+        title: title,
+        username: req.session.username,
+        loggedin: req.session.loggedin
     });
     console.log(req.session);
 })
@@ -54,7 +56,9 @@ router.get('/pens', (req, res) => {
         res.render('products', {
             title: title,
             header: header,
-            data: result
+            data: result,
+            username: req.session.username,
+            loggedin: req.session.loggedin
         });
     })
 });
@@ -64,7 +68,9 @@ router.get('/artcontest', (req, res) => {
     let header = 'Art Contest';
     res.render('contest', {
         title: title,
-        header: header
+        header: header,
+        username: req.session.username,
+        loggedin: req.session.loggedin
     });
 });
 
@@ -74,21 +80,27 @@ router.get('/contact', (req, res) => {
     let header = 'Contact Us';
     res.render('contact', {
         title: title,
-        header: header
+        header: header,
+        username: req.session.username,
+        loggedin: req.session.loggedin
     });
 });
 
 router.get('/createaccount', ifLoggedIn, (req, res) => {
     let title = 'Create an Account | Giraffe Website';
     res.render('createaccount', {
-        title: title
+        title: title,
+        username: req.session.username,
+        loggedin: req.session.loggedin
     });
 });
 
 router.get('/login', ifLoggedIn, (req, res) => {
     let title = 'Login | Giraffe Website';
     res.render('login', {
-        title: title
+        title: title,
+        username: req.session.username,
+        loggedin: req.session.loggedin
     });
 });
 
@@ -117,14 +129,18 @@ router.post('/login', (req, res) => {
 router.get('/basket', (req, res) => {
     let title = 'Your Basket | Giraffe Website';
     res.render('basket', {
-        title: title
+        title: title,
+        username: req.session.username,
+        loggedin: req.session.loggedin
     });
 });
 
 router.get('/checkout', (req, res) => {
     let title = 'Checkout | Giraffe Website';
     res.render('checkout', {
-        title: title
+        title: title,
+        username: req.session.username,
+        loggedin: req.session.loggedin
     });
 });
 
@@ -134,7 +150,9 @@ router.get('/youraccount', ifNotLoggedIn, (req, res) => {
     let header = 'Your Account';
     res.render('youraccount', {
         title: title,
-        header: header
+        header: header,
+        username: req.session.username,
+        loggedin: req.session.loggedin
     });
 });
 
@@ -145,7 +163,9 @@ router.get('/orders', ifNotLoggedIn, (req, res) => {
     db.query('SELECT * FROM orders WHERE customerID = ?', [id], (error, data, fields) => {
         res.render('orders', {
             title: title,
-            data: data
+            data: data,
+            username: req.session.username,
+            loggedin: req.session.loggedin
         });
     });
 });
@@ -155,7 +175,9 @@ router.get('/wishlist', ifNotLoggedIn, (req, res) => {
     let header = 'Wishlist';
     res.render('wishlist', {
         title: title,
-        header: header
+        header: header,
+        username: req.session.username,
+        loggedin: req.session.loggedin
     });
 });
 
