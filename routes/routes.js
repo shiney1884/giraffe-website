@@ -146,7 +146,8 @@ router.get('/login', ifLoggedIn, (req, res) => {
     res.render('login', {
         title: title,
         username: req.session.username,
-        loggedin: req.session.loggedin
+        loggedin: req.session.loggedin,
+        error: ''
     });
 });
 
@@ -160,13 +161,21 @@ router.post('/login', (req, res) => {
                 req.session.username = username;
                 res.redirect('/');
             } else {
-                res.send('Error');
+                return res.render('login', {
+                    title: 'Error | Giraffe Website',
+                    username: req.session.username,
+                    loggedin: req.session.loggedin,
+                    error: 'These details do not exist'
+                });
             }
-            res.end()
         });
     } else {
-        res.send('Please enter username and password');
-        res.end();
+        return res.render('login', {
+            title: 'Error | Giraffe Website',
+            username: req.session.username,
+            loggedin: req.session.loggedin,
+            error: 'Please enter a username and password'
+        });
     }
 });
 
