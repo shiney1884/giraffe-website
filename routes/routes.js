@@ -91,8 +91,47 @@ router.get('/createaccount', ifLoggedIn, (req, res) => {
     res.render('createaccount', {
         title: title,
         username: req.session.username,
-        loggedin: req.session.loggedin
+        loggedin: req.session.loggedin,
+        error: ''
     });
+});
+
+router.post('/createaccount', (req, res) => {
+    const username = req.body.username;
+    const email = req.body.email;
+    const password = req.body.password;
+    const passwordReEnter = req.body.passwordReEnter;
+
+    db.query('SELECT * FROM customers WHERE (username = ? OR email = ?)', [username, email], (error, results) => {
+        if (error) {
+            console.log(error);
+        }
+        if (results.length > 0) {
+            res.render('createaccount', {
+                title: 'Error | Giraffe Website',
+                username: req.session.username,
+                loggedin: req.session.loggedin,
+                error: 'This email and/or username is already in use'
+            });
+        }
+    })
+    // let username = req.body.username;
+    // let password = req.body.password;
+    // if (username && password) {
+    //     db.query('SELECT * FROM customers WHERE username = ? AND password = ?', [username, password], (error, results, fields) => {
+    //         if (results.length > 0) {
+    //             req.session.loggedin = true;
+    //             req.session.username = username;
+    //             res.redirect('/');
+    //         } else {
+    //             res.send('Error');
+    //         }
+    //         res.end()
+    //     });
+    // } else {
+    //     res.send('Please enter username and password');
+    //     res.end();
+    // }
 });
 
 router.get('/login', ifLoggedIn, (req, res) => {

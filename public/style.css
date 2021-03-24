@@ -755,6 +755,13 @@ hr {
     text-align: center;
 }
 
+.error {
+    color: red;
+    font-weight: 700;
+    margin-top: 20px;
+    text-align: center;
+}
+
 
 
 

@@ -3,13 +3,16 @@
 <div class="page-content">
     <div class="form-holder">
         <h4>Create an Account</h4>
-        <form class="form" action="/auth/createaccount" method="POST">
+        <form class="form" action="/createaccount" method="POST">
+            <span class="error"><%= error %></span>
             <label for="email">Email</label>
             <input type="email" name="email" id="email">
             <label for="username">Username</label>
             <input type="text" name="username" id="username">
             <label for="password">Password</label>
             <input type="password" name="password" id="password">
+            <label for="passwordReEnter">Re-Enter Password</label>
+            <input type="password" name="passwordReEnter" id="passwordReEnter">
             <button type="submit">Create Account</button>
         </form>
     </div>
