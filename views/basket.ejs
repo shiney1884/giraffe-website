@@ -4,196 +4,25 @@
     <div class="basket">
         <h4>Your Basket</h4>
         <div class="basket-items">
-            <div class="basket-item">
+            <%  if(data.length > 0) { %>
+            <% for (let i = 0; i < data.length; i++) { %>
+            <div id="<%= data[i]['id'] %>" class="basket-item">
                 <div class="image-holder">
-                    <img src="images/art-equipment.jpg" alt="">
+                    <img src="images/<%= data[i]['imageSrc'] %>" alt="">
                 </div>
                 <div class="basket-item-details">
-                    <div class="basket-item-name">Pencil 1</div>
-                    <div class="basket-item-price">£<span>5.00</span></div>
-                    <select name="" id="">
-                        <option value="">1</option>
-                        <option value="">2</option>
-                        <option value="">3</option>
-                        <option value="">4</option>
-                        <option value="">5</option>
-                    </select>
+                    <a href="<%= data[i]['url'] %>">
+                        <div class="basket-item-name"><%= data[i]['name'] %></div>
+                    </a>
+                    <div class="basket-item-price">£<span><%= data[i]['price'] %></span></div>
+                    <div class="quantity"><%= data[i]['quantity'] %></div>
                     <div class="basket-item-delete">
                         <button>Delete</button>
                     </div>
                 </div>
             </div>
-            <div class="basket-item">
-                <div class="image-holder">
-                    <img src="images/art-equipment.jpg" alt="">
-                </div>
-                <div class="basket-item-details">
-                    <div class="basket-item-name">Pencil 1</div>
-                    <div class="basket-item-price">£<span>5.00</span></div>
-                    <select name="" id="">
-                        <option value="">1</option>
-                        <option value="">2</option>
-                        <option value="">3</option>
-                        <option value="">4</option>
-                        <option value="">5</option>
-                    </select>
-                    <div class="basket-item-delete">
-                        <button>Delete</button>
-                    </div>
-                </div>
-            </div>
-            <div class="basket-item">
-                <div class="image-holder">
-                    <img src="images/art-equipment.jpg" alt="">
-                </div>
-                <div class="basket-item-details">
-                    <div class="basket-item-name">Pencil 1</div>
-                    <div class="basket-item-price">£<span>5.00</span></div>
-                    <select name="" id="">
-                        <option value="">1</option>
-                        <option value="">2</option>
-                        <option value="">3</option>
-                        <option value="">4</option>
-                        <option value="">5</option>
-                    </select>
-                    <div class="basket-item-delete">
-                        <button>Delete</button>
-                    </div>
-                </div>
-            </div>
-            <div class="basket-item">
-                <div class="image-holder">
-                    <img src="images/art-equipment.jpg" alt="">
-                </div>
-                <div class="basket-item-details">
-                    <div class="basket-item-name">Pencil 1</div>
-                    <div class="basket-item-price">£<span>5.00</span></div>
-                    <select name="" id="">
-                        <option value="">1</option>
-                        <option value="">2</option>
-                        <option value="">3</option>
-                        <option value="">4</option>
-                        <option value="">5</option>
-                    </select>
-                    <div class="basket-item-delete">
-                        <button>Delete</button>
-                    </div>
-                </div>
-            </div>
-            <div class="basket-item">
-                <div class="image-holder">
-                    <img src="images/art-equipment.jpg" alt="">
-                </div>
-                <div class="basket-item-details">
-                    <div class="basket-item-name">Pencil 1</div>
-                    <div class="basket-item-price">£<span>5.00</span></div>
-                    <select name="" id="">
-                        <option value="">1</option>
-                        <option value="">2</option>
-                        <option value="">3</option>
-                        <option value="">4</option>
-                        <option value="">5</option>
-                    </select>
-                    <div class="basket-item-delete">
-                        <button>Delete</button>
-                    </div>
-                </div>
-            </div>
-            <div class="basket-item">
-                <div class="image-holder">
-                    <img src="images/art-equipment.jpg" alt="">
-                </div>
-                <div class="basket-item-details">
-                    <div class="basket-item-name">Pencil 1</div>
-                    <div class="basket-item-price">£<span>5.00</span></div>
-                    <select name="" id="">
-                        <option value="">1</option>
-                        <option value="">2</option>
-                        <option value="">3</option>
-                        <option value="">4</option>
-                        <option value="">5</option>
-                    </select>
-                    <div class="basket-item-delete">
-                        <button>Delete</button>
-                    </div>
-                </div>
-            </div>
-            <div class="basket-item">
-                <div class="image-holder">
-                    <img src="images/art-equipment.jpg" alt="">
-                </div>
-                <div class="basket-item-details">
-                    <div class="basket-item-name">Pencil 1</div>
-                    <div class="basket-item-price">£<span>5.00</span></div>
-                    <select name="" id="">
-                        <option value="">1</option>
-                        <option value="">2</option>
-                        <option value="">3</option>
-                        <option value="">4</option>
-                        <option value="">5</option>
-                    </select>
-                    <div class="basket-item-delete">
-                        <button>Delete</button>
-                    </div>
-                </div>
-            </div>
-            <div class="basket-item">
-                <div class="image-holder">
-                    <img src="images/art-equipment.jpg" alt="">
-                </div>
-                <div class="basket-item-details">
-                    <div class="basket-item-name">Pencil 1</div>
-                    <div class="basket-item-price">£<span>5.00</span></div>
-                    <select name="" id="">
-                        <option value="">1</option>
-                        <option value="">2</option>
-                        <option value="">3</option>
-                        <option value="">4</option>
-                        <option value="">5</option>
-                    </select>
-                    <div class="basket-item-delete">
-                        <button>Delete</button>
-                    </div>
-                </div>
-            </div>
-            <div class="basket-item">
-                <div class="image-holder">
-                    <img src="images/art-equipment.jpg" alt="">
-                </div>
-                <div class="basket-item-details">
-                    <div class="basket-item-name">Pencil 1</div>
-                    <div class="basket-item-price">£<span>5.00</span></div>
-                    <select name="" id="">
-                        <option value="">1</option>
-                        <option value="">2</option>
-                        <option value="">3</option>
-                        <option value="">4</option>
-                        <option value="">5</option>
-                    </select>
-                    <div class="basket-item-delete">
-                        <button>Delete</button>
-                    </div>
-                </div>
-            </div>
-            <div class="basket-item">
-                <div class="image-holder">
-                    <img src="images/art-equipment.jpg" alt="">
-                </div>
-                <div class="basket-item-details">
-                    <div class="basket-item-name">Pencil 1</div>
-                    <div class="basket-item-price">£<span>5.00</span></div>
-                    <select name="" id="">
-                        <option value="">1</option>
-                        <option value="">2</option>
-                        <option value="">3</option>
-                        <option value="">4</option>
-                        <option value="">5</option>
-                    </select>
-                    <div class="basket-item-delete">
-                        <button>Delete</button>
-                    </div>
-                </div>
-            </div>
+            <%   } %>
+            <% } %>
         </div>
     </div>
     <div class="basket-total">

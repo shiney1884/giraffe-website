@@ -104,3 +104,25 @@ VALUES ('shiney0406', 20.00, '2021/03/24', 'Complete', 'Paypal'),
 ('shiney0406', 400.00, '2021/03/20', 'Complete', 'Paypal'),
 ('shiney0406', 225.00, '2021/03/16', 'Complete', 'Paypal');
 
+INSERT INTO basketItems (productID, customerID, quantity, price)
+VALUES (1, 'shiney0406', 2, 20.99),
+(2, 'shiney0406', 1, 45.99),
+(3, 'shiney0406', 2, 5.99);
+
+INSERT INTO basketItems (productID, customerID, quantity, price)
+VALUES (1, 'shiney0406', 2, 20.99),
+(2, 'shiney0406', 1, 45.99),
+(3, 'shiney0406', 2, 5.99);
+
+INSERT INTO basketItems (productID, customerID, quantity, price)
+VALUES (1, 'shiney0406', 2, 20.99),
+(2, 'shiney0406', 1, 45.99),
+(3, 'shiney0406', 2, 5.99);
+
+INSERT INTO basketItems (productID, customerID, quantity, price)
+VALUES (2, 'shiney04067', 10, 20.99),
+(3, 'shiney1884', 2, 5.99),
+(3, 'anewaccount', 5, 7.00),
+(1, 'idkwhattoput', 7, 5.99);
+
+

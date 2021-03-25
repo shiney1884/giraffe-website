@@ -43,7 +43,6 @@ router.get('/', (req, res) => {
         username: req.session.username,
         loggedin: req.session.loggedin
     });
-    console.log(req.session);
 })
 
 router.get('/pens', (req, res) => {
@@ -183,11 +182,28 @@ router.post('/login', (req, res) => {
 
 router.get('/basket', (req, res) => {
     let title = 'Your Basket | Giraffe Website';
-    res.render('basket', {
-        title: title,
-        username: req.session.username,
-        loggedin: req.session.loggedin
-    });
+
+    db.query('SELECT b.productID, b.customerID, b.quantity, b.price, p.id, p.name, p.url, p.imageSrc FROM basketitems b INNER JOIN products p ON p.id = b.productID WHERE b.customerID = ?', [req.session.username], (error, results) => {
+        if (error) {
+            console.log(error);
+        } else if (results.length > 0) {
+            console.log(results);
+            res.render('basket', {
+                title: title,
+                username: req.session.username,
+                loggedin: req.session.loggedin,
+                data: results
+            });
+        } else {
+            res.render('basket', {
+                title: title,
+                username: req.session.username,
+                loggedin: req.session.loggedin,
+                data: []
+            });
+        }
+    })
+
 });
 
 router.get('/checkout', (req, res) => {
@@ -205,7 +221,7 @@ router.get('/youraccount', ifNotLoggedIn, (req, res) => {
     let header = 'Your Account';
     res.render('youraccount', {
         title: title,
-        header: header,
+        header: req.session.username,
         username: req.session.username,
         loggedin: req.session.loggedin
     });

@@ -16,7 +16,7 @@
     </div>
     <div class="products">
        <% for(let i = 0; i < data.length; i++) { %>
-           <div class="product">
+           <div id="<%= data[i]['id'] %>" class="product">
             <img class="product-img" src="images/<%= data[i]['imageSrc'] %>" alt="">
             <a href= '<%= data[i]["url"] %>'><%= data[i]['name'] %></a>
             <div class="product-info">
