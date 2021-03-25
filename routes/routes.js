@@ -187,7 +187,6 @@ router.get('/basket', (req, res) => {
         if (error) {
             console.log(error);
         } else if (results.length > 0) {
-            console.log(results);
             res.render('basket', {
                 title: title,
                 username: req.session.username,
@@ -244,12 +243,27 @@ router.get('/orders', ifNotLoggedIn, (req, res) => {
 router.get('/wishlist', ifNotLoggedIn, (req, res) => {
     let title = 'Your Wishlist | Giraffe Website';
     let header = 'Wishlist';
-    res.render('wishlist', {
-        title: title,
-        header: header,
-        username: req.session.username,
-        loggedin: req.session.loggedin
-    });
+    db.query('SELECT w.productID, w.customerID, p.id, p.name, p.url, p.imageSrc, p.price FROM wishlistitems w INNER JOIN products p ON p.id = w.productID WHERE w.customerID = ?', [req.session.username], (error, results) => {
+        if (error) {
+            console.log(error);
+        } else if (results.length > 0) {
+            res.render('wishlist', {
+                title: title,
+                header: header,
+                username: req.session.username,
+                loggedin: req.session.loggedin,
+                data: results
+            });
+        } else {
+            res.render('wishlist', {
+                title: title,
+                header: header,
+                username: req.session.username,
+                loggedin: req.session.loggedin,
+                data: []
+            });
+        }
+    })
 });
 
 router.get('/logout', ifLoggedIn, (req, res) => {

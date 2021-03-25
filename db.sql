@@ -58,17 +58,11 @@ CREATE TABLE basketItems(
 CREATE TABLE wishlistItems(
     id INT NOT NULL AUTO_INCREMENT PRIMARY KEY,
     customerID VARCHAR(30) NOT NULL,
-    categoryID INT NOT NULL,
     productID INT NOT NULL,
 
     FOREIGN KEY(customerID) REFERENCES customers(username),
     FOREIGN KEY(productID) REFERENCES products(id),
-    FOREIGN KEY(categoryID) REFERENCES categories(id)
 );
-
-
-
--- adding data to db
 
 INSERT INTO customers (username, email, password)
 VALUES ('shiney1884', 'scott0406@outlook.com','=Fx,UX7UkrD>'),
@@ -110,19 +104,11 @@ VALUES (1, 'shiney0406', 2, 20.99),
 (3, 'shiney0406', 2, 5.99);
 
 INSERT INTO basketItems (productID, customerID, quantity, price)
-VALUES (1, 'shiney0406', 2, 20.99),
-(2, 'shiney0406', 1, 45.99),
-(3, 'shiney0406', 2, 5.99);
-
-INSERT INTO basketItems (productID, customerID, quantity, price)
-VALUES (1, 'shiney0406', 2, 20.99),
-(2, 'shiney0406', 1, 45.99),
-(3, 'shiney0406', 2, 5.99);
-
-INSERT INTO basketItems (productID, customerID, quantity, price)
 VALUES (2, 'shiney04067', 10, 20.99),
-(3, 'shiney1884', 2, 5.99),
-(3, 'anewaccount', 5, 7.00),
-(1, 'idkwhattoput', 7, 5.99);
+(3, 'shiney1884', 2, 5.99)
+
+INSERT INTO wishlistItems (customerID, productID)
+VALUES ('shiney04067', 1),
+('shiney1884', 2);
 
 

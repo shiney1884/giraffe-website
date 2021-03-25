@@ -534,6 +534,10 @@ footer a {
     text-decoration: line-through;
 }
 
+.price {
+    color: #000;
+}
+
 .actions {
     display: flex;
 }
@@ -826,6 +830,8 @@ hr {
 
 .basket-item-name {
     font-weight: 700;
+    color: #000;
+    text-decoration: none;
 }
 
 .basket-item-price, .basket-item-delete {

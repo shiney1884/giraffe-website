@@ -11,11 +11,11 @@
                     <img src="images/<%= data[i]['imageSrc'] %>" alt="">
                 </div>
                 <div class="basket-item-details">
-                    <a href="<%= data[i]['url'] %>">
-                        <div class="basket-item-name"><%= data[i]['name'] %></div>
-                    </a>
-                    <div class="basket-item-price">£<span><%= data[i]['price'] %></span></div>
-                    <div class="quantity"><%= data[i]['quantity'] %></div>
+                    <div class="basket-item-name">Item Name:
+                        <a class="basket-item-name" href="<%= data[i]['url'] %>"><%= data[i]['name'] %></a>
+                    </div>
+                    <div class="basket-item-price">Item Price: £<span><%= data[i]['price'] %></span></div>
+                    <div class="quantity">Quantity of Item: <%= data[i]['quantity'] %></div>
                     <div class="basket-item-delete">
                         <button>Delete</button>
                     </div>
