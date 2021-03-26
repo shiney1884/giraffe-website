@@ -283,7 +283,6 @@ router.get('/:id', (req, res) => {
                 loggedin: req.session.loggedin,
                 data: results
             })
-            console.log(results)
         }
     })
 })

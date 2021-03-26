@@ -18,7 +18,7 @@
         <% for(let i = 0; i < data.length; i++) { %>
         <div id="<%= data[i]['id'] %>" class="product">
             <img class="product-img" src="images/<%= data[i]['imageSrc'] %>" alt="">
-            <a href='<%= data[i]["url"] %>'><%= data[i]['name'] %></a>
+            <a href='<%= data[i]["id"] %>'><%= data[i]['name'] %></a>
             <div class="product-info">
                 <div class="price">
                     <span>£</span><%= (Math.round(data[i]['price'] * 0.9 * 100) / 100).toFixed(2) %>

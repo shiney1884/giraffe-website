@@ -7,7 +7,7 @@
     <div class="products">
         <% for(let i = 0; i < data.length; i++) { %> <div class="product">
             <img class="product-img" src="images/<%= data[i]['imageSrc'] %>" alt="">
-            <a href="<%= data[i]['url'] %>"><%= data[i]['name'] %></a>
+            <a href="<%= data[i]['id'] %>"><%= data[i]['name'] %></a>
             <div class="product-info">
                 <div class="price">
                     <span>£<%= data[i]['price'] %></span>
