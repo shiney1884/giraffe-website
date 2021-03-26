@@ -272,5 +272,20 @@ router.get('/logout', ifLoggedIn, (req, res) => {
     res.redirect('/');
 });
 
+router.get('/:id', (req, res) => {
+    db.query('SELECT * FROM products WHERE id = ?', [req.params.id], (error, results) => {
+        if (error) {
+            console.log(error);
+        } else {
+            res.render('product', {
+                title: results['title'],
+                username: req.session.username,
+                loggedin: req.session.loggedin,
+                data: results
+            })
+            console.log(results)
+        }
+    })
+})
 
 module.exports = router;

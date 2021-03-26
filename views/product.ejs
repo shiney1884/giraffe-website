@@ -3,11 +3,11 @@
 <div class="page-content">
     <div class="product-page-product">
         <div class="product-page-img">
-            <img src="images/pencil-1.jpg" alt="">
+            <img src="images/<%= data[0]['imageSrc'] %>" alt="">
         </div>
         <div class="product-page-details">
-            <div class="product-page-title">Pencil</div>
-            <div class="product-page-price">£<span>5.00</span></div>
+            <div class="product-page-title"><%= data[0]['name'] %></div>
+            <div class="product-page-price">£<%= data[0]['price'] %></div>
             <hr>
             <div class="product-page-actions">
                 <i class="far fa-heart"></i>
@@ -15,10 +15,7 @@
             </div>
             <hr>
             <div class="product-description-title">PRODUCT DESCRIPTION</div>
-            <div class="product-page-description">Lorem ipsum dolor sit amet, consectetur adipiscing elit. 
-                Mauris tristique laoreet massa, non consequat sapien feugiat in. 
-                Morbi lacus tellus, semper a ligula in, malesuada placerat mi. 
-                Morbi pulvinar ac.</div>
+            <div class="product-page-description"><%= data[0]['description'] %></div>
         </div>
     </div>
 </div>
