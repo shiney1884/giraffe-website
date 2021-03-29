@@ -547,10 +547,21 @@ footer a {
 
 .actions {
     display: flex;
+    /* border: 2px solid black; */
 }
 
 .actions i {
     margin: 2.5px;
+}
+
+.basket-add {
+    all: unset;
+    /* border: 2px solid red; */
+}
+
+.basket-add:hover {
+    cursor: pointer;
+    color: green;
 }
 
 

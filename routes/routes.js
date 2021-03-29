@@ -287,4 +287,14 @@ router.get('/:id', (req, res) => {
     })
 })
 
+// router.get('/addtobasket', (req, res) => {
+//     res.redirect('products', {
+//         title: title,
+//         header: header,
+//         data: result,
+//         username: req.session.username,
+//         loggedin: req.session.loggedin
+//     });
+// })
+
 module.exports = router;

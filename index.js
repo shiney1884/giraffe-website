@@ -1,8 +1,8 @@
-const newrelic = require('newrelic');
+// const newrelic = require('newrelic');
 const express = require('express');
 const ejs = require('ejs');
 const app = express();
-const port = process.env.PORT;
+let port = process.env.PORT;
 
 if (port == null || port == '') {
     port = 3000;
