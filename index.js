@@ -1,14 +1,17 @@
 const express = require('express');
 const ejs = require('ejs');
 const app = express();
+const port = process.env.PORT;
+
+if (port == null || port == '') {
+    port = 3000;
+}
 
 app.use(express.static("public"));
 app.set('view engine', 'ejs');
 
 app.use('/', require('./routes/routes'));
 
-app.listen(3000, () => {
-    console.log('server started on port 3000');
+app.listen(port, () => {
+    console.log('server started');
 });
-
-
