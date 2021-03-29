@@ -30,10 +30,10 @@ router.use(bodyparser.urlencoded({
 router.use(bodyparser.json());
 
 const db = mySQL.createConnection({
-    host: 'localhost',
-    user: 'root',
-    password: '',
-    database: 'giraffe-data'
+    host: 'us-cdbr-east-03.cleardb.com',
+    user: 'b45a5a0846f797',
+    password: 'd129f376',
+    database: 'heroku_67102ae31cc4527'
 });
 
 router.get('/', (req, res) => {
