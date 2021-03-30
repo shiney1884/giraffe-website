@@ -559,9 +559,18 @@ footer a {
     /* border: 2px solid red; */
 }
 
+.wishlist-add {
+    all: unset;
+}
+
 .basket-add:hover {
     cursor: pointer;
     color: green;
+}
+
+.wishlist-add:hover {
+    cursor: pointer;
+    color: red;
 }
 
 

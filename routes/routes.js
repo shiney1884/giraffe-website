@@ -288,21 +288,37 @@ router.get('/:id', (req, res) => {
 })
 
 router.post('/:category', (req, res) => {
-    db.query('SELECT * FROM basketitems WHERE productID = ? AND customerID = ?', [req.body.id, req.session.username], (error, results) => {
-        if (error) {
-            console.log(error);
-        } else if (results.length > 0) {
-            db.query('UPDATE basketitems SET quantity = quantity + 1 WHERE productID = ? AND customerID = ?', [req.body.id, req.session.username], (error, results) => {
-                if (error) throw err;
-            })
-        } else {
-            db.query("INSERT INTO basketitems(productID, customerID, quantity, price) VALUES (?, ?, ?, ?)", [req.body.id, req.session.username, 1, req.body.price], (err, res) => {
-                if (err) {
-                    console.log(err)
-                }
-            })
-        }
-    })
+    if (req.body.type === 'add_to_basket') {
+        db.query('SELECT * FROM basketitems WHERE productID = ? AND customerID = ?', [req.body.id, req.session.username], (error, results) => {
+            if (error) {
+                console.log(error);
+            } else if (results.length > 0) {
+                db.query('UPDATE basketitems SET quantity = quantity + 1 WHERE productID = ? AND customerID = ?', [req.body.id, req.session.username], (error, results) => {
+                    if (error) throw err;
+                })
+            } else {
+                db.query("INSERT INTO basketitems(productID, customerID, quantity, price) VALUES (?, ?, ?, ?)", [req.body.id, req.session.username, 1, req.body.price], (err, res) => {
+                    if (err) {
+                        console.log(err)
+                    }
+                })
+            }
+        })
+    } else if (req.body.type === 'add_to_wishlist') {
+        db.query('SELECT * FROM wishlistitems WHERE productID = ? AND customerID = ?', [req.body.id, req.session.username], (error, results) => {
+            if (error) {
+                console.log(error);
+            } else if (results.length > 0) {
+                return;
+            } else {
+                db.query("INSERT INTO wishlistitems(productID, customerID) VALUES (?, ?)", [req.body.id, req.session.username, 1, req.body.price], (err, res) => {
+                    if (err) {
+                        console.log(err)
+                    }
+                })
+            }
+        })
+    }
 
     res.redirect(`/${req.params.category}`);
 })
