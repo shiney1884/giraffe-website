@@ -289,20 +289,22 @@ router.get('/:id', (req, res) => {
 
 router.post('/:category', (req, res) => {
     db.query('SELECT * FROM basketitems WHERE productID = ? AND customerID = ?', [req.body.id, req.session.username], (error, results) => {
-        if(error) {
+        if (error) {
             console.log(error);
-        } else if(results.length > 0) {
-            res.redirect(`/${req.params.category}`);
+        } else if (results.length > 0) {
+            db.query('UPDATE basketitems SET quantity = quantity + 1 WHERE productID = ? AND customerID = ?', [req.body.id, req.session.username], (error, results) => {
+                if (error) throw err;
+            })
         } else {
-            db.query("INSERT INTO basketitems(productID, customerID, quantity, price) VALUES (?, ?, ?, ?)", [req.body.id, req.session.username, 1 ,req.body.price], (err, res)=> {
-                if(err) {
+            db.query("INSERT INTO basketitems(productID, customerID, quantity, price) VALUES (?, ?, ?, ?)", [req.body.id, req.session.username, 1, req.body.price], (err, res) => {
+                if (err) {
                     console.log(err)
                 }
-            }) 
+            })
         }
     })
 
-     res.redirect(`/${req.params.category}`);
+    res.redirect(`/${req.params.category}`);
 })
 
 module.exports = router;
