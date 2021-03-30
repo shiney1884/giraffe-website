@@ -16,20 +16,24 @@
     </div>
     <div id="products" class="products">
         <% for(let i = 0; i < data.length; i++) { %>
-        <div id="<%= data[i]['id'] %>" class="product">
-            <img class="product-img" src="images/<%= data[i]['imageSrc'] %>" alt="">
-            <a href='<%= data[i]["id"] %>'><%= data[i]['name'] %></a>
-            <div class="product-info">
-                <div class="price">
-                    <span>£</span><%= (Math.round(data[i]['price'] * 0.9 * 100) / 100).toFixed(2) %>
-                    <div class="old-price"><span>£</span><%= data[i]['price'] %></div>
-                </div>
-                <div class="actions">
-                    <i class="far fa-heart"></i>
-                    <button class="basket-add" type="submit" method= 'POST'><i class="fas fa-cart-plus"></i></button>
+        <form action="/pens" method="post">
+            <div id="<%= data[i]['id'] %>" class="product">
+                <img class="product-img" src="images/<%= data[i]['imageSrc'] %>" alt="">
+                <input type="hidden" name='id' value='<%= data[i]["id"] %>'><a href='<%= data[i]["id"] %>'><%= data[i]['name'] %></a>
+                <div class="product-info">
+                    <div class="price">
+                        <input type="hidden" name='price', value="<%= (Math.round(data[i]['price'] * 0.9 * 100) / 100).toFixed(2) %>"><span>£</span><%= (Math.round(data[i]['price'] * 0.9 * 100) / 100).toFixed(2) %>
+                        <div class="old-price"><span>£</span><%= data[i]['price'] %></div>
+                    </div>
+                    <div class="actions">
+                        <i class="far fa-heart"></i>
+                        <button class="basket-add" type="submit">
+                            <i class="fas fa-cart-plus"></i>
+                        </button>
+                    </div>
                 </div>
             </div>
-        </div>
+        </form>
         <% } %>
     </div>
 

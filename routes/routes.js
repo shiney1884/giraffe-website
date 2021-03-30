@@ -287,14 +287,22 @@ router.get('/:id', (req, res) => {
     })
 })
 
-// router.get('/addtobasket', (req, res) => {
-//     res.redirect('products', {
-//         title: title,
-//         header: header,
-//         data: result,
-//         username: req.session.username,
-//         loggedin: req.session.loggedin
-//     });
-// })
+router.post('/:category', (req, res) => {
+    db.query('SELECT * FROM basketitems WHERE productID = ? AND customerID = ?', [req.body.id, req.session.username], (error, results) => {
+        if(error) {
+            console.log(error);
+        } else if(results.length > 0) {
+            res.redirect(`/${req.params.category}`);
+        } else {
+            db.query("INSERT INTO basketitems(productID, customerID, quantity, price) VALUES (?, ?, ?, ?)", [req.body.id, req.session.username, 1 ,req.body.price], (err, res)=> {
+                if(err) {
+                    console.log(err)
+                }
+            }) 
+        }
+    })
+
+     res.redirect(`/${req.params.category}`);
+})
 
 module.exports = router;
