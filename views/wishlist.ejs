@@ -5,19 +5,29 @@
         <h4 class="product-header"><%= header %></h4>
     </div>
     <div class="products">
-        <% for(let i = 0; i < data.length; i++) { %> <div class="product">
-            <img class="product-img" src="images/<%= data[i]['imageSrc'] %>" alt="">
-            <a href="<%= data[i]['id'] %>"><%= data[i]['name'] %></a>
-            <div class="product-info">
-                <div class="price">
-                    <span>£<%= data[i]['price'] %></span>
-                </div>
-                <div class="actions">
-                    <i class="fas fa-trash-alt"></i>
-                    <i class="fas fa-cart-plus"></i>
+        <% for(let i = 0; i < data.length; i++) { %>
+        <form class="product-form" action="/wishlist" method="post">
+            <div class="product">
+                <img class="product-img" src="images/<%= data[i]['imageSrc'] %>" alt="">
+                <input type="hidden" name='id' value='<%= data[i]["id"] %>'>
+                <a href="<%= data[i]['id'] %>"><%= data[i]['name'] %></a>
+                <div class="product-info">
+                    <div class="price">
+                        <input type="hidden" name='price'
+                            value="<%= (Math.round(data[i]['price'] * 0.9 * 100) / 100).toFixed(2) %>">
+                        <span>£<%= (Math.round(data[i]['price'] * 0.9 * 100) / 100).toFixed(2) %></span>
+                    </div>
+                    <div class="actions">
+                        <button class="wishlist-delete" type="submit" name="type" value="delete_from_wishlist">
+                            <i class="fas fa-trash-alt"></i>
+                        </button>
+                        <button class="basket-add" type="submit" name="type" value="add_to_basket">
+                            <i class="fas fa-cart-plus"></i>
+                        </button>
+                    </div>
                 </div>
             </div>
-        </div>
+        </form>
         <%  } %>
     </div>
 </div>
