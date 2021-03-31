@@ -205,6 +205,23 @@ router.get('/basket', (req, res) => {
 
 });
 
+router.post('/basket', (req, res) => {
+    db.query('SELECT * FROM basketitems WHERE productID = ? AND customerID =?', [req.body.id, req.session.username], (error, results) => {
+        if (error) {
+            console.log(error);
+        } else {
+            db.query('DELETE FROM basketitems WHERE productID = ? AND customerID = ?', [req.body.id, req.session.username], (error, results) => {
+                if (error) throw err;
+                console.log(results)
+            })
+        }
+    })
+
+    setTimeout(() => {
+        res.redirect('/basket');
+    }, 1000);
+})
+
 router.get('/checkout', (req, res) => {
     let title = 'Checkout | Giraffe Website';
     res.render('checkout', {
@@ -359,9 +376,5 @@ router.post('/:category', (req, res) => {
     res.redirect(`/${req.params.category}`);
 })
 
-router.post('/basket', (req, res)=> {
-    console.log(req.body);
-    res.redirect('/')
-})
 
 module.exports = router;
