@@ -513,6 +513,7 @@ footer a {
 .product {
     width: 33.33vw;
     flex-basis: 40%;
+    /* border: 2px solid red; */
 }
 
 .product-img {
@@ -1259,7 +1260,13 @@ td {
     }
 
     .product {
-        flex-basis: 22.5%;
+        width: 30vw;
+        flex-basis: 5%;
+    }
+
+    .product-form .product {
+        /* border: 2px solid red; */
+        width: 20vw;
     }
 
     .steps {
