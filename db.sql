@@ -111,4 +111,28 @@ INSERT INTO wishlistItems (customerID, productID)
 VALUES ('shiney04067', 1),
 ('shiney1884', 2);
 
+ALTER TABLE orderItems ADD orderID INT NOT NULL;
 
+ALTER TABLE orderItems ADD FOREIGN KEY(orderID) REFERENCES orders(id);
+
+
+INSERT INTO orders (customerID, orderTotal, dateOfOrder, status, paymentMethod )
+VALUES ('shiney0406', 20.00, '2021/03/24', 'Complete', 'Paypal'),
+('anewaccount', 400.00, '2021/03/20', 'Complete', 'Paypal'),
+('idkwhattoput', 225.00, '2021/03/16', 'Complete', 'Paypal'),
+('shiney04067', 20.00, '2021/03/24', 'Complete', 'Paypal'),
+('shiney1884', 400.00, '2021/03/20', 'Complete', 'Paypal'),
+('shiney0406', 20.00, '2021/03/30', 'Complete', 'Paypal'),
+('anewaccount', 400.00, '2021/03/21', 'Complete', 'Paypal'),
+('idkwhattoput', 225.00, '2021/03/17', 'Complete', 'Paypal'),
+('shiney04067', 20.00, '2021/03/25', 'Complete', 'Paypal'),
+('shiney1884', 400.00, '2021/03/21', 'Complete', 'Paypal');
+
+INSERT INTO orders (customerID, orderTotal, dateOfOrder, status, paymentMethod )
+VALUES ('shiney0406', 20.00, '2021/03/30', 'Complete', 'Paypal'),
+('anewaccount', 400.00, '2021/03/21', 'Complete', 'Paypal'),
+('idkwhattoput', 225.00, '2021/03/17', 'Complete', 'Paypal'),
+('shiney04067', 20.00, '2021/03/25', 'Complete', 'Paypal'),
+('shiney1884', 400.00, '2021/03/21', 'Complete', 'Paypal');
+
+SELECT * FROM orders WHERE customerID = 'shiney04067' ORDER BY dateOfOrder DESC, id DESC LIMIT 1;

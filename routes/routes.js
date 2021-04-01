@@ -208,11 +208,19 @@ router.get('/basket', (req, res) => {
 
 router.get('/checkout', (req, res) => {
     let title = 'Checkout | Giraffe Website';
-    res.render('checkout', {
-        title: title,
-        username: req.session.username,
-        loggedin: req.session.loggedin
-    });
+
+    db.query('SELECT * FROM basketitems WHERE customerID = ?', [req.session.username], (error, results) => {
+        if (error) {
+            console.log(error)
+        } else {
+            res.render('checkout', {
+                title: title,
+                username: req.session.username,
+                loggedin: req.session.loggedin,
+                data: results
+            });
+        }
+    })
 });
 
 
