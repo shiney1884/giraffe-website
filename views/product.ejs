@@ -1,23 +1,33 @@
 <%- include('header') -%>
 
 <div class="page-content">
-    <div class="product-page-product">
-        <div class="product-page-img">
-            <img src="images/<%= data[0]['imageSrc'] %>" alt="">
-        </div>
-        <div class="product-page-details">
-            <div class="product-page-title"><%= data[0]['name'] %></div>
-            <div class="product-page-price">£<%= data[0]['price'] %></div>
-            <hr>
-            <div class="product-page-actions">
-                <i class="far fa-heart"></i>
-                <button>Add to Basket</button>
+    <form action="/actions" method="post">
+        <div class="product-page-product">
+            <div class="product-page-img">
+                <img src="images/<%= data[0]['imageSrc'] %>" alt="">
             </div>
-            <hr>
-            <div class="product-description-title">PRODUCT DESCRIPTION</div>
-            <div class="product-page-description"><%= data[0]['description'] %></div>
+            <div class="product-page-details">
+                <input type="hidden" name='id' value='<%= data[0]["id"] %>'>
+                <div class="product-page-title"><%= data[0]['name'] %></div>
+                <input type="hidden" name='price'
+                    value="<%= (Math.round(data[0]['price'] * 0.9 * 100) / 100).toFixed(2) %>">
+                <div class="product-page-price">£<%= (Math.round(data[0]['price'] * 0.9 * 100) / 100).toFixed(2) %>
+                </div>
+                <hr>
+                <div class="product-page-actions">
+                    <button type="submit" name="type" value="add_to_wishlist">
+                        <i class="far fa-heart"></i>
+                    </button>
+                    <button type="submit" name="type" value="add_to_basket">
+                        Add to Basket
+                    </button>
+                </div>
+                <hr>
+                <div class="product-description-title">PRODUCT DESCRIPTION</div>
+                <div class="product-page-description"><%= data[0]['description'] %></div>
+            </div>
         </div>
-    </div>
+    </form>
 </div>
 <script src="scripts/app.js"></script>
 

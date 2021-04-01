@@ -6,7 +6,7 @@
         <div class="basket-items">
             <%  if(data.length > 0) { %>
             <% for (let i = 0; i < data.length; i++) { %>
-            <form action="/basket" method="post">
+            <form action="/actions" method="post">
                 <input type="hidden" name='id' value='<%= data[i]["id"] %>'>
                 <div id="<%= data[i]['id'] %>" class="basket-item">
                     <div class="image-holder">
@@ -19,7 +19,7 @@
                         <div class="basket-item-price">Item Price: £<span><%= data[i]['price'] %></span></div>
                         <div class="quantity">Quantity of Item: <%= data[i]['quantity'] %></div>
                         <div class="basket-item-delete">
-                            <button type="submit">Delete</button>
+                            <button type="submit" name="type" value="delete_from_basket">Delete</button>
                         </div>
                     </div>
                 </div>

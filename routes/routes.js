@@ -290,23 +290,6 @@ router.get('/:id', (req, res) => {
     })
 })
 
-router.post('/basket', (req, res) => {
-    db.query('SELECT * FROM basketitems WHERE productID = ? AND customerID =?', [req.body.id, req.session.username], (error, results) => {
-        if (error) {
-            console.log(error);
-        } else {
-            db.query('DELETE FROM basketitems WHERE productID = ? AND customerID = ?', [req.body.id, req.session.username], (error, results) => {
-                if (error) throw err;
-                console.log(results)
-            })
-        }
-    })
-
-    setTimeout(() => {
-        res.redirect('/basket');
-    }, 1000);
-})
-
 
 router.post('/actions', (req, res) => {
     const backURL = req.header('Referer')
@@ -355,10 +338,22 @@ router.post('/actions', (req, res) => {
             }
         })
     }
-    
-      setTimeout(() => {
+    if (req.body.type === 'delete_from_basket') {
+        db.query('SELECT * FROM basketitems WHERE productID = ? AND customerID =?', [req.body.id, req.session.username], (error, results) => {
+            if (error) {
+                console.log(error);
+            } else {
+                db.query('DELETE FROM basketitems WHERE productID = ? AND customerID = ?', [req.body.id, req.session.username], (error, results) => {
+                    if (error) throw err;
+                    console.log(results)
+                })
+            }
+        })
+    }
+
+    setTimeout(() => {
         res.redirect(`${backURL}`);
-    }, 1000);
+    }, 300);
 })
 
 
