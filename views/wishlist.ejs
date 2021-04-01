@@ -6,7 +6,7 @@
     </div>
     <div class="products">
         <% for(let i = 0; i < data.length; i++) { %>
-        <form class="product-form" action="/wishlist" method="post">
+        <form class="product-form" action="/actions" method="post">
             <div class="product">
                 <img class="product-img" src="images/<%= data[i]['imageSrc'] %>" alt="">
                 <input type="hidden" name='id' value='<%= data[i]["id"] %>'>

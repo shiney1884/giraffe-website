@@ -205,22 +205,6 @@ router.get('/basket', (req, res) => {
 
 });
 
-router.post('/basket', (req, res) => {
-    db.query('SELECT * FROM basketitems WHERE productID = ? AND customerID =?', [req.body.id, req.session.username], (error, results) => {
-        if (error) {
-            console.log(error);
-        } else {
-            db.query('DELETE FROM basketitems WHERE productID = ? AND customerID = ?', [req.body.id, req.session.username], (error, results) => {
-                if (error) throw err;
-                console.log(results)
-            })
-        }
-    })
-
-    setTimeout(() => {
-        res.redirect('/basket');
-    }, 1000);
-})
 
 router.get('/checkout', (req, res) => {
     let title = 'Checkout | Giraffe Website';
@@ -283,41 +267,7 @@ router.get('/wishlist', ifNotLoggedIn, (req, res) => {
     })
 });
 
-router.post('/wishlist', (req, res) => {
-    if (req.body.type === 'add_to_basket') {
-        db.query('SELECT * FROM basketitems WHERE productID = ? AND customerID = ?', [req.body.id, req.session.username], (error, results) => {
-            if (error) {
-                console.log(error);
-            } else if (results.length > 0) {
-                db.query('UPDATE basketitems SET quantity = quantity + 1 WHERE productID = ? AND customerID = ?', [req.body.id, req.session.username], (error, results) => {
-                    if (error) throw err;
-                })
-            } else {
-                db.query("INSERT INTO basketitems(productID, customerID, quantity, price) VALUES (?, ?, ?, ?)", [req.body.id, req.session.username, 1, req.body.price], (err, res) => {
-                    if (err) {
-                        console.log(err)
-                    }
-                })
-            }
-        })
-    }
-    if (req.body.type === 'delete_from_wishlist') {
-        db.query('SELECT * FROM wishlistitems WHERE productID = ? AND customerID = ?', [req.body.id, req.session.username], (error, results) => {
-            if (error) {
-                console.log(error);
-            } else {
-                db.query('DELETE FROM wishlistitems WHERE productID = ? AND customerID = ?', [req.body.id, req.session.username], (error, results) => {
-                    if (error) throw err;
-                    console.log(results)
-                })
-            }
-        })
-    }
 
-    setTimeout(() => {
-        res.redirect('/wishlist');
-    }, 1000);
-})
 
 router.get('/logout', ifLoggedIn, (req, res) => {
     req.session.loggedin = false;
@@ -340,7 +290,69 @@ router.get('/:id', (req, res) => {
     })
 })
 
-router.post('/:category', (req, res) => {
+router.post('/basket', (req, res) => {
+    db.query('SELECT * FROM basketitems WHERE productID = ? AND customerID =?', [req.body.id, req.session.username], (error, results) => {
+        if (error) {
+            console.log(error);
+        } else {
+            db.query('DELETE FROM basketitems WHERE productID = ? AND customerID = ?', [req.body.id, req.session.username], (error, results) => {
+                if (error) throw err;
+                console.log(results)
+            })
+        }
+    })
+
+    setTimeout(() => {
+        res.redirect('/basket');
+    }, 1000);
+})
+
+// router.post('/wishlist', (req, res) => {
+//     backURL = req.header('Referer')
+
+//     if (req.body.type === 'add_to_basket') {
+//         db.query('SELECT * FROM basketitems WHERE productID = ? AND customerID = ?', [req.body.id, req.session.username], (error, results) => {
+//             if (error) {
+//                 console.log(error);
+//             } else if (results.length > 0) {
+//                 db.query('UPDATE basketitems SET quantity = quantity + 1 WHERE productID = ? AND customerID = ?', [req.body.id, req.session.username], (error, results) => {
+//                     if (error) throw err;
+//                 })
+//             } else {
+//                 db.query("INSERT INTO basketitems(productID, customerID, quantity, price) VALUES (?, ?, ?, ?)", [req.body.id, req.session.username, 1, req.body.price], (err, res) => {
+//                     if (err) {
+//                         console.log(err)
+//                     }
+//                 })
+//             }
+//         })
+//     }
+//     if (req.body.type === 'delete_from_wishlist') {
+//         db.query('SELECT * FROM wishlistitems WHERE productID = ? AND customerID = ?', [req.body.id, req.session.username], (error, results) => {
+//             if (error) {
+//                 console.log(error);
+//             } else {
+//                 db.query('DELETE FROM wishlistitems WHERE productID = ? AND customerID = ?', [req.body.id, req.session.username], (error, results) => {
+//                     if (error) throw err;
+//                     console.log(results)
+//                 })
+//             }
+//         })
+//     }
+
+
+//     console.log(backURL);
+
+    // setTimeout(() => {
+    //     res.redirect('/wishlist');
+    // }, 1000);
+// })
+
+
+
+router.post('/actions', (req, res) => {
+    const backURL = req.header('Referer')
+
     if (req.body.type === 'add_to_basket') {
         db.query('SELECT * FROM basketitems WHERE productID = ? AND customerID = ?', [req.body.id, req.session.username], (error, results) => {
             if (error) {
@@ -373,7 +385,23 @@ router.post('/:category', (req, res) => {
         })
     }
 
-    res.redirect(`/${req.params.category}`);
+    if (req.body.type === 'delete_from_wishlist') {
+        db.query('SELECT * FROM wishlistitems WHERE productID = ? AND customerID = ?', [req.body.id, req.session.username], (error, results) => {
+            if (error) {
+                console.log(error);
+            } else {
+                db.query('DELETE FROM wishlistitems WHERE productID = ? AND customerID = ?', [req.body.id, req.session.username], (error, results) => {
+                    if (error) throw err;
+                    console.log(results)
+                })
+            }
+        })
+    }
+
+    // console.log(backURL)
+      setTimeout(() => {
+        res.redirect(`${backURL}`);
+    }, 1000);
 })
 
 
