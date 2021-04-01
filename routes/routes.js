@@ -307,48 +307,6 @@ router.post('/basket', (req, res) => {
     }, 1000);
 })
 
-// router.post('/wishlist', (req, res) => {
-//     backURL = req.header('Referer')
-
-//     if (req.body.type === 'add_to_basket') {
-//         db.query('SELECT * FROM basketitems WHERE productID = ? AND customerID = ?', [req.body.id, req.session.username], (error, results) => {
-//             if (error) {
-//                 console.log(error);
-//             } else if (results.length > 0) {
-//                 db.query('UPDATE basketitems SET quantity = quantity + 1 WHERE productID = ? AND customerID = ?', [req.body.id, req.session.username], (error, results) => {
-//                     if (error) throw err;
-//                 })
-//             } else {
-//                 db.query("INSERT INTO basketitems(productID, customerID, quantity, price) VALUES (?, ?, ?, ?)", [req.body.id, req.session.username, 1, req.body.price], (err, res) => {
-//                     if (err) {
-//                         console.log(err)
-//                     }
-//                 })
-//             }
-//         })
-//     }
-//     if (req.body.type === 'delete_from_wishlist') {
-//         db.query('SELECT * FROM wishlistitems WHERE productID = ? AND customerID = ?', [req.body.id, req.session.username], (error, results) => {
-//             if (error) {
-//                 console.log(error);
-//             } else {
-//                 db.query('DELETE FROM wishlistitems WHERE productID = ? AND customerID = ?', [req.body.id, req.session.username], (error, results) => {
-//                     if (error) throw err;
-//                     console.log(results)
-//                 })
-//             }
-//         })
-//     }
-
-
-//     console.log(backURL);
-
-    // setTimeout(() => {
-    //     res.redirect('/wishlist');
-    // }, 1000);
-// })
-
-
 
 router.post('/actions', (req, res) => {
     const backURL = req.header('Referer')
@@ -397,8 +355,7 @@ router.post('/actions', (req, res) => {
             }
         })
     }
-
-    // console.log(backURL)
+    
       setTimeout(() => {
         res.redirect(`${backURL}`);
     }, 1000);
