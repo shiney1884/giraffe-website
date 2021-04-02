@@ -243,10 +243,42 @@ router.post('/checkout', (req, res) => {
     db.query("INSERT INTO orders(customerID, orderTotal, dateOfOrder, status, paymentMethod) VALUES (?, ?, ?, ?, ?)", [req.session.username, req.body.total, req.body.date, 'Pending', 'Debit'], (err, res) => {
         if (err) {
             console.log(err)
-        } else {
-            res.redirect('/');
         }
     })
+
+    db.query('SELECT * FROM orders WHERE customerID = ? ORDER BY dateOfOrder DESC, id DESC LIMIT 1', [req.session.username], (err, res) => {
+        if (err) {
+            console.log(err)
+        } else {
+            let id = res[0]['id'];
+
+            db.query('SELECT * FROM basketitems WHERE customerID = ?', [req.session.username], (err, res) => {
+                if (err) {
+                    console.log(err)
+                } else {
+                    for (let i = 0; i < res.length; i++) {
+                        db.query('INSERT INTO orderitems(customerID, productID, quantity, price, orderID) VALUES (?, ?, ?, ?, ?)', [req.session.username, res[i]['productID'], res[i]['quantity'], res[i]['price'], id], (err, res) => {
+                            if (err) {
+                                console.log(err)
+                            } else {
+                                console.log(res);
+                            }
+                        })
+                    }
+
+                    db.query('DELETE FROM basketitems WHERE customerID = ?', [req.session.username], (err, res) => {
+                        if (err) {
+                            console.log(err)
+                        }
+                    })
+                }
+            })
+        }
+    })
+
+    res.redirect('/');
+
+
 })
 
 
