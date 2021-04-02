@@ -206,22 +206,48 @@ router.get('/basket', (req, res) => {
 });
 
 
-router.get('/checkout', (req, res) => {
+router.get('/checkout', ifNotLoggedIn, (req, res) => {
     let title = 'Checkout | Giraffe Website';
 
-    db.query('SELECT * FROM basketitems WHERE customerID = ?', [req.session.username], (error, results) => {
+    db.query('SELECT b.productID, b.customerID, b.quantity, b.price, p.id, p.name, p.url, p.imageSrc FROM basketitems b INNER JOIN products p ON p.id = b.productID WHERE b.customerID = ?', [req.session.username], (error, results) => {
         if (error) {
             console.log(error)
+        } else if (results.length === 0) {
+            res.redirect('/')
         } else {
+            var today = new Date();
+            var dd = String(today.getDate()).padStart(2, '0');
+            var mm = String(today.getMonth() + 1).padStart(2, '0'); //January is 0!
+            var yyyy = today.getFullYear();
+
+            today = yyyy + '/' + dd + '/' + mm;
+
+            let total = 0;
+            for (let i = 0; i < results.length; i++) {
+                total += results[i]['price'] * results[i]['quantity'];
+            }
+
             res.render('checkout', {
                 title: title,
                 username: req.session.username,
                 loggedin: req.session.loggedin,
-                data: results
+                data: results,
+                total: total,
+                date: today
             });
         }
     })
 });
+
+router.post('/checkout', (req, res) => {
+    db.query("INSERT INTO orders(customerID, orderTotal, dateOfOrder, status, paymentMethod) VALUES (?, ?, ?, ?, ?)", [req.session.username, req.body.total, req.body.date, 'Pending', 'Debit'], (err, res) => {
+        if (err) {
+            console.log(err)
+        } else {
+            res.redirect('/');
+        }
+    })
+})
 
 
 router.get('/youraccount', ifNotLoggedIn, (req, res) => {

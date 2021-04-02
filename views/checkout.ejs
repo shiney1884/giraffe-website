@@ -4,17 +4,16 @@
     <div class="order-details">
         <h4>Your Order</h4>
         <div class="order-items">
-            <% for(let i = 0; i < data.length; i++) {
-                    <div class="order-item">
-                        <div class="item-details">
-                            <img src="images/winner-1.jpg" alt="">
-                            <div class="item-name"><span>Item: </span>Pencil 1</div>
-                            <div class="item-price"><span>Price: </span>£5.00</div>
-                            <div class="item-quantity"><span>Quantity: </span>5</div>
-                        </div>
-                        <hr>
-                    </div>
-            }
+            <%    for(let i = 0; i < data.length; i++) { %> <div class="order-item">
+                <div class="item-details">
+                    <img src="images/<%= data[i]['imageSrc'] %>" alt="">
+                    <div class="item-name"><span>Item: </span><%= data[i]['name'] %></div>
+                    <div class="item-price"><span>Price: </span><%= data[i]['price'] %></div>
+                    <div class="item-quantity"><span>Quantity: </span><%= data[i]['quantity'] %></div>
+                </div>
+                <hr>
+            </div>
+            <%    } %>
 
         </div>
     </div>
@@ -62,16 +61,20 @@
             </div>
         </div>
     </div>
-    <div class="payment-method">
-        <h4>Payment Method</h4>
-    </div>
-    <div class="final-cost">
-        <h4>Your Total Order Price</h4>
-        <p>£<span>25.00</span></p>
-    </div>
-    <div class="complete-order">
-        <button>Complete Order</button>
-    </div>
+    <form action="/checkout" method="post">
+        <div class="payment-method">
+            <h4>Payment Method</h4>
+        </div>
+        <div class="final-cost">
+            <h4>Your Total Order Price</h4>
+            <input type="hidden" name='date' value="<%= date %>">
+            <input type="hidden" name='total' value="<%= total %>">
+            <p>£<%= total %></p>
+        </div>
+        <button class="complete-order" type="submit">
+            Complete Order
+        </button>
+    </form>
 </div>
 
 <%- include('footer') -%>
