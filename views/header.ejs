@@ -31,7 +31,10 @@
                 <a href="artcontest">Art Contests</a>
                 <a href="contact">Contact Us</a>
             </div>
-            <input class="searchbar" type="search" name="" id="" placeholder="Search Products...">
+            <form action="/search" method="post">
+                <input class="searchbar" type="search" name="query" value="" placeholder="Search Products...">
+                <input type="submit" value="send">
+            </form>
             <i class="fas fa-search"></i>
             <% if(loggedin) { %>
             <a id="item" class="sign-in-link" href="youraccount"><%= username %></a>

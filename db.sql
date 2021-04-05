@@ -136,3 +136,5 @@ VALUES ('shiney0406', 20.00, '2021/03/30', 'Complete', 'Paypal'),
 ('shiney1884', 400.00, '2021/03/21', 'Complete', 'Paypal');
 
 SELECT * FROM orders WHERE customerID = 'shiney04067' ORDER BY dateOfOrder DESC, id DESC LIMIT 1;
+
+SELECT * FROM products WHERE name LIKE '%pen%';

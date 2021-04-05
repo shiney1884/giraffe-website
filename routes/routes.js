@@ -260,8 +260,6 @@ router.post('/checkout', (req, res) => {
                         db.query('INSERT INTO orderitems(customerID, productID, quantity, price, orderID) VALUES (?, ?, ?, ?, ?)', [req.session.username, res[i]['productID'], res[i]['quantity'], res[i]['price'], id], (err, res) => {
                             if (err) {
                                 console.log(err)
-                            } else {
-                                console.log(res);
                             }
                         })
                     }
@@ -420,6 +418,23 @@ router.post('/actions', (req, res) => {
     setTimeout(() => {
         res.redirect(`${backURL}`);
     }, 300);
+})
+
+router.post('/search', (req, res) => {
+    let query = `%${req.body.query}%`;
+    db.query('SELECT * FROM products WHERE name LIKE ?', [query], (error, results) => {
+        if (error) {
+            console.log(error)
+        } else {
+            res.render('products', {
+                title: 'Search Results',
+                header: 'Search Results',
+                username: req.session.username,
+                loggedin: req.session.loggedin,
+                data: results
+            });
+        }
+    })
 })
 
 
