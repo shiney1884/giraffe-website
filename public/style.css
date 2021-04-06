@@ -72,11 +72,40 @@ nav {
     cursor: pointer;
 }
 
-.searchbar {
-    opacity: 0;
+.search-container {
     position: absolute;
-    top: 25px;
-    left: 200px
+    top: 15px;
+    left: 240px;
+    display: flex;
+    align-items: center;
+    width: 40%;
+    opacity: 0;
+}
+
+.searchbar {
+    all: unset;
+    background-color: #fff;
+    padding: 10px 7.5px;
+    font-size: .75em;
+    font-family: Arial,
+        Helvetica,
+        sans-serif;
+    border-radius: 5px 0 0 5px;
+    width: 75%;
+}
+
+.searchbar-btn {
+    all: unset;
+    font-size: .75em;
+    width: 25%;
+    text-align: center;
+    background-color: #F2B613;
+    height: 34.5px;
+    border-radius: 0 5px 5px 0;
+}
+
+.searchbar-btn:hover {
+    cursor: pointer;
 }
 
 .sign-in-link {
@@ -116,6 +145,10 @@ nav {
 
 .hide {
     opacity: 0;
+}
+
+.show {
+    opacity: 1;
 }
 
 .links a {
@@ -871,8 +904,8 @@ hr {
     font-size: .85em;
 }
 
-.checkoutLink{
-   color: #000;
+.checkoutLink {
+    color: #000;
 }
 
 
@@ -1178,17 +1211,12 @@ td {
         top: 0;
     }
 
-
-    .searchbar {
-        opacity: 100;
-        all: unset;
-        border: 2px solid grey;
-        height: 30%;
-        background-color: #fff;
+    .search-container {
+        position: relative;
+        top: auto;
+        left: auto;
         width: 300px;
-        padding: 10px 7.5px;
-        font-size: .75em;
-        font-family: Arial, Helvetica, sans-serif;
+        opacity: 100;
     }
 
     .burger {

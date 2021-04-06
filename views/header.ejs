@@ -31,11 +31,11 @@
                 <a href="artcontest">Art Contests</a>
                 <a href="contact">Contact Us</a>
             </div>
-            <form action="/search" method="post">
+            <form id="search-container" class="search-container" action="/search" method="post">
                 <input class="searchbar" type="search" name="query" value="" placeholder="Search Products...">
-                <input type="submit" value="send">
+                <input class="searchbar-btn" type="submit" value="Search">
             </form>
-            <i class="fas fa-search"></i>
+            <i id="search-icon" class="fas fa-search"></i>
             <% if(loggedin) { %>
             <a id="item" class="sign-in-link" href="youraccount"><%= username %></a>
             <%     } else { %>
@@ -45,3 +45,4 @@
         </nav>
     </header>
     <script src="scripts/nav.js"></script>
+    <script src="scripts/search.js"></script>
