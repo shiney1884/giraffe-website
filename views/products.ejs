@@ -1,5 +1,4 @@
 <%- include('header'); -%>
-<script src="scripts/links.js"></script>
 <div class="page-content">
     <div class="product-hero hero">
         <h4 class="product-header"><%= header %></h4>
@@ -41,9 +40,13 @@
         </form>
         <% } %>
     </div>
-
-
 </div>
+<script>
+    let data = "<%= data %>";
+
+    console.log(data);
+  
+</script>
 
 
 <%- include('footer'); -%>

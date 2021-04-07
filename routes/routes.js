@@ -52,6 +52,7 @@ router.get('/pens', (req, res) => {
 
     db.query(sql, (err, result) => {
         if (err) throw err;
+
         res.render('products', {
             title: title,
             header: header,
