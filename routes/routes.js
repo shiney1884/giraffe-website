@@ -330,6 +330,10 @@ router.post('/checkout', (req, res) => {
 
 })
 
+router.get('/search', (req, res) => {
+    res.redirect('/');
+})
+
 
 router.get('/youraccount', ifNotLoggedIn, (req, res) => {
     let title = 'Your Account | Giraffe Website';
@@ -467,7 +471,7 @@ router.post('/actions', (req, res) => {
         }
 
         setTimeout(() => {
-            res.redirect(`${backURL}`);
+            res.redirect(`${backURL}` || '/');
         }, 300);
 
     } else {
@@ -495,6 +499,8 @@ router.post('/actions', (req, res) => {
 
 
 })
+
+
 
 router.post('/search', (req, res) => {
     let query = `%${req.body.query}%`;
