@@ -3,6 +3,21 @@ const mySQL = require('mysql');
 const router = express.Router();
 const bodyparser = require('body-parser')
 const session = require('express-session')
+const flash = require('connect-flash');
+
+
+router.use(session({
+    secret: 'secret',
+    resave: true,
+    saveUninitialized: true
+}));
+
+router.use(flash());
+
+router.use(bodyparser.urlencoded({
+    extended: true
+}));
+router.use(bodyparser.json());
 
 const ifLoggedIn = (req, res, next) => {
     if (req.session.loggedin) {
@@ -18,16 +33,6 @@ const ifNotLoggedIn = (req, res, next) => {
     next();
 }
 
-router.use(session({
-    secret: 'secret',
-    resave: true,
-    saveUninitialized: true
-}));
-
-router.use(bodyparser.urlencoded({
-    extended: true
-}));
-router.use(bodyparser.json());
 
 const db = mySQL.createConnection({
     host: 'us-cdbr-east-03.cleardb.com',
@@ -92,7 +97,7 @@ router.get('/createaccount', ifLoggedIn, (req, res) => {
         title: title,
         username: req.session.username,
         loggedin: req.session.loggedin,
-        error: ''
+        message: req.flash('message')
     });
 });
 
@@ -102,23 +107,65 @@ router.post('/createaccount', (req, res) => {
     const password = req.body.password;
     const passwordReEnter = req.body.passwordReEnter;
 
+
+    if (!email) {
+        req.flash('message', 'Please enter an email');
+        return res.render('createaccount', {
+            title: 'Error | Giraffe Website',
+            username: req.session.username,
+            loggedin: req.session.loggedin,
+            message: req.flash('message')
+        });
+    }
+
+    if (!username) {
+        req.flash('message', 'Please enter a username');
+        return res.render('createaccount', {
+            title: 'Error | Giraffe Website',
+            username: req.session.username,
+            loggedin: req.session.loggedin,
+            message: req.flash('message')
+        });
+    }
+
+    if (!password) {
+        req.flash('message', 'Please enter a password');
+        return res.render('createaccount', {
+            title: 'Error | Giraffe Website',
+            username: req.session.username,
+            loggedin: req.session.loggedin,
+            message: req.flash('message')
+        });
+    }
+    if (!passwordReEnter) {
+        req.flash('message', 'Please re-enter your password');
+        return res.render('createaccount', {
+            title: 'Error | Giraffe Website',
+            username: req.session.username,
+            loggedin: req.session.loggedin,
+            message: req.flash('message')
+        });
+    }
+
     db.query('SELECT * FROM customers WHERE (username = ? OR email = ?)', [username, email], (error, results) => {
         if (error) {
             console.log(error);
         }
         if (results.length > 0) {
+            req.flash('message', 'Email and/or username is already in use');
             return res.render('createaccount', {
                 title: 'Error | Giraffe Website',
                 username: req.session.username,
                 loggedin: req.session.loggedin,
-                error: 'This email and/or username is already in use'
+                message: req.flash('message')
             });
         } else if (password !== passwordReEnter) {
+            req.flash('message', 'Passwords do not match')
             return res.render('createaccount', {
                 title: 'Error | Giraffe Website',
                 username: req.session.username,
                 loggedin: req.session.loggedin,
-                error: 'Passwords do not match'
+                message: req.flash('message')
             });
         }
 
@@ -130,11 +177,12 @@ router.post('/createaccount', (req, res) => {
             if (error) {
                 console.log(error);
             } else {
-                return res.render('createaccount', {
+                req.flash('message', 'You have successfully created your account')
+                return res.render('login', {
                     title: 'Success | Giraffe Website',
                     username: req.session.username,
                     loggedin: req.session.loggedin,
-                    error: 'You have registered an account'
+                    message: req.flash('message')
                 });
             }
         })
@@ -147,7 +195,7 @@ router.get('/login', ifLoggedIn, (req, res) => {
         title: title,
         username: req.session.username,
         loggedin: req.session.loggedin,
-        error: ''
+        message: req.flash('message')
     });
 });
 
@@ -161,20 +209,22 @@ router.post('/login', (req, res) => {
                 req.session.username = username;
                 res.redirect('/');
             } else {
+                req.flash('message', 'Incorrect Login Details')
                 return res.render('login', {
                     title: 'Error | Giraffe Website',
                     username: req.session.username,
                     loggedin: req.session.loggedin,
-                    error: 'These details do not exist'
+                    message: req.flash('message')
                 });
             }
         });
     } else {
+        req.flash('message', 'Please enter a username and password')
         return res.render('login', {
             title: 'Error | Giraffe Website',
             username: req.session.username,
             loggedin: req.session.loggedin,
-            error: 'Please enter a username and password'
+            message: req.flash('message')
         });
     }
 });
@@ -358,67 +408,92 @@ router.get('/:id', (req, res) => {
 
 router.post('/actions', (req, res) => {
     const backURL = req.header('Referer')
+    if (req.session.loggedin) {
+        if (req.body.type === 'add_to_basket') {
+            db.query('SELECT * FROM basketitems WHERE productID = ? AND customerID = ?', [req.body.id, req.session.username], (error, results) => {
+                if (error) {
+                    console.log(error);
+                } else if (results.length > 0) {
+                    db.query('UPDATE basketitems SET quantity = quantity + 1 WHERE productID = ? AND customerID = ?', [req.body.id, req.session.username], (error, results) => {
+                        if (error) throw err;
+                    })
+                } else {
+                    db.query("INSERT INTO basketitems(productID, customerID, quantity, price) VALUES (?, ?, ?, ?)", [req.body.id, req.session.username, 1, req.body.price], (err, res) => {
+                        if (err) {
+                            console.log(err)
+                        }
+                    })
+                }
+            })
+        } else if (req.body.type === 'add_to_wishlist') {
+            db.query('SELECT * FROM wishlistitems WHERE productID = ? AND customerID = ?', [req.body.id, req.session.username], (error, results) => {
+                if (error) {
+                    console.log(error);
+                } else if (results.length > 0) {
+                    return;
+                } else {
+                    db.query("INSERT INTO wishlistitems(productID, customerID) VALUES (?, ?)", [req.body.id, req.session.username, 1, req.body.price], (err, res) => {
+                        if (err) {
+                            console.log(err)
+                        }
+                    })
+                }
+            })
+        }
 
-    if (req.body.type === 'add_to_basket') {
-        db.query('SELECT * FROM basketitems WHERE productID = ? AND customerID = ?', [req.body.id, req.session.username], (error, results) => {
-            if (error) {
-                console.log(error);
-            } else if (results.length > 0) {
-                db.query('UPDATE basketitems SET quantity = quantity + 1 WHERE productID = ? AND customerID = ?', [req.body.id, req.session.username], (error, results) => {
-                    if (error) throw err;
-                })
-            } else {
-                db.query("INSERT INTO basketitems(productID, customerID, quantity, price) VALUES (?, ?, ?, ?)", [req.body.id, req.session.username, 1, req.body.price], (err, res) => {
-                    if (err) {
-                        console.log(err)
-                    }
-                })
-            }
-        })
-    } else if (req.body.type === 'add_to_wishlist') {
-        db.query('SELECT * FROM wishlistitems WHERE productID = ? AND customerID = ?', [req.body.id, req.session.username], (error, results) => {
-            if (error) {
-                console.log(error);
-            } else if (results.length > 0) {
-                return;
-            } else {
-                db.query("INSERT INTO wishlistitems(productID, customerID) VALUES (?, ?)", [req.body.id, req.session.username, 1, req.body.price], (err, res) => {
-                    if (err) {
-                        console.log(err)
-                    }
-                })
-            }
-        })
+        if (req.body.type === 'delete_from_wishlist') {
+            db.query('SELECT * FROM wishlistitems WHERE productID = ? AND customerID = ?', [req.body.id, req.session.username], (error, results) => {
+                if (error) {
+                    console.log(error);
+                } else {
+                    db.query('DELETE FROM wishlistitems WHERE productID = ? AND customerID = ?', [req.body.id, req.session.username], (error, results) => {
+                        if (error) throw err;
+                        console.log(results)
+                    })
+                }
+            })
+        }
+        if (req.body.type === 'delete_from_basket') {
+            db.query('SELECT * FROM basketitems WHERE productID = ? AND customerID =?', [req.body.id, req.session.username], (error, results) => {
+                if (error) {
+                    console.log(error);
+                } else {
+                    db.query('DELETE FROM basketitems WHERE productID = ? AND customerID = ?', [req.body.id, req.session.username], (error, results) => {
+                        if (error) throw err;
+                        console.log(results)
+                    })
+                }
+            })
+        }
+
+        setTimeout(() => {
+            res.redirect(`${backURL}`);
+        }, 300);
+
+    } else {
+        if (req.body.type === 'add_to_basket') {
+            req.flash('message', 'Please create an account to add items to your basket')
+            return res.render('createaccount', {
+                title: 'Error | Giraffe Website',
+                username: req.session.username,
+                loggedin: req.session.loggedin,
+                message: req.flash('message')
+            });
+        }
+
+        if (req.body.type === 'add_to_wishlist') {
+            req.flash('message', 'Please create an account to add items to your wishlist')
+            return res.render('createaccount', {
+                title: 'Error | Giraffe Website',
+                username: req.session.username,
+                loggedin: req.session.loggedin,
+                message: req.flash('message')
+            });
+        }
     }
 
-    if (req.body.type === 'delete_from_wishlist') {
-        db.query('SELECT * FROM wishlistitems WHERE productID = ? AND customerID = ?', [req.body.id, req.session.username], (error, results) => {
-            if (error) {
-                console.log(error);
-            } else {
-                db.query('DELETE FROM wishlistitems WHERE productID = ? AND customerID = ?', [req.body.id, req.session.username], (error, results) => {
-                    if (error) throw err;
-                    console.log(results)
-                })
-            }
-        })
-    }
-    if (req.body.type === 'delete_from_basket') {
-        db.query('SELECT * FROM basketitems WHERE productID = ? AND customerID =?', [req.body.id, req.session.username], (error, results) => {
-            if (error) {
-                console.log(error);
-            } else {
-                db.query('DELETE FROM basketitems WHERE productID = ? AND customerID = ?', [req.body.id, req.session.username], (error, results) => {
-                    if (error) throw err;
-                    console.log(results)
-                })
-            }
-        })
-    }
 
-    setTimeout(() => {
-        res.redirect(`${backURL}`);
-    }, 300);
+
 })
 
 router.post('/search', (req, res) => {
