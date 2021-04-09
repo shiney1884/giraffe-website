@@ -1,10 +1,9 @@
 const express = require('express');
-const mySQL = require('mysql');
+const mySQL = require('mysql2');
 const router = express.Router();
 const bodyparser = require('body-parser')
 const session = require('express-session')
 const flash = require('connect-flash');
-
 
 router.use(session({
     secret: 'secret',
@@ -41,12 +40,40 @@ const db = mySQL.createConnection({
     database: 'heroku_67102ae31cc4527'
 });
 
+
+function getBasketItems(req, res, callback) {
+    db.query('SELECT * FROM basketitems WHERE customerID = ?', [req.session.username], (err, res) => {
+        if (err) {
+            callback(err, null);
+        } else {
+            var amount = 0;
+            for (let i = 0; i < res.length; i++) {
+                amount += parseInt(res[i]['quantity']);
+            }
+            callback(null, amount);
+        }
+    })
+}
+
+
+
+
 router.get('/', (req, res) => {
     let title = 'Home | Giraffe Website';
+    let basketAmount = 0;
+    getBasketItems(req, res, (err, data) => {
+        if (err) {
+            console.log(err)
+        } else {
+            basketAmount = data;
+        }
+    });
+
     res.render('index', {
         title: title,
         username: req.session.username,
-        loggedin: req.session.loggedin
+        loggedin: req.session.loggedin,
+        basketAmount: basketAmount
     });
 })
 
@@ -54,6 +81,14 @@ router.get('/pens', (req, res) => {
     let title = 'Pens | Giraffe Website';
     let header = 'Pens';
     let sql = 'SELECT * FROM products';
+    let basketAmount = 0;
+    getBasketItems(req, res, (err, data) => {
+        if (err) {
+            console.log(err)
+        } else {
+            basketAmount = data;
+        }
+    });
 
     db.query(sql, (err, result) => {
         if (err) throw err;
@@ -63,7 +98,8 @@ router.get('/pens', (req, res) => {
             header: header,
             data: result,
             username: req.session.username,
-            loggedin: req.session.loggedin
+            loggedin: req.session.loggedin,
+            basketAmount: basketAmount
         });
     })
 });
@@ -191,17 +227,34 @@ router.post('/createaccount', (req, res) => {
 
 router.get('/login', ifLoggedIn, (req, res) => {
     let title = 'Login | Giraffe Website';
+    let basketAmount = 0;
+    getBasketItems(req, res, (err, data) => {
+        if (err) {
+            console.log(err)
+        } else {
+            basketAmount = data;
+        }
+    });
     res.render('login', {
         title: title,
         username: req.session.username,
         loggedin: req.session.loggedin,
-        message: req.flash('message')
+        message: req.flash('message'),
+        basketAmount: basketAmount
     });
 });
 
 router.post('/login', (req, res) => {
     let username = req.body.username;
     let password = req.body.password;
+    let basketAmount = 0;
+    getBasketItems(req, res, (err, data) => {
+        if (err) {
+            console.log(err)
+        } else {
+            basketAmount = data;
+        }
+    });
     if (username && password) {
         db.query('SELECT * FROM customers WHERE username = ? AND password = ?', [username, password], (error, results, fields) => {
             if (results.length > 0) {
@@ -214,7 +267,8 @@ router.post('/login', (req, res) => {
                     title: 'Error | Giraffe Website',
                     username: req.session.username,
                     loggedin: req.session.loggedin,
-                    message: req.flash('message')
+                    message: req.flash('message'),
+                    basketAmount: basketAmount
                 });
             }
         });

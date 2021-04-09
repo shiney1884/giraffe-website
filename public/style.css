@@ -182,6 +182,14 @@ nav {
     display: block;
 }
 
+.basket-amount {
+    color: #F2B613;
+    position: absolute;
+    top: 12px;
+    font-size: 12px;
+    right: 26px;
+}
+
 .fa-shopping-basket {
     position: absolute;
     top: 25px;

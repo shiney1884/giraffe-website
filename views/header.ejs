@@ -49,7 +49,10 @@
             <%     } else { %>
             <a id="item" class="sign-in-link" href="login">Sign In</a>
             <%    } %>
-            <a href="basket"><i class="fas fa-shopping-basket"></i></a>
+            <a href="basket">
+                <p class="basket-amount"><%= basketAmount %></p>
+                <i class="fas fa-shopping-basket"></i>
+            </a>
         </nav>
     </header>
     <script src="scripts/nav.js"></script>
