@@ -4,6 +4,16 @@ const router = express.Router();
 const bodyparser = require('body-parser')
 const session = require('express-session')
 const flash = require('connect-flash');
+const sendMail = require('./mail');
+const nodemailer = require('nodemailer');
+const mailGun = require('nodemailer-mailgun-transport');
+const auth = {
+    auth: {
+        api_key: '9e45d308c198a6d970098144c5daca86-71b35d7e-a0cd4042',
+        domain: 'sandboxabfed12fc8aa4108809a818a6c6c6bff.mailgun.org'
+    }
+};
+const transporter = nodemailer.createTransport(mailGun(auth));
 
 router.use(session({
     secret: 'secret',
@@ -239,8 +249,26 @@ router.get('/login', ifLoggedIn, async (req, res) => {
     });
 });
 
-router.post('/contact', (req, res) => {
-    console.log(req.body);
+router.post('/contact', async (req, res) => {
+    let email = req.body.email;
+    let details = req.body.details;
+    const mailOptions = {
+        sender: 'user',
+        from: email,
+        to: 'scott0406@outlook.com',
+        subject: 'Problem',
+        text: details
+    };
+    
+    transporter.sendMail(mailOptions, function await (err, data) {
+        if (err) {
+            cb(err, null);
+        } else {
+            cb(null, data);
+        }
+    });
+
+    res.redirect('/contact');
 })
 
 
@@ -379,9 +407,9 @@ router.post('/checkout', (req, res) => {
         }
     })
 
-       setTimeout(() => {
-            res.redirect('/');
-        }, 500);
+    setTimeout(() => {
+        res.redirect('/');
+    }, 500);
 
 
 })
