@@ -239,6 +239,11 @@ router.get('/login', ifLoggedIn, async (req, res) => {
     });
 });
 
+router.post('/contact', (req, res) => {
+    console.log(req.body);
+})
+
+
 router.post('/login', async (req, res) => {
     let username = req.body.username;
     let password = req.body.password;
