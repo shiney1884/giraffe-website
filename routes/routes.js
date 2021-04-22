@@ -4,13 +4,12 @@ const router = express.Router();
 const bodyparser = require('body-parser')
 const session = require('express-session')
 const flash = require('connect-flash');
-const sendMail = require('./mail');
 const nodemailer = require('nodemailer');
 const mailGun = require('nodemailer-mailgun-transport');
 const auth = {
     auth: {
-        api_key: '9e45d308c198a6d970098144c5daca86-71b35d7e-a0cd4042',
-        domain: 'sandboxabfed12fc8aa4108809a818a6c6c6bff.mailgun.org'
+        api_key: process.env.SANDBOX_API_KEY,
+        domain: process.env.SANDBOX_DOMAIN
     }
 };
 const transporter = nodemailer.createTransport(mailGun(auth));
@@ -44,10 +43,10 @@ const ifNotLoggedIn = (req, res, next) => {
 
 
 const db = mySQL.createConnection({
-    host: 'us-cdbr-east-03.cleardb.com',
-    user: 'b45a5a0846f797',
-    password: 'd129f376',
-    database: 'heroku_67102ae31cc4527'
+    host: process.env.DB_HOST,
+    user: process.env.DB_USER,
+    password: process.env.DB_PASSWORD,
+    database: process.env.DB_DB
 });
 
 
