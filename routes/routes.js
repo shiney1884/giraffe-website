@@ -1,4 +1,5 @@
 const express = require('express');
+const dotenv = require('dotenv').config();
 const mySQL = require('mysql2');
 const router = express.Router();
 const bodyparser = require('body-parser')
@@ -254,11 +255,11 @@ router.post('/contact', async (req, res) => {
     const mailOptions = {
         sender: 'user',
         from: email,
-        to: 'scott0406@outlook.com',
+        to: 'scott04067@outlook.com',
         subject: 'Problem',
         text: details
     };
-    
+
     transporter.sendMail(mailOptions, function await (err, data) {
         if (err) {
             cb(err, null);
