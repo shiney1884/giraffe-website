@@ -41,19 +41,19 @@ const db = mySQL.createConnection({
 });
 
 
-function getBasketItems(req, res, callback) {
-    db.query('SELECT * FROM basketitems WHERE customerID = ?', [req.session.username], (err, res) => {
-        if (err) {
-            callback(err, null);
-        } else {
-            var amount = 0;
-            for (let i = 0; i < res.length; i++) {
-                amount += parseInt(res[i]['quantity']);
-            }
-            callback(null, amount);
-        }
-    })
-}
+// function getBasketItems(req, res, callback) {
+//     db.query('SELECT * FROM basketitems WHERE customerID = ?', [req.session.username], (err, res) => {
+//         if (err) {
+//             callback(err, null);
+//         } else {
+//             var amount = 0;
+//             for (let i = 0; i < res.length; i++) {
+//                 amount += parseInt(res[i]['quantity']);
+//             }
+//             callback(null, amount);
+//         }
+//     })
+// }
 
 
 
@@ -61,19 +61,19 @@ function getBasketItems(req, res, callback) {
 router.get('/', (req, res) => {
     let title = 'Home | Giraffe Website';
     let basketAmount = 0;
-    getBasketItems(req, res, (err, data) => {
-        if (err) {
-            console.log(err)
-        } else {
-            basketAmount = data;
-        }
-    });
+    // getBasketItems(req, res, (err, data) => {
+    //     if (err) {
+    //         console.log(err)
+    //     } else {
+    //         basketAmount = data;
+    //     }
+    // });
 
     res.render('index', {
         title: title,
         username: req.session.username,
         loggedin: req.session.loggedin,
-        basketAmount: basketAmount
+        // basketAmount: basketAmount
     });
 })
 
@@ -82,13 +82,13 @@ router.get('/pens', (req, res) => {
     let header = 'Pens';
     let sql = 'SELECT * FROM products';
     let basketAmount = 0;
-    getBasketItems(req, res, (err, data) => {
-        if (err) {
-            console.log(err)
-        } else {
-            basketAmount = data;
-        }
-    });
+    // getBasketItems(req, res, (err, data) => {
+    //     if (err) {
+    //         console.log(err)
+    //     } else {
+    //         basketAmount = data;
+    //     }
+    // });
 
     db.query(sql, (err, result) => {
         if (err) throw err;
@@ -99,7 +99,7 @@ router.get('/pens', (req, res) => {
             data: result,
             username: req.session.username,
             loggedin: req.session.loggedin,
-            basketAmount: basketAmount
+            // basketAmount: basketAmount
         });
     })
 });
@@ -228,19 +228,19 @@ router.post('/createaccount', (req, res) => {
 router.get('/login', ifLoggedIn, (req, res) => {
     let title = 'Login | Giraffe Website';
     let basketAmount = 0;
-    getBasketItems(req, res, (err, data) => {
-        if (err) {
-            console.log(err)
-        } else {
-            basketAmount = data;
-        }
-    });
+    // getBasketItems(req, res, (err, data) => {
+    //     if (err) {
+    //         console.log(err)
+    //     } else {
+    //         basketAmount = data;
+    //     }
+    // });
     res.render('login', {
         title: title,
         username: req.session.username,
         loggedin: req.session.loggedin,
         message: req.flash('message'),
-        basketAmount: basketAmount
+        // basketAmount: basketAmount
     });
 });
 
@@ -248,13 +248,13 @@ router.post('/login', (req, res) => {
     let username = req.body.username;
     let password = req.body.password;
     let basketAmount = 0;
-    getBasketItems(req, res, (err, data) => {
-        if (err) {
-            console.log(err)
-        } else {
-            basketAmount = data;
-        }
-    });
+    // getBasketItems(req, res, (err, data) => {
+    //     if (err) {
+    //         console.log(err)
+    //     } else {
+    //         basketAmount = data;
+    //     }
+    // });
     if (username && password) {
         db.query('SELECT * FROM customers WHERE username = ? AND password = ?', [username, password], (error, results, fields) => {
             if (results.length > 0) {
@@ -268,7 +268,7 @@ router.post('/login', (req, res) => {
                     username: req.session.username,
                     loggedin: req.session.loggedin,
                     message: req.flash('message'),
-                    basketAmount: basketAmount
+                    // basketAmount: basketAmount
                 });
             }
         });
@@ -515,6 +515,10 @@ router.post('/actions', (req, res) => {
             db.query('SELECT * FROM basketitems WHERE productID = ? AND customerID =?', [req.body.id, req.session.username], (error, results) => {
                 if (error) {
                     console.log(error);
+                } else if (results[0].quantity > 1) {
+                    db.query('UPDATE basketitems SET quantity = quantity - 1 WHERE productID = ? AND customerID = ?', [req.body.id, req.session.username], (error, results) => {
+                        if (error) throw err;
+                    })
                 } else {
                     db.query('DELETE FROM basketitems WHERE productID = ? AND customerID = ?', [req.body.id, req.session.username], (error, results) => {
                         if (error) throw err;
