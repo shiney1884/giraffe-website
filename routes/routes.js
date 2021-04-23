@@ -144,13 +144,21 @@ router.get('/artcontest', async (req, res) => {
     let header = 'Art Contest';
     let basketAmount = await getBasketItems(req, res);
 
-    res.render('contest', {
-        title: title,
-        header: header,
-        username: req.session.username,
-        loggedin: req.session.loggedin,
-        basketAmount: basketAmount
-    });
+    db.query('SELECT * FROM artcontestwinners', (error, results) => {
+        if (error) {
+            console.log(error);
+        }
+        res.render('contest', {
+            title: title,
+            header: header,
+            username: req.session.username,
+            loggedin: req.session.loggedin,
+            basketAmount: basketAmount,
+            winners: results
+        });
+
+    })
+
 });
 
 

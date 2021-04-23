@@ -667,6 +667,10 @@ footer a {
     padding: 0 10px 10px 10px;
 }
 
+.step a {
+    color: #000;
+}
+
 .circle {
     border: 2px solid #000;
     width: 7.5vw;
@@ -687,6 +691,10 @@ footer a {
 
 .step p {
     margin-top: 10px;
+}
+
+.step .center {
+    text-align: center;
 }
 
 hr {

@@ -4,6 +4,14 @@ CREATE TABLE customers(
     password VARCHAR(30)
 );
 
+CREATE TABLE artcontestwinners(
+    id VARCHAR(30) PRIMARY KEY,
+    img VARCHAR(60) NOT NULL UNIQUE,
+    winnername VARCHAR(60) NOT NULL,
+    contest VARCHAR(60) NOT NULL,
+    contestdescription VARCHAR(260) NOT NULL
+);
+
 CREATE TABLE orders(
     id INT NOT NULL AUTO_INCREMENT PRIMARY KEY,
     customerID VARCHAR(30) NOT NULL,
@@ -152,8 +160,20 @@ WHERE
 
 INSERT INTO products (name, description, price, stock, url, imageSrc, categoryID)
 VALUES 
-('Pack of 4 Pens', 'A pack of 4 pens that are all different colours and are perfect for all types of different activities.', 3.60, 20, '4-pack-pens', '4-pack-pens.jpg', 1),
-('Pack of 24 Multi-Coloured Pens', 'A pack of 24 Multi-Coloured Pens where each one is a different colour and are perfect for your artistic activities!', 20.00, 10, '24-pack-multi-coloured-pens', '24-pack-multicolour-pens.jpg', 1),
-('Pack of 9 Gel Pens', 'A pack of 9 gel pens that are great for your creative and artistic activities.', 7.20, 20, '9-pack-gel-pens', '9-pack-gel-pens.jpg', 1),
-('Single Green Pen', 'A single green pen that is great for your creative and writing activities.', 1.00, 275, 'single-green-pen', 'single-green-pen.jpg', 1),
-('Pack of 10 Ballpoint Pens', 'A pack of 10 ballpoint pens that are great for your writing activities.', 9.00, 20, '10-ballpoint-pens', '10-pack-pens.jpg', 1);
+('Beige Notebook', 'A beige notebook for you to write down ideas, dates to remember or important information.', 4.00, 45, 'beige-notebook', 'beige-notebook.jpg', 3),
+('Red Notebook', 'A red notebook for you to write down ideas, dates to remember or important information.', 4.00, 45, 'red-notebook', 'red-notebook.jpg', 3),
+('Purple Notebook', 'A purple notebook for you to write down ideas, dates to remember or important information.', 4.00, 45, 'purple-notebook', 'purple-notebook.jpg', 3),
+('A5 Mixed Colour Notebook', 'An A5 notebook for you to write down ideas, dates to remember or important information.', 4.50, 45, 'a5-mixed-notebook', 'a5-blue-red-notebook.jpg', 3),
+('3 Pack of Notebooks', 'A pack of 3 notebooks for you to write down ideas, dates to remember or important information.', 10.00, 25, '3-pack-of-notebooks', 'pack-of-3-notebooks.jpg', 3);
+
+ALTER TABLE artcontestwinners MODIFY id id INT NOT NULL AUTO_INCREMENT;
+
+CREATE TABLE artcontestwinners(
+    id VARCHAR(30) PRIMARY KEY,
+    img VARCHAR(60) NOT NULL UNIQUE,
+    winnername VARCHAR(60) NOT NULL,
+    contest VARCHAR(60) NOT NULL,
+    contestdescription VARCHAR(260) NOT NULL
+);
+
+INSERT INTO artcontestwinners (img, winnername, contest, contestdescription) VALUES ('winner-1.jpg', 'Catherine', 'Paint Mix', 'Had to paint something creative with a mix of colours');
