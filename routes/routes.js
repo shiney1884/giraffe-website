@@ -82,7 +82,47 @@ router.get('/', async (req, res) => {
 router.get('/pens', async (req, res) => {
     let title = 'Pens | Giraffe Website';
     let header = 'Pens';
-    let sql = 'SELECT * FROM products';
+    let sql = 'SELECT * FROM products WHERE categoryID = 1';
+    let basketAmount = await getBasketItems(req, res);
+
+    db.query(sql, (err, result) => {
+        if (err) throw err;
+
+        res.render('products', {
+            title: title,
+            header: header,
+            data: result,
+            username: req.session.username,
+            loggedin: req.session.loggedin,
+            basketAmount: basketAmount
+        });
+    })
+});
+
+router.get('/pencils', async (req, res) => {
+    let title = 'Pencils | Giraffe Website';
+    let header = 'Pencils';
+    let sql = 'SELECT * FROM products WHERE categoryID = 2';
+    let basketAmount = await getBasketItems(req, res);
+
+    db.query(sql, (err, result) => {
+        if (err) throw err;
+
+        res.render('products', {
+            title: title,
+            header: header,
+            data: result,
+            username: req.session.username,
+            loggedin: req.session.loggedin,
+            basketAmount: basketAmount
+        });
+    })
+});
+
+router.get('/notebooks', async (req, res) => {
+    let title = 'Notebooks | Giraffe Website';
+    let header = 'Notebooks';
+    let sql = 'SELECT * FROM products WHERE categoryID = 3';
     let basketAmount = await getBasketItems(req, res);
 
     db.query(sql, (err, result) => {

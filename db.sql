@@ -138,3 +138,22 @@ VALUES ('shiney0406', 20.00, '2021/03/30', 'Complete', 'Paypal'),
 SELECT * FROM orders WHERE customerID = 'shiney04067' ORDER BY dateOfOrder DESC, id DESC LIMIT 1;
 
 SELECT * FROM products WHERE name LIKE '%pen%';
+
+
+UPDATE products
+SET 
+    description = 'A black notebook that can be used for anything you would like. Art, writing etc!',
+    price = 2.00,
+    stock = 75,
+    imageSrc = 'black-notebook.jpg'
+WHERE 
+    id = 3;
+
+
+INSERT INTO products (name, description, price, stock, url, imageSrc, categoryID)
+VALUES 
+('Pack of 4 Pens', 'A pack of 4 pens that are all different colours and are perfect for all types of different activities.', 3.60, 20, '4-pack-pens', '4-pack-pens.jpg', 1),
+('Pack of 24 Multi-Coloured Pens', 'A pack of 24 Multi-Coloured Pens where each one is a different colour and are perfect for your artistic activities!', 20.00, 10, '24-pack-multi-coloured-pens', '24-pack-multicolour-pens.jpg', 1),
+('Pack of 9 Gel Pens', 'A pack of 9 gel pens that are great for your creative and artistic activities.', 7.20, 20, '9-pack-gel-pens', '9-pack-gel-pens.jpg', 1),
+('Single Green Pen', 'A single green pen that is great for your creative and writing activities.', 1.00, 275, 'single-green-pen', 'single-green-pen.jpg', 1),
+('Pack of 10 Ballpoint Pens', 'A pack of 10 ballpoint pens that are great for your writing activities.', 9.00, 20, '10-ballpoint-pens', '10-pack-pens.jpg', 1);
