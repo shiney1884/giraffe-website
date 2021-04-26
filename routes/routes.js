@@ -412,7 +412,7 @@ router.get('/checkout', ifNotLoggedIn, async (req, res) => {
                 username: req.session.username,
                 loggedin: req.session.loggedin,
                 data: results,
-                total: total,
+                total: total.toFixed(2),
                 date: today,
                 basketAmount: basketAmount
             });
