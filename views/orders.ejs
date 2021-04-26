@@ -11,10 +11,12 @@
                 <th>Order Status</th>
             </tr>
             <% for (let i = 0; i < data.length; i++) { %>
+              <%  let sqlDate = new Date(data[i]['dateOfOrder']); %>
+              <%  let newDate = sqlDate.getDate() + '/' + (sqlDate.getMonth() + 1) + '/' + sqlDate.getFullYear(); %>
             <tr class="order">
                 <td class="order-id"><%= data[i]['id']  %></td>
                 <td class="order-price">£<span><%= data[i]['orderTotal'] %></span></td>
-                <td class="order-date"><%= data[i]['dateOfOrder'] %></td>
+                <td class="order-date"><%= newDate %></td>
                 <td class="order-status"><%= data[i]['status'] %></td>
             </tr>
       <%  } %>

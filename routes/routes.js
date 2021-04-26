@@ -400,7 +400,7 @@ router.get('/checkout', ifNotLoggedIn, async (req, res) => {
             var mm = String(today.getMonth() + 1).padStart(2, '0'); //January is 0!
             var yyyy = today.getFullYear();
 
-            today = yyyy + '/' + dd + '/' + mm;
+            today = yyyy + '/' + mm + '/' + dd;
 
             let total = 0;
             for (let i = 0; i < results.length; i++) {

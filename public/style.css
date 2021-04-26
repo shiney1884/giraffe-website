@@ -79,7 +79,6 @@ nav {
     display: flex;
     align-items: center;
     width: 40%;
-    opacity: 0;
 }
 
 .searchbar {
