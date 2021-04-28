@@ -176,4 +176,6 @@ CREATE TABLE artcontestwinners(
     contestdescription VARCHAR(260) NOT NULL
 );
 
-INSERT INTO artcontestwinners (img, winnername, contest, contestdescription) VALUES ('winner-1.jpg', 'Catherine', 'Paint Mix', 'Had to paint something creative with a mix of colours');
+INSERT INTO artcontestwinners (img, winnername, contest, contestdescription) VALUES 
+('winner-2.jpg', 'Kim', 'Red, Blue, Yellow', 'Had to paint something creative with red, blue and yellow'),
+('winner-3.jpg', 'Jake', 'Simple', "Had to paint something as simple as possible to test how creative you can be with something simple");

@@ -150,6 +150,11 @@ nav {
     padding: 10px;
 }
 
+.dropdown-content a {
+    font-size: 13px;
+    color: rgb(238, 216, 216);
+}
+
 .dropdown-content {
     display: none;
     background-color: #B46325;
@@ -525,6 +530,8 @@ footer a {
 .product-header {
     font-size: 1.5em;
     color: #B46325;
+    background-color: #F2B613;
+    padding: 10px
 }
 
 
@@ -714,25 +721,18 @@ footer a {
 
 .step h6 {
     text-align: center;
-    font-size: 1.25em;
+    font-size: 1em;
+    font-weight: 600;
 }
 
 .step p {
+    font-weight: 300;
     margin-top: 10px;
 }
 
 .step .center {
     text-align: center;
 }
-
-hr {
-    height: 5px;
-    background-color: #B46325;
-    width: 80vw;
-    margin: 10px auto;
-}
-
-
 
 
 /* artcontest gallery */
@@ -744,6 +744,7 @@ hr {
 
 .title h4 {
     margin-bottom: 25px;
+    font-size: 20px;
 }
 
 .winner {
@@ -756,7 +757,7 @@ hr {
 }
 
 .winner-info .name {
-    font-weight: 700;
+    font-weight: 600;
     margin-bottom: 7.5px;
 }
 
@@ -1143,7 +1144,6 @@ textarea {
 
 .orders h4 {
     font-size: 1.25em;
-    text-decoration: underline;
     text-align: center;
 }
 
@@ -1153,14 +1153,11 @@ textarea {
 }
 
 table {
-    margin: 0 auto;
-    margin-top: 20px;
+    margin: 20px auto 0 auto;
     width: 100%;
 }
 
-table,
-th,
-td {
+th {
     border: 1px solid black;
     border-collapse: collapse;
 }
@@ -1364,7 +1361,7 @@ td {
     }
 
     .social-media-sec {
-        margin: 0 auto;
+        margin: 20px auto;
     }
 
     .desktop-socials {
