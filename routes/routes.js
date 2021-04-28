@@ -364,12 +364,17 @@ router.get('/basket', async (req, res) => {
         if (error) {
             console.log(error);
         } else if (results.length > 0) {
+            let total = 0;
+            for (let i = 0; i < results.length; i++) {
+                total += results[i]['price'] * results[i]['quantity'];
+            }
             res.render('basket', {
                 title: title,
                 username: req.session.username,
                 loggedin: req.session.loggedin,
                 data: results,
-                basketAmount: basketAmount
+                basketAmount: basketAmount,
+                total: total.toFixed(2)
             });
         } else {
             res.render('basket', {
