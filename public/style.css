@@ -34,6 +34,7 @@ nav {
     position: relative;
     background-color: #B46325;
     height: 70px;
+    z-index: 10;
     /* border: 2px solid blue; */
 }
 
@@ -288,10 +289,10 @@ footer a {
     display: flex;
     justify-content: center;
     align-items: center;
-    z-index: -1;
+    z-index: 1;
 }
 
-.hero::after {
+.hero::before {
     content: '';
     background: url(images/notebook-img.jpg);
     background-size: cover;
@@ -309,13 +310,15 @@ footer a {
 
 .hero a {
     all: unset;
-    background-color: #F2B613;
+    background-color: #fff;
     padding: 10px 7.5px;
     color: #000;
     border-radius: 4.5px;
+    z-index: 100;
 }
 
-.hero a:hover {
+.hero-link:hover {
+    background-color: #F2B613;
     cursor: pointer;
 }
 
@@ -390,13 +393,14 @@ footer a {
 
 .categories a {
     all: unset;
-    background-color: #F2B613;
+    background-color: #fff;
     padding: 10px 7.5px;
     color: #000;
     border-radius: 4.5px;
 }
 
 .categories a:hover {
+    background-color: #F2B613;
     cursor: pointer;
 }
 
@@ -419,6 +423,15 @@ footer a {
     left: 0;
     z-index: -1;
     opacity: 0.7;
+}
+
+.midpage-link {
+    all: unset;
+    background-color: #fff;
+    padding: 10px 7.5px;
+    color: #000;
+    border: 2px solid #B46325;
+    border-radius: 4.5px;
 }
 
 
@@ -463,6 +476,11 @@ footer a {
     align-items: center;
 }
 
+.factbox p {
+    width: 75%;
+    text-align: center;
+}
+
 .factbox h6 {
     font-size: 1.25em;
     text-align: center;
@@ -471,13 +489,15 @@ footer a {
 
 .factbox button {
     all: unset;
-    background-color: #F2B613;
-    padding: 10px 7.5px;
+    background-color: #fff;
+    padding: 7.5px;
     color: #000;
     border-radius: 4.5px;
+    margin-top: 12.5px;
 }
 
 .factbox button:hover {
+    background-color: #F2B613;
     cursor: pointer;
 }
 
