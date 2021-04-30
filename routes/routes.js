@@ -271,12 +271,13 @@ router.post('/createaccount', async (req, res) => {
             if (error) {
                 console.log(error);
             } else {
-                req.flash('message', 'You have successfully created your account')
+                req.flash('success', 'You have successfully created your account')
                 return res.render('login', {
                     title: 'Success | Giraffe Website',
                     username: req.session.username,
                     loggedin: req.session.loggedin,
-                    message: req.flash('message'),
+                    success_message: req.flash('success'),
+                    message: false,
                     basketAmount: basketAmount
                 });
             }
@@ -296,6 +297,106 @@ router.get('/login', ifLoggedIn, async (req, res) => {
         basketAmount: basketAmount
     });
 });
+
+router.get('/update-password', ifNotLoggedIn, async (req, res) => {
+    let title = 'Update Password | Giraffe Website';
+    let basketAmount = await getBasketItems(req, res);
+
+    res.render('update-password', {
+        title: title,
+        username: req.session.username,
+        loggedin: req.session.loggedin,
+        message: req.flash('message'),
+        basketAmount: basketAmount
+    });
+});
+
+router.get('/update-email', ifNotLoggedIn, async (req, res) => {
+    let title = 'Update Email | Giraffe Website';
+    let basketAmount = await getBasketItems(req, res);
+
+    res.render('update-email', {
+        title: title,
+        username: req.session.username,
+        loggedin: req.session.loggedin,
+        message: req.flash('message'),
+        basketAmount: basketAmount
+    });
+});
+
+router.post('/update', async (req, res) => {
+    let basketAmount = await getBasketItems(req, res);
+    if (req.body.type === 'update-password') {
+        db.query('SELECT password FROM customers WHERE username = ?', [req.session.username], (error, results) => {
+            if (error) {
+                console.log(error)
+            } else {
+                if (results[0]['password'] === req.body['current-password']) {
+                    if (req.body['new-password'] === req.body['retype-new-password']) {
+                        db.query('UPDATE customers SET password = ? WHERE username = ?', [req.body['new-password'], req.session.username], (error, results) => {
+                            if (error) {
+                                console.log(error)
+                            } else {
+                                req.flash('success', "Password has been updated");
+                                return res.render('update-password', {
+                                    title: 'Success | Giraffe Website',
+                                    username: req.session.username,
+                                    loggedin: req.session.loggedin,
+                                    success_message: req.flash('success'),
+                                    message: false,
+                                    basketAmount: basketAmount
+                                });
+                            }
+                        })
+                    } else {
+                        req.flash('message', "The passwords don't match");
+                        res.redirect('/update-password');
+                    }
+                } else {
+                    req.flash('message', "The password you entered isn't your current password")
+                    res.redirect('/update-password');
+                }
+            }
+        })
+    } else if (req.body.type === 'update-email') {
+        db.query('SELECT email FROM customers WHERE username = ?', [req.session.username], (error, results) => {
+            if (results[0].email === req.body['current-email']) {
+                if (req.body['new-email'] === req.body['retype-new-email']) {
+                    db.query('SELECT email FROM customers WHERE email = ?', [req.body['new-email']], (error, results) => {
+                        if (results.length > 0) {
+                            req.flash('message', "The email you entered is already registered to an account");
+                            res.redirect('/update-email');
+                        } else {
+                            db.query('UPDATE customers SET email = ? WHERE username = ?', [req.body['new-email'], req.session.username], (error, results) => {
+                                if (error) {
+                                    console.log(error)
+                                } else {
+                                    req.flash('success', "Email has been updated");
+                                    return res.render('update-email', {
+                                        title: 'Success | Giraffe Website',
+                                        username: req.session.username,
+                                        loggedin: req.session.loggedin,
+                                        success_message: req.flash('success'),
+                                        message: false,
+                                        basketAmount: basketAmount
+                                    });
+                                }
+                            })
+                        }
+                    })
+                } else {
+                    req.flash('message', "The emails do not match")
+                    res.redirect('/update-email');
+                }
+            } else {
+                req.flash('message', "The email you entered doesn't match your current email")
+                res.redirect('/update-email');
+            }
+        })
+    }
+})
+
+
 
 router.post('/contact', async (req, res) => {
     let email = req.body.email;

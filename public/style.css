@@ -703,7 +703,9 @@ footer a {
 }
 
 .step a {
-    color: #000;
+    background-color: #F2B613;
+    color: black;
+    padding: 4px;
 }
 
 .circle {
@@ -893,6 +895,12 @@ footer a {
     text-align: center;
 }
 
+.success {
+    color: green;
+    font-weight: 700;
+    margin-top: 20px;
+    text-align: center;
+}
 
 
 

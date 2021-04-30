@@ -1,0 +1,23 @@
+<%- include('header') -%>
+
+<div class="page-content">
+    <div class="form-holder">
+        <h4>Update Email</h4>
+        <form class="form" action="/update" method="POST">
+            <% if(message) { %>
+            <span class="error"><%= message %></span>
+            <% } else {%>
+            <span class="success"><%= success_message %></span>
+            <%  }%>
+            <label for="new-email">New Email</label>
+            <input type="email" name="new-email" id="new-email">
+            <label for="retype-new-email">Re-Type New Email</label>
+            <input type="email" name="retype-new-email" id="retype-new-email">
+            <label for="current-email">Current Email</label>
+            <input type="email" name="current-email" id="current-email">
+            <button type="submit" name="type" value="update-email">Update</button>
+        </form>
+    </div>
+</div>
+
+<%- include('footer') -%>

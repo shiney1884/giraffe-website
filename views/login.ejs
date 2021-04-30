@@ -4,7 +4,11 @@
     <div class="form-holder">
         <h4>Login</h4>
         <form class="form" action="/login" method="POST">
+            <% if(message) { %>
             <span class="error"><%= message %></span>
+            <% } else {%>
+            <span class="success"><%= success_message %></span>
+            <%  }%>
             <label for="username">Username</label>
             <input type="text" name="username" id="username">
             <label for="password">Password</label>
