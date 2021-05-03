@@ -10,30 +10,27 @@
                 <input type="hidden" name='id' value='<%= data[i]["id"] %>'>
                 <div id="<%= data[i]['id'] %>" class="basket-item">
                     <div class="image-holder">
-                        <img src="images/<%= data[i]['imageSrc'] %>" alt="">
+                        <a href="<%= data[i]['id'] %>"><img src="images/<%= data[i]['imageSrc'] %>" alt=""></a>
                     </div>
                     <div class="basket-item-details">
-                        <div class="basket-item-name">Item Name:
-                            <a class="basket-item-name" href="<%= data[i]['id'] %>"><%= data[i]['name'] %></a>
-                        </div>
-                        <div class="basket-item-price">Item Price: £<span><%= data[i]['price'] %></span></div>
-                        <div class="quantity">Quantity of Item: <%= data[i]['quantity'] %></div>
+                        <a class="basket-item-name" href="<%= data[i]['id'] %>"><%= data[i]['name'] %></a>
+                        <div class="basket-item-price">£<%= data[i]['price'] %></div>
+                        <div class="quantity"><%= data[i]['quantity'] %></div>
+                        <div class="total">£<%= (data[i]['quantity'] * data[i]['price']).toFixed(2)%></div>
                         <div class="basket-item-delete">
                             <button type="submit" name="type" value="delete_from_basket">Delete</button>
+                            <button type="submit" name="type" value="add_to_basket">Add</button>
                         </div>
                     </div>
                 </div>
             </form>
             <%   } %>
+            <div class="basket-total">£<%= total %> </div>
             <a href="/checkout" class="checkoutLink">checkout</a>
             <% } %>
         </div>
     </div>
-    <div class="basket-total">
-        <%  if(data.length > 0) { %>
-        £<%= total %>
-        <%  } %>
-    </div>
+
 </div>
 
 <%- include('footer') -%>

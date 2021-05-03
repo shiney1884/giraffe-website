@@ -4,6 +4,7 @@
     <div class="form-holder">
         <h4>Login</h4>
         <form class="form" action="/login" method="POST">
+            <div class="movement-message">Need an account? Create one <a href="createaccount">here!</a></div>
             <% if(message) { %>
             <span class="error"><%= message %></span>
             <% } else {%>

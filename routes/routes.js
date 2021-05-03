@@ -64,6 +64,19 @@ function getBasketItems(req, res) {
     })
 }
 
+function getBasketItem(req, res) {
+    return new Promise((resolve, reject) => {
+        db.query('SELECT * FROM basketitems WHERE customerID = ?', [req.session.username], (err, res) => {
+            if (err) {
+                reject(err)
+            } else {
+                let results = res;
+                resolve(results);
+            }
+        })
+    })
+}
+
 
 
 
@@ -83,6 +96,7 @@ router.get('/pens', async (req, res) => {
     let title = 'Pens | Giraffe Website';
     let header = 'Pens';
     let sql = 'SELECT * FROM products WHERE categoryID = 1';
+    let sql2 = `SELECT * FROM basketitems HWERE customerID = ${req.session.username}`;
     let basketAmount = await getBasketItems(req, res);
 
     db.query(sql, (err, result) => {

@@ -3,23 +3,14 @@
     <div class="product-hero hero">
         <h4 class="product-header"><%= header %></h4>
     </div>
-    <!-- <div class="filter">
-        <button>Filters</button>
-        <div class="filter-options">
-            <button>Option 1</button>
-            <button>Option 2</button>
-            <button>Option 2</button>
-            <button>Option 2</button>
-            <button>Option 2</button>
-        </div>
-    </div> -->
     <div id="products" class="products">
         <% for(let i = 0; i < data.length; i++) { %>
         <form class="product-form" action="/actions" method="post">
             <div id="<%= data[i]['id'] %>" class="product">
-                <img class="product-img" src="images/<%= data[i]['imageSrc'] %>" alt="">
+                <a class="img-btn" href='<%= data[i]["id"] %>'><img class="product-img"
+                        src="images/<%= data[i]['imageSrc'] %>" alt=""></a>
                 <input type="hidden" name='id' value='<%= data[i]["id"] %>'>
-                <a href='<%= data[i]["id"] %>'><%= data[i]['name'] %></a>
+                <a class="name-btn" href='<%= data[i]["id"] %>'><%= data[i]['name'] %></a>
                 <div class="product-info">
                     <div class="price">
                         <input type="hidden" name='price'
@@ -45,7 +36,6 @@
     let data = "<%= data %>";
 
     console.log(data);
-  
 </script>
 
 

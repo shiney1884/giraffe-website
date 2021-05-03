@@ -4,6 +4,7 @@
     <div class="form-holder">
         <h4>Create an Account</h4>
         <form class="form" action="/createaccount" method="POST">
+            <div class="movement-message">Already have an account? Log in <a href="login">here!</a></div>
             <span class="error"><%= message %></span>
             <label for="email">Email</label>
             <input type="email" name="email" id="email">
