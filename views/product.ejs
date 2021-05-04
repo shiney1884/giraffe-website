@@ -15,13 +15,26 @@
                 </div>
                 <hr>
                 <div class="product-page-actions">
-                    <button class="wishlist-add-btn" type="submit" name="type" value="add_to_wishlist">
-                        <i class="far fa-heart wishlist-add-btn"></i>
+                    <%  if(wishlistItems.includes(data[0]['id'])) { %>
+                    <button class="wishlist-delete" type="submit" name="type" value="delete_from_wishlist">
+                        <i class="fas fa-heart-broken"></i>
                     </button>
+                    <%   } else {%>
+                    <button class="wishlist-add" type="submit" name="type" value="add_to_wishlist">
+                        <i class="far fa-heart"></i>
+                    </button>
+                    <%   }%>
+                    <%   if(basketItems.includes(data[0]['id'])) { %>
+                    <button type="submit" name="type" value="delete_all_from_basket">
+                        <i class="fas fa-trash"></i>
+                    </button>
+                    <%   } else { %>
                     <button class="basket-add-btn" type="submit" name="type" value="add_to_basket">
                         Add to Basket
                     </button>
+                    <%    } %>
                 </div>
+
                 <hr>
                 <div class="product-description-title">PRODUCT DESCRIPTION</div>
                 <div class="product-page-description"><%= data[0]['description'] %></div>

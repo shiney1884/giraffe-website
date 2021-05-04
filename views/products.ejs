@@ -19,12 +19,24 @@
                         <div class="old-price"><span>£</span><%= data[i]['price'] %></div>
                     </div>
                     <div class="actions">
+                        <%  if(wishlistItems.includes(data[i]['id'])) { %>
+                        <button class="wishlist-delete" type="submit" name="type" value="delete_from_wishlist">
+                            <i class="fas fa-heart-broken"></i>
+                        </button>
+                        <%   } else {%>
                         <button class="wishlist-add" type="submit" name="type" value="add_to_wishlist">
                             <i class="far fa-heart"></i>
                         </button>
+                        <%   }%>
+                        <%   if(basketItems.includes(data[i]['id'])) { %>
+                        <button type="submit" name="type" value="delete_all_from_basket">
+                            <i class="fas fa-trash"></i>
+                        </button>
+                        <%   } else { %>
                         <button class="basket-add" type="submit" name="type" value="add_to_basket">
                             <i class="fas fa-cart-plus"></i>
                         </button>
+                        <%    } %>
                     </div>
                 </div>
             </div>

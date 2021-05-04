@@ -51,7 +51,7 @@ const db = mySQL.createConnection({
 });
 
 
-function getBasketItems(req, res) {
+function getBasketAmount(req, res) {
     return new Promise((resolve, reject) => {
         db.query('SELECT * FROM basketitems WHERE customerID = ?', [req.session.username], (err, res) => {
             if (err) {
@@ -64,25 +64,46 @@ function getBasketItems(req, res) {
     })
 }
 
-function getBasketItem(req, res) {
+function getBasketItems(req, res) {
     return new Promise((resolve, reject) => {
-        db.query('SELECT * FROM basketitems WHERE customerID = ?', [req.session.username], (err, res) => {
+        db.query('SELECT productID FROM basketitems WHERE customerID = ?', [req.session.username], (err, res) => {
             if (err) {
                 reject(err)
             } else {
-                let results = res;
-                resolve(results);
+                let arr = [];
+                for (let i = 0; i < res.length; i++) {
+                    arr.push(res[i]['productID']);
+                }
+                resolve(arr);
             }
         })
     })
 }
 
+function getWishlistItems(req, res) {
+    return new Promise((resolve, reject) => {
+        db.query('SELECT productID FROM wishlistitems WHERE customerID = ?', [req.session.username], (err, res) => {
+            if (err) {
+                reject(err)
+            } else {
+                let arr = [];
+                for (let i = 0; i < res.length; i++) {
+                    arr.push(res[i]['productID']);
+                }
+                resolve(arr);
+            }
+        })
+    })
+}
 
-
+router.get('/get', async (req, res) => {
+    let basketItems = await getBasketItems(req, res);
+    console.log(basketItems);
+})
 
 router.get('/', async (req, res) => {
     let title = 'Home | Giraffe Website';
-    let basketAmount = await getBasketItems(req, res);
+    let basketAmount = await getBasketAmount(req, res);
 
     res.render('index', {
         title: title,
@@ -96,8 +117,9 @@ router.get('/pens', async (req, res) => {
     let title = 'Pens | Giraffe Website';
     let header = 'Pens';
     let sql = 'SELECT * FROM products WHERE categoryID = 1';
-    let sql2 = `SELECT * FROM basketitems HWERE customerID = ${req.session.username}`;
-    let basketAmount = await getBasketItems(req, res);
+    let basketAmount = await getBasketAmount(req, res);
+    let basketItems = await getBasketItems(req, res);
+    let wishlistItems = await getWishlistItems(req, res);
 
     db.query(sql, (err, result) => {
         if (err) throw err;
@@ -108,7 +130,9 @@ router.get('/pens', async (req, res) => {
             data: result,
             username: req.session.username,
             loggedin: req.session.loggedin,
-            basketAmount: basketAmount
+            basketAmount: basketAmount,
+            basketItems: basketItems,
+            wishlistItems: wishlistItems
         });
     })
 });
@@ -117,7 +141,9 @@ router.get('/pencils', async (req, res) => {
     let title = 'Pencils | Giraffe Website';
     let header = 'Pencils';
     let sql = 'SELECT * FROM products WHERE categoryID = 2';
-    let basketAmount = await getBasketItems(req, res);
+    let basketAmount = await getBasketAmount(req, res);
+    let basketItems = await getBasketItems(req, res);
+    let wishlistItems = await getWishlistItems(req, res);
 
     db.query(sql, (err, result) => {
         if (err) throw err;
@@ -128,7 +154,9 @@ router.get('/pencils', async (req, res) => {
             data: result,
             username: req.session.username,
             loggedin: req.session.loggedin,
-            basketAmount: basketAmount
+            basketAmount: basketAmount,
+            basketItems: basketItems,
+            wishlistItems: wishlistItems
         });
     })
 });
@@ -137,7 +165,9 @@ router.get('/notebooks', async (req, res) => {
     let title = 'Notebooks | Giraffe Website';
     let header = 'Notebooks';
     let sql = 'SELECT * FROM products WHERE categoryID = 3';
-    let basketAmount = await getBasketItems(req, res);
+    let basketAmount = await getBasketAmount(req, res);
+    let basketItems = await getBasketItems(req, res);
+    let wishlistItems = await getWishlistItems(req, res);
 
     db.query(sql, (err, result) => {
         if (err) throw err;
@@ -148,7 +178,9 @@ router.get('/notebooks', async (req, res) => {
             data: result,
             username: req.session.username,
             loggedin: req.session.loggedin,
-            basketAmount: basketAmount
+            basketAmount: basketAmount,
+            basketItems: basketItems,
+            wishlistItems: wishlistItems
         });
     })
 });
@@ -156,7 +188,7 @@ router.get('/notebooks', async (req, res) => {
 router.get('/artcontest', async (req, res) => {
     let title = 'Art Contest | Giraffe Website';
     let header = 'Art Contest';
-    let basketAmount = await getBasketItems(req, res);
+    let basketAmount = await getBasketAmount(req, res);
 
     db.query('SELECT * FROM artcontestwinners', (error, results) => {
         if (error) {
@@ -179,7 +211,7 @@ router.get('/artcontest', async (req, res) => {
 router.get('/contact', async (req, res) => {
     let title = 'Contact | Giraffe Website';
     let header = 'Contact Us';
-    let basketAmount = await getBasketItems(req, res);
+    let basketAmount = await getBasketAmount(req, res);
     res.render('contact', {
         title: title,
         header: header,
@@ -191,7 +223,7 @@ router.get('/contact', async (req, res) => {
 
 router.get('/createaccount', ifLoggedIn, async (req, res) => {
     let title = 'Create an Account | Giraffe Website';
-    let basketAmount = await getBasketItems(req, res);
+    let basketAmount = await getBasketAmount(req, res);
 
     res.render('createaccount', {
         title: title,
@@ -207,7 +239,7 @@ router.post('/createaccount', async (req, res) => {
     const email = req.body.email;
     const password = req.body.password;
     const passwordReEnter = req.body.passwordReEnter;
-    let basketAmount = await getBasketItems(req, res);
+    let basketAmount = await getBasketAmount(req, res);
 
 
     if (!email) {
@@ -301,7 +333,7 @@ router.post('/createaccount', async (req, res) => {
 
 router.get('/login', ifLoggedIn, async (req, res) => {
     let title = 'Login | Giraffe Website';
-    let basketAmount = await getBasketItems(req, res);
+    let basketAmount = await getBasketAmount(req, res);
 
     res.render('login', {
         title: title,
@@ -314,7 +346,7 @@ router.get('/login', ifLoggedIn, async (req, res) => {
 
 router.get('/update-password', ifNotLoggedIn, async (req, res) => {
     let title = 'Update Password | Giraffe Website';
-    let basketAmount = await getBasketItems(req, res);
+    let basketAmount = await getBasketAmount(req, res);
 
     res.render('update-password', {
         title: title,
@@ -327,7 +359,7 @@ router.get('/update-password', ifNotLoggedIn, async (req, res) => {
 
 router.get('/update-email', ifNotLoggedIn, async (req, res) => {
     let title = 'Update Email | Giraffe Website';
-    let basketAmount = await getBasketItems(req, res);
+    let basketAmount = await getBasketAmount(req, res);
 
     res.render('update-email', {
         title: title,
@@ -339,7 +371,7 @@ router.get('/update-email', ifNotLoggedIn, async (req, res) => {
 });
 
 router.post('/update', async (req, res) => {
-    let basketAmount = await getBasketItems(req, res);
+    let basketAmount = await getBasketAmount(req, res);
     if (req.body.type === 'update-password') {
         db.query('SELECT password FROM customers WHERE username = ?', [req.session.username], (error, results) => {
             if (error) {
@@ -438,7 +470,7 @@ router.post('/contact', async (req, res) => {
 router.post('/login', async (req, res) => {
     let username = req.body.username;
     let password = req.body.password;
-    let basketAmount = await getBasketItems(req, res);
+    let basketAmount = await getBasketAmount(req, res);
 
     if (username && password) {
         db.query('SELECT * FROM customers WHERE username = ? AND password = ?', [username, password], (error, results, fields) => {
@@ -473,7 +505,7 @@ router.post('/login', async (req, res) => {
 
 router.get('/basket', async (req, res) => {
     let title = 'Your Basket | Giraffe Website';
-    let basketAmount = await getBasketItems(req, res);
+    let basketAmount = await getBasketAmount(req, res);
 
     db.query('SELECT b.productID, b.customerID, b.quantity, b.price, p.id, p.name, p.url, p.imageSrc FROM basketitems b INNER JOIN products p ON p.id = b.productID WHERE b.customerID = ?', [req.session.username], (error, results) => {
         if (error) {
@@ -507,7 +539,7 @@ router.get('/basket', async (req, res) => {
 
 router.get('/checkout', ifNotLoggedIn, async (req, res) => {
     let title = 'Checkout | Giraffe Website';
-    let basketAmount = await getBasketItems(req, res);
+    let basketAmount = await getBasketAmount(req, res);
 
     db.query('SELECT b.productID, b.customerID, b.quantity, b.price, p.id, p.name, p.url, p.imageSrc FROM basketitems b INNER JOIN products p ON p.id = b.productID WHERE b.customerID = ?', [req.session.username], (error, results) => {
         if (error) {
@@ -590,7 +622,7 @@ router.get('/search', (req, res) => {
 router.get('/youraccount', ifNotLoggedIn, async (req, res) => {
     let title = 'Your Account | Giraffe Website';
     let header = 'Your Account';
-    let basketAmount = await getBasketItems(req, res);
+    let basketAmount = await getBasketAmount(req, res);
 
     res.render('youraccount', {
         title: title,
@@ -604,7 +636,7 @@ router.get('/youraccount', ifNotLoggedIn, async (req, res) => {
 router.get('/orders', ifNotLoggedIn, async (req, res) => {
     let title = 'Your Orders | Giraffe Website';
     let id = req.session.username;
-    let basketAmount = await getBasketItems(req, res);
+    let basketAmount = await getBasketAmount(req, res);
 
     db.query('SELECT * FROM orders WHERE customerID = ?', [id], (error, data, fields) => {
         res.render('orders', {
@@ -620,7 +652,7 @@ router.get('/orders', ifNotLoggedIn, async (req, res) => {
 router.get('/wishlist', ifNotLoggedIn, async (req, res) => {
     let title = 'Your Wishlist | Giraffe Website';
     let header = 'Wishlist';
-    let basketAmount = await getBasketItems(req, res);
+    let basketAmount = await getBasketAmount(req, res);
 
     db.query('SELECT w.productID, w.customerID, p.id, p.name, p.url, p.imageSrc, p.price FROM wishlistitems w INNER JOIN products p ON p.id = w.productID WHERE w.customerID = ?', [req.session.username], (error, results) => {
         if (error) {
@@ -656,7 +688,10 @@ router.get('/logout', ifLoggedIn, (req, res) => {
 });
 
 router.get('/:id', async (req, res) => {
-    let basketAmount = await getBasketItems(req, res);
+    let basketAmount = await getBasketAmount(req, res);
+    let wishlistItems = await getWishlistItems(req, res);
+    let basketItems = await getBasketItems(req, res);
+
     db.query('SELECT * FROM products WHERE id = ?', [req.params.id], (error, results) => {
         if (error) {
             console.log(error);
@@ -666,7 +701,9 @@ router.get('/:id', async (req, res) => {
                 username: req.session.username,
                 loggedin: req.session.loggedin,
                 data: results,
-                basketAmount: basketAmount
+                basketAmount: basketAmount,
+                wishlistItems: wishlistItems,
+                basketItems: basketItems
             })
         }
     })
@@ -675,7 +712,7 @@ router.get('/:id', async (req, res) => {
 
 router.post('/actions', async (req, res) => {
     const backURL = req.header('Referer')
-    let basketAmount = await getBasketItems(req, res);
+    let basketAmount = await getBasketAmount(req, res);
 
     if (req.session.loggedin) {
         if (req.body.type === 'add_to_basket') {
@@ -738,6 +775,18 @@ router.post('/actions', async (req, res) => {
                 }
             })
         }
+        if (req.body.type === 'delete_all_from_basket') {
+            db.query('SELECT * FROM basketitems WHERE productID = ? AND customerID =?', [req.body.id, req.session.username], (error, results) => {
+                if (error) {
+                    console.log(error);
+                } else {
+                    db.query('DELETE FROM basketitems WHERE productID = ? AND customerID = ?', [req.body.id, req.session.username], (error, results) => {
+                        if (error) throw err;
+                        console.log(results)
+                    })
+                }
+            })
+        }
 
         setTimeout(() => {
             res.redirect(`${backURL}` || '/');
@@ -775,7 +824,7 @@ router.post('/actions', async (req, res) => {
 
 router.post('/search', async (req, res) => {
     let query = `%${req.body.query}%`;
-    let basketAmount = await getBasketItems(req, res);
+    let basketAmount = await getBasketAmount(req, res);
 
     db.query('SELECT * FROM products WHERE name LIKE ?', [query], (error, results) => {
         if (error) {
