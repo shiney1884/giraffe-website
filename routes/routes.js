@@ -789,7 +789,7 @@ router.post('/actions', async (req, res) => {
         }
 
         setTimeout(() => {
-            res.redirect(`${backURL}` || '/');
+            res.redirect(`${backURL}`);
         }, 300);
 
     } else {
@@ -825,6 +825,8 @@ router.post('/actions', async (req, res) => {
 router.post('/search', async (req, res) => {
     let query = `%${req.body.query}%`;
     let basketAmount = await getBasketAmount(req, res);
+    let basketItems = await getBasketItems(req, res);
+    let wishlistItems = await getWishlistItems(req, res);
 
     db.query('SELECT * FROM products WHERE name LIKE ?', [query], (error, results) => {
         if (error) {
@@ -836,7 +838,9 @@ router.post('/search', async (req, res) => {
                 username: req.session.username,
                 loggedin: req.session.loggedin,
                 data: results,
-                basketAmount: basketAmount
+                basketAmount: basketAmount,
+                basketItems: basketItems,
+                wishlistItems: wishlistItems
             });
         }
     })
