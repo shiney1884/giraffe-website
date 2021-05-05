@@ -180,6 +180,102 @@ router.get('/notebooks', async (req, res) => {
     })
 });
 
+router.get('/art-equipment', async (req, res) => {
+    let title = 'Art Equipment | Giraffe Website';
+    let header = 'Art Equipment';
+    let sql = 'SELECT * FROM products WHERE categoryID = 4';
+    let basketAmount = await getBasketAmount(req, res);
+    let basketItems = await getBasketItems(req, res);
+    let wishlistItems = await getWishlistItems(req, res);
+
+    db.query(sql, (err, result) => {
+        if (err) throw err;
+
+        res.render('products', {
+            title: title,
+            header: header,
+            data: result,
+            username: req.session.username,
+            loggedin: req.session.loggedin,
+            basketAmount: basketAmount,
+            basketItems: basketItems,
+            wishlistItems: wishlistItems
+        });
+    })
+});
+
+router.get('/art', async (req, res) => {
+    let title = 'Art | Giraffe Website';
+    let header = 'Art';
+    let sql = 'SELECT * FROM products WHERE categoryID = 14';
+    let basketAmount = await getBasketAmount(req, res);
+    let basketItems = await getBasketItems(req, res);
+    let wishlistItems = await getWishlistItems(req, res);
+
+    db.query(sql, (err, result) => {
+        if (err) throw err;
+
+        res.render('products', {
+            title: title,
+            header: header,
+            data: result,
+            username: req.session.username,
+            loggedin: req.session.loggedin,
+            basketAmount: basketAmount,
+            basketItems: basketItems,
+            wishlistItems: wishlistItems
+        });
+    })
+});
+
+router.get('/cards', async (req, res) => {
+    let title = 'Cards | Giraffe Website';
+    let header = 'Cards';
+    let sql = 'SELECT * FROM products WHERE categoryID = 24';
+    let basketAmount = await getBasketAmount(req, res);
+    let basketItems = await getBasketItems(req, res);
+    let wishlistItems = await getWishlistItems(req, res);
+
+    db.query(sql, (err, result) => {
+        if (err) throw err;
+
+        res.render('products', {
+            title: title,
+            header: header,
+            data: result,
+            username: req.session.username,
+            loggedin: req.session.loggedin,
+            basketAmount: basketAmount,
+            basketItems: basketItems,
+            wishlistItems: wishlistItems
+        });
+    })
+});
+
+router.get('/bags', async (req, res) => {
+    let title = 'Bags | Giraffe Website';
+    let header = 'Bags';
+    let sql = 'SELECT * FROM products WHERE categoryID = 34';
+    let basketAmount = await getBasketAmount(req, res);
+    let basketItems = await getBasketItems(req, res);
+    let wishlistItems = await getWishlistItems(req, res);
+
+    db.query(sql, (err, result) => {
+        if (err) throw err;
+
+        res.render('products', {
+            title: title,
+            header: header,
+            data: result,
+            username: req.session.username,
+            loggedin: req.session.loggedin,
+            basketAmount: basketAmount,
+            basketItems: basketItems,
+            wishlistItems: wishlistItems
+        });
+    })
+});
+
 router.get('/artcontest', async (req, res) => {
     let title = 'Art Contest | Giraffe Website';
     let header = 'Art Contest';

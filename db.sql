@@ -179,3 +179,41 @@ CREATE TABLE artcontestwinners(
 INSERT INTO artcontestwinners (img, winnername, contest, contestdescription) VALUES 
 ('winner-2.jpg', 'Kim', 'Red, Blue, Yellow', 'Had to paint something creative with red, blue and yellow'),
 ('winner-3.jpg', 'Jake', 'Simple', "Had to paint something as simple as possible to test how creative you can be with something simple");
+
+INSERT INTO products (name, description, price, stock, url, imageSrc, categoryID)
+VALUES 
+('Mini-Canvas', 'A mini canvas for you to do your artistic and creative work on.', 4.00, 45, 'mini-canvas', 'mini-canvas.jpg', 4),
+('Canvas 4 Pack', 'A 4 pack of canvases to do your artistic and creative work on.', 4.00, 45, 'canvas-4-pack', '4-pack-canvas.jpg', 4),
+('4 Pack of Jumbo Paint Brushes', 'A pack of 4 jumbo paint brushes to help give your paintings the design and look you want.', 7.50, 45, '4-pack-jumbo-paint-brushes', '4-pack-jumbo-paint-brushes.jpg', 4),
+('Bristle Paint Brush', 'A bristle paint brush to help give your painting the design and look you want.', 7.00, 45, 'bristle-paint-brush', 'bristle-paint-brush.jpg', 4),
+('Mix of 6 Different Paint Brsuhes', 'A mix of 6 different paint brushes to give your paintings more variety and give you more flexiblity.', 20.00, 25, 'mix-of-6-paint-brushes', 'mix-of-6-paint-brushes.jpg', 4);
+
+INSERT INTO categories (name)
+VALUES ('Art Equipment'),
+('Art'),
+('Cards'),
+('Bags');
+
+INSERT INTO products (name, description, price, stock, url, imageSrc, categoryID)
+VALUES 
+('City Wall Art', 'An image of some city wall art.', 7.50, 20, 'city-wall-art', 'art-1.jpg', 14),
+('Small Blue Lights', 'An image of many blue lights.', 6.50, 20, 'small-blue-light-art', 'art-2.jpg', 14),
+('Wave Art', 'An artists painting of a wave.', 10.00, 30, 'wave-painting', 'art-3.jpg', 14),
+('Disneyland Painting', 'An artists painting of Disneyland.', 10.00, 45, 'disneyland-painting', 'art-4.jpg', 14),
+('Neighbourhood Painting', 'An artists painting of a neighbourhood.', 8.00, 25, 'neighbourhood-painting', 'art-5.jpg', 14);
+
+INSERT INTO products (name, description, price, stock, url, imageSrc, categoryID)
+VALUES 
+('Best Friend Birthday Card', 'A card you can gift to one of your loved ones on their birthday!.', 1.00, 40, 'best-friend-birthday-card', 'best-friend-card.jpg', 24),
+('Age 30 Birthday Card (Virus Theme)', 'A birthday card you can gift to a loved one who is aged 30!.', 1.00, 40, 'age-30-birthday-card-virus', 'age-30-birthday-card-virus.jpg', 24),
+('Light Green Christmas Card', 'A light green Christmas Card you can gift to one of your loved ones on Christmas!.', 1.00, 30, 'light-green-christmas-card', 'light-green-christmas-card.jpg', 24),
+('Fiance Christmas Card', 'A christmas card you can gift to your fiance at Christmas.', 1.00, 45, 'fiance-christmas-card', 'fiance-christmas-card.jpg', 24),
+('Cat Christmas Card', 'A Christmas with a cat theme to gift to one of your loved ones at Christams.', 1.00, 45, 'cat-christmas-card', 'cat-christmas-card.jpg', 24);
+
+INSERT INTO products (name, description, price, stock, url, imageSrc, categoryID)
+VALUES 
+('Valentino Bag', 'A designer bag designed and manufactured by Valentino.', 30.00, 40, 'valentino-bag', 'valentino-bag.jpg', 34),
+('Thule Boarding Bag', 'A boarding bag that can be used as luggage on a flight etc..', 12.00, 40, 'thule-boarding-bag', 'thule-boarding.jpg', 34),
+('2 O Bags', '2 bags designed and manufactured by O.', 25.00, 30, 'pair-o-bag', 'pair-o-bag.jpg', 34),
+('GG Marmont Mini Shoulder Bag', 'A mini shoulder bag designed and manufactured by GG Marmont.', 31.00, 45, 'gg-marmont-mini-shoulder-bag', 'gg-marmont-mini-shoulder-bag.jpg', 34),
+('High Spirit Bag', 'A bag designed and manufactured by High Spirit.', 10.00, 45, 'high-spirit-bag', 'high-spirit-bag.jpg', 34);
