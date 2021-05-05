@@ -96,11 +96,6 @@ function getWishlistItems(req, res) {
     })
 }
 
-router.get('/get', async (req, res) => {
-    let basketItems = await getBasketItems(req, res);
-    console.log(basketItems);
-})
-
 router.get('/', async (req, res) => {
     let title = 'Home | Giraffe Website';
     let basketAmount = await getBasketAmount(req, res);
@@ -653,32 +648,37 @@ router.get('/wishlist', ifNotLoggedIn, async (req, res) => {
     let title = 'Your Wishlist | Giraffe Website';
     let header = 'Wishlist';
     let basketAmount = await getBasketAmount(req, res);
+    let basketItems = await getBasketItems(req, res);
+    let wishlistItems = await getWishlistItems(req, res);
 
     db.query('SELECT w.productID, w.customerID, p.id, p.name, p.url, p.imageSrc, p.price FROM wishlistitems w INNER JOIN products p ON p.id = w.productID WHERE w.customerID = ?', [req.session.username], (error, results) => {
         if (error) {
             console.log(error);
         } else if (results.length > 0) {
-            res.render('wishlist', {
+            res.render('products', {
                 title: title,
                 header: header,
                 username: req.session.username,
                 loggedin: req.session.loggedin,
                 data: results,
-                basketAmount: basketAmount
+                basketAmount: basketAmount,
+                basketItems: basketItems,
+                wishlistItems: wishlistItems
             });
         } else {
-            res.render('wishlist', {
+            res.render('products', {
                 title: title,
                 header: header,
                 username: req.session.username,
                 loggedin: req.session.loggedin,
                 data: [],
-                basketAmount: basketAmount
+                basketAmount: basketAmount,
+                basketItems: basketItems,
+                wishlistItems: wishlistItems
             });
         }
     })
 });
-
 
 
 router.get('/logout', ifLoggedIn, (req, res) => {

@@ -15,11 +15,11 @@
                     <div class="basket-item-details">
                         <a class="basket-item-name" href="<%= data[i]['id'] %>"><%= data[i]['name'] %></a>
                         <div class="basket-item-price">£<%= data[i]['price'] %></div>
-                        <div class="quantity"><%= data[i]['quantity'] %></div>
                         <div class="total">£<%= (data[i]['quantity'] * data[i]['price']).toFixed(2)%></div>
                         <div class="basket-item-delete">
-                            <button type="submit" name="type" value="delete_from_basket">Delete</button>
-                            <button type="submit" name="type" value="add_to_basket">Add</button>
+                            <button type="submit" name="type" value="delete_from_basket">-</button>
+                            <div class="quantity"><%= data[i]['quantity'] %></div>
+                            <button type="submit" name="type" value="add_to_basket">+</button>
                         </div>
                     </div>
                 </div>
