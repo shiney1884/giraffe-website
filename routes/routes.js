@@ -612,7 +612,8 @@ router.get('/basket', async (req, res) => {
                 loggedin: req.session.loggedin,
                 data: results,
                 basketAmount: basketAmount,
-                total: total.toFixed(2)
+                total: total.toFixed(2),
+                message: req.flash('message')
             });
         } else {
             res.render('basket', {
@@ -620,7 +621,8 @@ router.get('/basket', async (req, res) => {
                 username: req.session.username,
                 loggedin: req.session.loggedin,
                 data: [],
-                basketAmount: basketAmount
+                basketAmount: basketAmount,
+                message: req.flash('message')
             });
         }
     })
@@ -632,15 +634,22 @@ router.get('/checkout', ifNotLoggedIn, async (req, res) => {
     let title = 'Checkout | Giraffe Website';
     let basketAmount = await getBasketAmount(req, res);
 
-    db.query('SELECT b.productID, b.customerID, b.quantity, b.price, p.id, p.name, p.url, p.imageSrc FROM basketitems b INNER JOIN products p ON p.id = b.productID WHERE b.customerID = ?', [req.session.username], (error, results) => {
+    db.query('SELECT b.productID, b.customerID, b.quantity, b.price, p.id, p.stock, p.name, p.url, p.imageSrc FROM basketitems b INNER JOIN products p ON p.id = b.productID WHERE b.customerID = ?', [req.session.username], (error, results) => {
         if (error) {
             console.log(error)
         } else if (results.length === 0) {
             res.redirect('/')
         } else {
+            for (let i = 0; i < results.length; i++) {
+                if (results[i]['quantity'] > results[i]['stock']) {
+                    req.flash('message', 'One of your items is either out of stock or you have ordered more items than are in stock.')
+                    res.redirect('/basket');
+                    return;
+                }
+            }
             var today = new Date();
             var dd = String(today.getDate()).padStart(2, '0');
-            var mm = String(today.getMonth() + 1).padStart(2, '0'); //January is 0!
+            var mm = String(today.getMonth() + 1).padStart(2, '0');
             var yyyy = today.getFullYear();
 
             today = yyyy + '/' + mm + '/' + dd;
@@ -664,6 +673,7 @@ router.get('/checkout', ifNotLoggedIn, async (req, res) => {
 });
 
 router.post('/checkout', (req, res) => {
+
     db.query("INSERT INTO orders(customerID, orderTotal, dateOfOrder, status, paymentMethod) VALUES (?, ?, ?, ?, ?)", [req.session.username, req.body.total, req.body.date, 'Pending', 'Debit'], (err, res) => {
         if (err) {
             console.log(err)
@@ -684,6 +694,14 @@ router.post('/checkout', (req, res) => {
                         db.query('INSERT INTO orderitems(customerID, productID, quantity, price, orderID) VALUES (?, ?, ?, ?, ?)', [req.session.username, res[i]['productID'], res[i]['quantity'], res[i]['price'], id], (err, res) => {
                             if (err) {
                                 console.log(err)
+                            }
+                        })
+
+                        db.query('UPDATE products SET stock = stock - ? WHERE id = ?', [res[i]['quantity'], res[i]['productID']], (err, res) => {
+                            if (err) {
+                                console.log(err);
+                            } else {
+                                console.log(res);
                             }
                         })
                     }

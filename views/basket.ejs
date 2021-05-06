@@ -3,6 +3,9 @@
 <div class="page-content">
     <div class="basket">
         <h4>Your Basket</h4>
+        <% if(message) { %>
+        <span class="error"><%= message %></span>
+        <% } %>
         <div class="basket-items">
             <%  if(data.length > 0) { %>
             <% for (let i = 0; i < data.length; i++) { %>
