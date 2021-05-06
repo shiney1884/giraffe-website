@@ -10,10 +10,10 @@
                 <input type="hidden" name='id' value='<%= data[i]["id"] %>'>
                 <div id="<%= data[i]['id'] %>" class="basket-item">
                     <div class="image-holder">
-                        <a href="<%= data[i]['id'] %>"><img src="images/<%= data[i]['imageSrc'] %>" alt=""></a>
+                        <a href="<%= data[i]['url'] %>"><img src="images/<%= data[i]['imageSrc'] %>" alt=""></a>
                     </div>
                     <div class="basket-item-details">
-                        <a class="basket-item-name" href="<%= data[i]['id'] %>"><%= data[i]['name'] %></a>
+                        <a class="basket-item-name" href="<%= data[i]['url'] %>"><%= data[i]['name'] %></a>
                         <div class="basket-item-price">£<%= data[i]['price'] %></div>
                         <div class="total">£<%= (data[i]['quantity'] * data[i]['price']).toFixed(2)%></div>
                         <div class="basket-item-delete">

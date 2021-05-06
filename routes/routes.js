@@ -788,7 +788,7 @@ router.get('/:id', async (req, res) => {
     let wishlistItems = await getWishlistItems(req, res);
     let basketItems = await getBasketItems(req, res);
 
-    db.query('SELECT * FROM products WHERE id = ?', [req.params.id], (error, results) => {
+    db.query('SELECT * FROM products WHERE url = ?', [req.params.id], (error, results) => {
         if (error) {
             console.log(error);
         } else {
