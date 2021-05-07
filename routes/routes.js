@@ -673,8 +673,9 @@ router.get('/checkout', ifNotLoggedIn, async (req, res) => {
 });
 
 router.post('/checkout', (req, res) => {
+    console.log(req.body);
 
-    db.query("INSERT INTO orders(customerID, orderTotal, dateOfOrder, status, paymentMethod) VALUES (?, ?, ?, ?, ?)", [req.session.username, req.body.total, req.body.date, 'Pending', 'Debit'], (err, res) => {
+    db.query("INSERT INTO orders(customerID, orderTotal, dateOfOrder, status, paymentMethod) VALUES (?, ?, ?, ?, ?)", [req.session.username, req.body.total, req.body.date, 'Pending', req.body['payment-method']], (err, res) => {
         if (err) {
             console.log(err)
         }

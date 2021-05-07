@@ -343,7 +343,10 @@ footer a {
 
 .category-1,
 .category-2,
-.category-3 {
+.category-3,
+.category-4,
+.category-5,
+.category-6 {
     width: 50vw;
     height: 25vh;
     position: relative;
@@ -395,6 +398,46 @@ footer a {
     z-index: -1;
     opacity: 0.5;
 }
+
+.category-4::after {
+    content: '';
+    background: url(images/card-home.jpg);
+    background-size: cover;
+    background-position: center;
+    height: 25vh;
+    position: absolute;
+    right: 0;
+    left: 0;
+    z-index: -1;
+    opacity: 0.5;
+}
+
+.category-5::after {
+    content: '';
+    background: url(images/art-home.jpeg);
+    background-size: cover;
+    background-position: center;
+    height: 25vh;
+    position: absolute;
+    right: 0;
+    left: 0;
+    z-index: -1;
+    opacity: 0.5;
+}
+
+.category-6::after {
+    content: '';
+    background: url(images/bag-home.jpg);
+    background-size: cover;
+    background-position: center;
+    height: 25vh;
+    position: absolute;
+    right: 0;
+    left: 0;
+    z-index: -1;
+    opacity: 0.5;
+}
+
 
 .categories a {
     all: unset;
@@ -638,31 +681,53 @@ footer a {
 
 .actions {
     display: flex;
-    /* border: 2px solid black; */
 }
 
 .actions i {
-    margin: 2.5px;
+    margin: 5px;
 }
 
 .basket-add {
     all: unset;
-    /* border: 2px solid red; */
+    color: green;
 }
 
 .wishlist-add {
     all: unset;
+    color: green;
+}
+
+.wishlist-delete {
+    all: unset;
+    color: red;
 }
 
 .basket-add:hover {
     cursor: pointer;
-    color: green;
+    transform: scale(1.2);
 }
 
 .wishlist-add:hover {
     cursor: pointer;
+    transform: scale(1.2);
+}
+
+.delete-all-from-basket {
+    all: unset;
     color: red;
 }
+
+.delete-all-from-basket:hover {
+    cursor: pointer;
+    transform: scale(1.2);
+}
+
+.wishlist-delete:hover {
+    cursor: pointer;
+    transform: scale(1.2);
+}
+
+
 
 
 
@@ -921,7 +986,6 @@ footer a {
 /* basket page */
 
 .basket {
-    /* border: 2px solid red; */
     width: 80vw;
     margin: 10px auto;
 }
@@ -933,20 +997,26 @@ footer a {
 }
 
 .basket-items {
-    /* border: 2px solid orange; */
     display: flex;
     flex-direction: column;
     align-items: center;
+    border: 2px solid grey;
+}
+
+.basket-items form {
+    width: 100%;
 }
 
 .basket-item {
     border-bottom: 1.5px solid grey;
     display: flex;
     margin-top: 15px;
+    width: 100%;
 }
 
 .image-holder {
-    width: 50vw;
+    width: 50%;
+    padding: 10px;
 }
 
 .image-holder img {
@@ -955,35 +1025,25 @@ footer a {
 }
 
 .basket-item-details {
-    border: 2px solid yellow;
     width: 100%;
-    margin: 10px;
+    margin-left: 40px;
     display: flex;
     flex-direction: column;
     justify-content: space-evenly;
 }
 
-.basket-item-details select {
-    all: unset;
-    border: 2px solid grey;
-    padding: 5px;
-    text-align: center;
-    width: 20%;
-}
-
-.basket-item-delete {
-    border: 2px solid red;
+.basket-item-actions {
+    /* border: 2px solid red; */
     display: flex;
 }
 
-.basket-item-delete button {
+.basket-item-actions button {
     all: unset;
-    background-color: red;
-    color: #fff;
+    border: 2px solid grey;
     padding: 5px;
 }
 
-.basket-item-delete button:hover {
+.basket-item-actions button:hover {
     cursor: pointer;
 }
 
@@ -994,14 +1054,73 @@ footer a {
 }
 
 .basket-item-price,
-.basket-item-delete {
+.basket-item-actions {
     font-size: .85em;
 }
 
-.checkoutLink {
+
+.review-sec a:hover {
+    cursor: pointer;
+}
+
+.quantity {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 10px;
+    border: 1px solid grey;
+    font-weight: 600;
+}
+
+.review-sec {
+    margin-top: 20px;
+    padding: 20px;
+}
+
+.total {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-left: 10px;
+    font-weight: 600;
+    color: green;
+}
+
+.basket-total {
+    font-size: 20px;
+    text-align: center;
+}
+
+.basket-total span {
+    color: green;
+    font-weight: 600;
+}
+
+.review-sec a {
+    all: unset;
+    display: block;
+    margin: 20px auto;
+    width: 150px;
+    text-align: center;
+    background: #F2B613;
+    padding: 5px;
     color: #000;
 }
 
+.review-sec button {
+    all: unset;
+    display: block;
+    margin: 20px auto;
+    width: 150px;
+    text-align: center;
+    background: #F2B613;
+    padding: 5px;
+    color: #000;
+}
+
+.review-sec button:hover {
+    cursor: pointer;
+}
 
 
 
@@ -1013,9 +1132,13 @@ footer a {
 .delivery-address,
 .payment-method,
 .final-cost {
-    /* border: 2px solid red; */
-    width: 90vw;
+    width: 80vw;
     margin: 20px auto;
+}
+
+.cko-details {
+    /* border: 2px solid grey; */
+    margin: 25px 0;
 }
 
 .order-details h4,
@@ -1023,12 +1146,12 @@ footer a {
 .payment-method h4,
 .final-cost h4 {
     font-size: 1.25em;
-    text-decoration: underline;
+    text-align: center;
 }
 
 .order-items,
 .delivery-address-details {
-    /* border: 2px solid green; */
+    border: 2px solid grey;
     margin-top: 10px;
 }
 
@@ -1053,12 +1176,14 @@ footer a {
     width: 100%;
 }
 
-.order-item hr {
-    height: 2px;
-    background-color: grey;
-    width: 90vw;
-    /* margin: 10px auto; */
+.cko-quantity span {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 10px;
+    font-weight: 600;
 }
+
 
 .item-name span,
 .item-price span,
@@ -1076,7 +1201,8 @@ footer a {
 .delivery-address-detail {
     display: flex;
     flex-direction: column;
-    margin-top: 15px;
+    margin: 15px auto;
+    width: 60vw;
 }
 
 .delivery-address-detail input,
@@ -1085,6 +1211,17 @@ textarea {
     all: unset;
     border: 1px solid grey;
     padding: 10px 5px;
+}
+
+.payment-method {
+    display: flex;
+    flex-direction: column;
+}
+
+.payment-method select,
+label {
+    width: 60vw;
+    margin: 0 auto;
 }
 
 .final-cost p {
@@ -1232,6 +1369,10 @@ td {
     margin-top: 10px;
     display: flex;
     align-items: center;
+}
+
+.product-page-actions .fa-trash {
+    margin-left: 15px;
 }
 
 .basket-add-btn {
@@ -1384,7 +1525,10 @@ td {
 
     .category-1,
     .category-2,
-    .category-3 {
+    .category-3,
+    .category-4,
+    .category-5,
+    .category-6 {
         width: 25vw;
     }
 
@@ -1489,13 +1633,28 @@ td {
     }
 
     .basket {
-        width: 50vw;
+        width: 60vw;
+    }
+
+    .order-details,
+    .delivery-address,
+    .payment-method,
+    .final-cost {
+        width: 60vw;
+    }
+
+    .delivery-address-detail {
+        width: 40vw;
     }
 
     .image-holder {
-        width: 20vw;
+        width: 30%;
     }
 
+    .payment-method select,
+    label {
+        width: 40vw;
+    }
 
 
 }

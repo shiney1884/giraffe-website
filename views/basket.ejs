@@ -6,8 +6,8 @@
         <% if(message) { %>
         <span class="error"><%= message %></span>
         <% } %>
+        <%  if(data.length > 0) { %>
         <div class="basket-items">
-            <%  if(data.length > 0) { %>
             <% for (let i = 0; i < data.length; i++) { %>
             <form action="/actions" method="post">
                 <input type="hidden" name='id' value='<%= data[i]["id"] %>'>
@@ -17,23 +17,24 @@
                     </div>
                     <div class="basket-item-details">
                         <a class="basket-item-name" href="<%= data[i]['url'] %>"><%= data[i]['name'] %></a>
-                        <div class="basket-item-price">£<%= data[i]['price'] %></div>
-                        <div class="total">£<%= (data[i]['quantity'] * data[i]['price']).toFixed(2)%></div>
-                        <div class="basket-item-delete">
+                        <div class="basket-item-price">Unit Price: £<%= data[i]['price'] %></div>
+                        <div class="basket-item-actions">
                             <button type="submit" name="type" value="delete_from_basket">-</button>
                             <div class="quantity"><%= data[i]['quantity'] %></div>
                             <button type="submit" name="type" value="add_to_basket">+</button>
+                            <div class="total">£<%= (data[i]['quantity'] * data[i]['price']).toFixed(2)%></div>
                         </div>
                     </div>
                 </div>
             </form>
             <%   } %>
-            <div class="basket-total">£<%= total %> </div>
-            <a href="/checkout" class="checkoutLink">checkout</a>
+            <div class="review-sec">
+                <div class="basket-total">Your Basket Total is <span>£<%= total %></span></div>
+                <a href="/checkout" class="checkout-link">Checkout Here</a>
+            </div>
             <% } %>
         </div>
     </div>
-
 </div>
 
 <%- include('footer') -%>

@@ -1,17 +1,21 @@
 <%- include('header') -%>
 
 <div class="page-content">
-    <div class="order-details">
+    <div class="basket">
         <h4>Your Order</h4>
-        <div class="order-items">
-            <%    for(let i = 0; i < data.length; i++) { %> <div class="order-item">
-                <div class="item-details">
-                    <img src="images/<%= data[i]['imageSrc'] %>" alt="">
-                    <div class="item-name"><span>Item: </span><%= data[i]['name'] %></div>
-                    <div class="item-price"><span>Price: </span><%= data[i]['price'] %></div>
-                    <div class="item-quantity"><span>Quantity: </span><%= data[i]['quantity'] %></div>
+        <div class="basket-items">
+            <%    for(let i = 0; i < data.length; i++) { %>
+            <div class="basket-item">
+                <div class="image-holder">
+                    <a href="<%= data[i]['url'] %>"><img src="images/<%= data[i]['imageSrc'] %>" alt=""></a>
                 </div>
-                <hr>
+                <div class="basket-item-details">
+                    <a class="basket-item-name" href="<%= data[i]['url'] %>"><%= data[i]['name'] %></a>
+                    <div class="basket-item-actions">
+                        <div class="cko-quantity">Quantity<span> <%= data[i]['quantity'] %></span></div>
+                        <div class="total">£<%= (data[i]['quantity'] * data[i]['price']).toFixed(2)%></div>
+                    </div>
+                </div>
             </div>
             <%    } %>
 
@@ -19,7 +23,7 @@
     </div>
     <div class="delivery-address">
         <h4>Your Delivery Address</h4>
-        <div class="delivery-address-details">
+        <div class="cko-details">
             <div class="delivery-address-detail">
                 <label for="">Country</label>
                 <select name="" id="">
@@ -64,16 +68,23 @@
     <form action="/checkout" method="post">
         <div class="payment-method">
             <h4>Payment Method</h4>
+            <div class="cko-details">
+                <div class="payment-method">
+                    <label for="payment-method">Please Select a Payment Method</label>
+                    <select name="payment-method" id="payment-method">
+                        <option>Paypal</option>
+                        <option>Debit Card</option>
+                        <option>Crypto</option>
+                    </select>
+                </div>
+            </div>
         </div>
-        <div class="final-cost">
-            <h4>Your Total Order Price</h4>
+        <div class="review-sec">
             <input type="hidden" name='date' value="<%= date %>">
             <input type="hidden" name='total' value="<%= total %>">
-            <p>£<%= total %></p>
+            <div class="basket-total">Your Total Order Price is <span>£<%= total %></span></div>
+            <button type="submit" class="checkout-link">Complete Order</button>
         </div>
-        <button class="complete-order" type="submit">
-            Complete Order
-        </button>
     </form>
 </div>
 
