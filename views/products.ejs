@@ -4,6 +4,9 @@
         <h4 class="product-header"><%= header %></h4>
     </div>
     <div id="products" class="products">
+        <% if(message) { %>
+        <span class="error"><%= message %></span>
+        <% } %>
         <% for(let i = 0; i < data.length; i++) { %>
         <form class="product-form" action="/actions" method="post">
             <div id="<%= data[i]['id'] %>" class="product">

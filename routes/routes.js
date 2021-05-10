@@ -946,7 +946,7 @@ router.post('/search', async (req, res) => {
     db.query('SELECT * FROM products WHERE name LIKE ?', [query], (error, results) => {
         if (error) {
             console.log(error)
-        } else {
+        } else if (results.length > 0) {
             res.render('products', {
                 title: 'Search Results',
                 header: 'Search Results',
@@ -955,7 +955,21 @@ router.post('/search', async (req, res) => {
                 data: results,
                 basketAmount: basketAmount,
                 basketItems: basketItems,
-                wishlistItems: wishlistItems
+                wishlistItems: wishlistItems,
+                message: req.flash('message')
+            });
+        } else {
+            req.flash('message', 'No products match your search, try again')
+            res.render('products', {
+                title: 'Search Results',
+                header: 'Search Results',
+                username: req.session.username,
+                loggedin: req.session.loggedin,
+                data: results,
+                basketAmount: basketAmount,
+                basketItems: basketItems,
+                wishlistItems: wishlistItems,
+                message: req.flash('message')
             });
         }
     })
