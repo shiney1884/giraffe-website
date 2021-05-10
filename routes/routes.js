@@ -1,3 +1,4 @@
+//NPM packages that are required in this file
 const express = require('express');
 const dotenv = require('dotenv').config();
 const mySQL = require('mysql2');
@@ -7,6 +8,8 @@ const session = require('express-session')
 const flash = require('connect-flash');
 const nodemailer = require('nodemailer');
 const mailGun = require('nodemailer-mailgun-transport');
+
+//mailgun functionality
 const auth = {
     auth: {
         api_key: process.env.SANDBOX_API_KEY,
@@ -15,19 +18,27 @@ const auth = {
 };
 const transporter = nodemailer.createTransport(mailGun(auth));
 
+
+//cookie functionality
 router.use(session({
     secret: 'secret',
     resave: true,
     saveUninitialized: true
 }));
 
+
+//flash message functionality
 router.use(flash());
 
+
+//allowing me to access form data
 router.use(bodyparser.urlencoded({
     extended: true
 }));
 router.use(bodyparser.json());
 
+
+//function that checks if user is logged in
 const ifLoggedIn = (req, res, next) => {
     if (req.session.loggedin) {
         res.redirect('/');
@@ -35,6 +46,9 @@ const ifLoggedIn = (req, res, next) => {
     next();
 }
 
+
+
+//function that checks if user isn't logged in
 const ifNotLoggedIn = (req, res, next) => {
     if (!req.session.loggedin) {
         res.redirect('/login');
@@ -43,6 +57,7 @@ const ifNotLoggedIn = (req, res, next) => {
 }
 
 
+//connecting to database
 const db = mySQL.createConnection({
     host: process.env.DB_HOST,
     user: process.env.DB_USER,
@@ -51,6 +66,8 @@ const db = mySQL.createConnection({
 });
 
 
+
+//function that gets the amount of items that are in a users basket
 function getBasketAmount(req, res) {
     return new Promise((resolve, reject) => {
         db.query('SELECT * FROM basketitems WHERE customerID = ?', [req.session.username], (err, res) => {
@@ -64,6 +81,8 @@ function getBasketAmount(req, res) {
     })
 }
 
+
+//function that finds the items that are in the users basket
 function getBasketItems(req, res) {
     return new Promise((resolve, reject) => {
         db.query('SELECT productID FROM basketitems WHERE customerID = ?', [req.session.username], (err, res) => {
@@ -80,6 +99,8 @@ function getBasketItems(req, res) {
     })
 }
 
+
+//function that finds the items that are in the users wishlist
 function getWishlistItems(req, res) {
     return new Promise((resolve, reject) => {
         db.query('SELECT productID FROM wishlistitems WHERE customerID = ?', [req.session.username], (err, res) => {
@@ -96,6 +117,8 @@ function getWishlistItems(req, res) {
     })
 }
 
+
+//home page route functionality
 router.get('/', async (req, res) => {
     let title = 'Home | Giraffe Website';
     let basketAmount = await getBasketAmount(req, res);
@@ -108,6 +131,8 @@ router.get('/', async (req, res) => {
     });
 })
 
+
+//pen category page functionality
 router.get('/pens', async (req, res) => {
     let title = 'Pens | Giraffe Website';
     let header = 'Pens';
@@ -132,6 +157,8 @@ router.get('/pens', async (req, res) => {
     })
 });
 
+
+//pencil category page functionality
 router.get('/pencils', async (req, res) => {
     let title = 'Pencils | Giraffe Website';
     let header = 'Pencils';
@@ -156,6 +183,9 @@ router.get('/pencils', async (req, res) => {
     })
 });
 
+
+
+//notebook category page functionality
 router.get('/notebooks', async (req, res) => {
     let title = 'Notebooks | Giraffe Website';
     let header = 'Notebooks';
@@ -180,6 +210,9 @@ router.get('/notebooks', async (req, res) => {
     })
 });
 
+
+
+//art equipment category page functionality
 router.get('/art-equipment', async (req, res) => {
     let title = 'Art Equipment | Giraffe Website';
     let header = 'Art Equipment';
@@ -204,6 +237,9 @@ router.get('/art-equipment', async (req, res) => {
     })
 });
 
+
+
+//art category page functionality
 router.get('/art', async (req, res) => {
     let title = 'Art | Giraffe Website';
     let header = 'Art';
@@ -228,6 +264,9 @@ router.get('/art', async (req, res) => {
     })
 });
 
+
+
+//card category page functionality
 router.get('/cards', async (req, res) => {
     let title = 'Cards | Giraffe Website';
     let header = 'Cards';
@@ -252,6 +291,10 @@ router.get('/cards', async (req, res) => {
     })
 });
 
+
+
+
+//bag category page functionality
 router.get('/bags', async (req, res) => {
     let title = 'Bags | Giraffe Website';
     let header = 'Bags';
@@ -276,6 +319,9 @@ router.get('/bags', async (req, res) => {
     })
 });
 
+
+
+//art contest page functionality
 router.get('/artcontest', async (req, res) => {
     let title = 'Art Contest | Giraffe Website';
     let header = 'Art Contest';
@@ -299,6 +345,7 @@ router.get('/artcontest', async (req, res) => {
 });
 
 
+//contact page functionality
 router.get('/contact', async (req, res) => {
     let title = 'Contact | Giraffe Website';
     let header = 'Contact Us';
@@ -312,6 +359,8 @@ router.get('/contact', async (req, res) => {
     });
 });
 
+
+//create account page functionality
 router.get('/createaccount', ifLoggedIn, async (req, res) => {
     let title = 'Create an Account | Giraffe Website';
     let basketAmount = await getBasketAmount(req, res);
@@ -325,6 +374,8 @@ router.get('/createaccount', ifLoggedIn, async (req, res) => {
     });
 });
 
+
+//create account form submit functionality
 router.post('/createaccount', async (req, res) => {
     const username = req.body.username;
     const email = req.body.email;
@@ -422,6 +473,8 @@ router.post('/createaccount', async (req, res) => {
     })
 });
 
+
+//login page functionality
 router.get('/login', ifLoggedIn, async (req, res) => {
     let title = 'Login | Giraffe Website';
     let basketAmount = await getBasketAmount(req, res);
@@ -461,6 +514,8 @@ router.get('/update-email', ifNotLoggedIn, async (req, res) => {
     });
 });
 
+
+//update password and update email form submit functionality
 router.post('/update', async (req, res) => {
     let basketAmount = await getBasketAmount(req, res);
     if (req.body.type === 'update-password') {
@@ -534,7 +589,7 @@ router.post('/update', async (req, res) => {
 })
 
 
-
+//contact page form functionality
 router.post('/contact', async (req, res) => {
     let email = req.body.email;
     let details = req.body.details;
@@ -558,6 +613,7 @@ router.post('/contact', async (req, res) => {
 })
 
 
+//login page form submit functionality
 router.post('/login', async (req, res) => {
     let username = req.body.username;
     let password = req.body.password;
@@ -593,7 +649,7 @@ router.post('/login', async (req, res) => {
 });
 
 
-
+//basket page functionality
 router.get('/basket', async (req, res) => {
     let title = 'Your Basket | Giraffe Website';
     let basketAmount = await getBasketAmount(req, res);
@@ -630,6 +686,7 @@ router.get('/basket', async (req, res) => {
 });
 
 
+//checkout page functionality
 router.get('/checkout', ifNotLoggedIn, async (req, res) => {
     let title = 'Checkout | Giraffe Website';
     let basketAmount = await getBasketAmount(req, res);
@@ -672,6 +729,8 @@ router.get('/checkout', ifNotLoggedIn, async (req, res) => {
     })
 });
 
+
+//checkout submit functionality
 router.post('/checkout', (req, res) => {
     console.log(req.body);
 
@@ -724,11 +783,15 @@ router.post('/checkout', (req, res) => {
 
 })
 
+
+//search page functionality - stops people accessing the search route without searching for something
 router.get('/search', (req, res) => {
     res.redirect('/');
 })
 
 
+
+//your account page functionality
 router.get('/youraccount', ifNotLoggedIn, async (req, res) => {
     let title = 'Your Account | Giraffe Website';
     let header = 'Your Account';
@@ -743,6 +806,8 @@ router.get('/youraccount', ifNotLoggedIn, async (req, res) => {
     });
 });
 
+
+//orders page functionality
 router.get('/orders', ifNotLoggedIn, async (req, res) => {
     let title = 'Your Orders | Giraffe Website';
     let id = req.session.username;
@@ -759,6 +824,8 @@ router.get('/orders', ifNotLoggedIn, async (req, res) => {
     });
 });
 
+
+//wishlist page functionality
 router.get('/wishlist', ifNotLoggedIn, async (req, res) => {
     let title = 'Your Wishlist | Giraffe Website';
     let header = 'Wishlist';
@@ -796,12 +863,15 @@ router.get('/wishlist', ifNotLoggedIn, async (req, res) => {
 });
 
 
+//logout page functionality
 router.get('/logout', ifLoggedIn, (req, res) => {
     req.session.loggedin = false;
     req.session.destroy();
     res.redirect('/');
 });
 
+
+//id page functionality - allows people to type in a product route and access its own page
 router.get('/:id', async (req, res) => {
     let basketAmount = await getBasketAmount(req, res);
     let wishlistItems = await getWishlistItems(req, res);
@@ -825,6 +895,7 @@ router.get('/:id', async (req, res) => {
 })
 
 
+//handles actions such as delete and add from wishlist/basket
 router.post('/actions', async (req, res) => {
     const backURL = req.header('Referer')
     let basketAmount = await getBasketAmount(req, res);
@@ -930,13 +1001,11 @@ router.post('/actions', async (req, res) => {
             });
         }
     }
-
-
-
 })
 
 
 
+//searchbar functionality
 router.post('/search', async (req, res) => {
     let query = `%${req.body.query}%`;
     let basketAmount = await getBasketAmount(req, res);
@@ -976,4 +1045,4 @@ router.post('/search', async (req, res) => {
 })
 
 
-module.exports = router;
+module.exports = router; //allows index.js to access these routes
