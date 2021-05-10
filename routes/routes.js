@@ -152,7 +152,8 @@ router.get('/pens', async (req, res) => {
             loggedin: req.session.loggedin,
             basketAmount: basketAmount,
             basketItems: basketItems,
-            wishlistItems: wishlistItems
+            wishlistItems: wishlistItems,
+            message: req.flash('message')
         });
     })
 });
@@ -178,7 +179,8 @@ router.get('/pencils', async (req, res) => {
             loggedin: req.session.loggedin,
             basketAmount: basketAmount,
             basketItems: basketItems,
-            wishlistItems: wishlistItems
+            wishlistItems: wishlistItems,
+            message: req.flash('message')
         });
     })
 });
@@ -205,7 +207,8 @@ router.get('/notebooks', async (req, res) => {
             loggedin: req.session.loggedin,
             basketAmount: basketAmount,
             basketItems: basketItems,
-            wishlistItems: wishlistItems
+            wishlistItems: wishlistItems,
+            message: req.flash('message')
         });
     })
 });
@@ -232,7 +235,8 @@ router.get('/art-equipment', async (req, res) => {
             loggedin: req.session.loggedin,
             basketAmount: basketAmount,
             basketItems: basketItems,
-            wishlistItems: wishlistItems
+            wishlistItems: wishlistItems,
+            message: req.flash('message')
         });
     })
 });
@@ -259,7 +263,8 @@ router.get('/art', async (req, res) => {
             loggedin: req.session.loggedin,
             basketAmount: basketAmount,
             basketItems: basketItems,
-            wishlistItems: wishlistItems
+            wishlistItems: wishlistItems,
+            message: req.flash('message')
         });
     })
 });
@@ -286,7 +291,8 @@ router.get('/cards', async (req, res) => {
             loggedin: req.session.loggedin,
             basketAmount: basketAmount,
             basketItems: basketItems,
-            wishlistItems: wishlistItems
+            wishlistItems: wishlistItems,
+            message: req.flash('message')
         });
     })
 });
@@ -314,7 +320,8 @@ router.get('/bags', async (req, res) => {
             loggedin: req.session.loggedin,
             basketAmount: basketAmount,
             basketItems: basketItems,
-            wishlistItems: wishlistItems
+            wishlistItems: wishlistItems,
+            message: req.flash('message')
         });
     })
 });
