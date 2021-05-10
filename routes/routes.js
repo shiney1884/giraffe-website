@@ -852,7 +852,8 @@ router.get('/wishlist', ifNotLoggedIn, async (req, res) => {
                 data: results,
                 basketAmount: basketAmount,
                 basketItems: basketItems,
-                wishlistItems: wishlistItems
+                wishlistItems: wishlistItems,
+                message: req.flash('message')
             });
         } else {
             res.render('products', {
@@ -863,7 +864,8 @@ router.get('/wishlist', ifNotLoggedIn, async (req, res) => {
                 data: [],
                 basketAmount: basketAmount,
                 basketItems: basketItems,
-                wishlistItems: wishlistItems
+                wishlistItems: wishlistItems,
+                message: req.flash('message')
             });
         }
     })
@@ -889,7 +891,7 @@ router.get('/:id', async (req, res) => {
             console.log(error);
         } else {
             res.render('product', {
-                title: results['title'],
+                title: results['name'],
                 username: req.session.username,
                 loggedin: req.session.loggedin,
                 data: results,
