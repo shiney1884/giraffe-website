@@ -7,10 +7,10 @@
             <%    for(let i = 0; i < data.length; i++) { %>
             <div class="basket-item">
                 <div class="image-holder">
-                    <a href="<%= data[i]['url'] %>"><img src="images/<%= data[i]['imageSrc'] %>" alt=""></a>
+                    <a href="#"><img src="images/<%= data[i]['imageSrc'] %>" alt=""></a>
                 </div>
                 <div class="basket-item-details">
-                    <a class="basket-item-name" href="<%= data[i]['url'] %>"><%= data[i]['name'] %></a>
+                    <a class="basket-item-name" href="#"><%= data[i]['name'] %></a>
                     <div class="basket-item-actions">
                         <div class="cko-quantity">Quantity<span> <%= data[i]['quantity'] %></span></div>
                         <div class="total">£<%= (data[i]['quantity'] * data[i]['price']).toFixed(2)%></div>
