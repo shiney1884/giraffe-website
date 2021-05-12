@@ -738,55 +738,65 @@ router.get('/checkout', ifNotLoggedIn, async (req, res) => {
 
 
 //checkout submit functionality
-router.post('/checkout', (req, res) => {
-    console.log(req.body);
+router.post('/checkout', async (req, res) => {
+    let basketAmount = await getBasketAmount(req, res);
+    if (basketAmount > 0) {
+        db.query("INSERT INTO orders(customerID, orderTotal, dateOfOrder, status, paymentMethod) VALUES (?, ?, ?, ?, ?)", [req.session.username, req.body.total, req.body.date, 'Pending', req.body['payment-method']], (err, res) => {
+            if (err) {
+                console.log(err)
+            }
+        })
 
-    db.query("INSERT INTO orders(customerID, orderTotal, dateOfOrder, status, paymentMethod) VALUES (?, ?, ?, ?, ?)", [req.session.username, req.body.total, req.body.date, 'Pending', req.body['payment-method']], (err, res) => {
-        if (err) {
-            console.log(err)
-        }
-    })
+        db.query('SELECT * FROM orders WHERE customerID = ? ORDER BY dateOfOrder DESC, id DESC LIMIT 1', [req.session.username], (err, res) => {
+            if (err) {
+                console.log(err)
+            } else {
+                let id = res[0]['id'];
 
-    db.query('SELECT * FROM orders WHERE customerID = ? ORDER BY dateOfOrder DESC, id DESC LIMIT 1', [req.session.username], (err, res) => {
-        if (err) {
-            console.log(err)
-        } else {
-            let id = res[0]['id'];
+                db.query('SELECT * FROM basketitems WHERE customerID = ?', [req.session.username], (err, res) => {
+                    if (err) {
+                        console.log(err)
+                    } else {
+                        for (let i = 0; i < res.length; i++) {
+                            db.query('INSERT INTO orderitems(customerID, productID, quantity, price, orderID) VALUES (?, ?, ?, ?, ?)', [req.session.username, res[i]['productID'], res[i]['quantity'], res[i]['price'], id], (err, res) => {
+                                if (err) {
+                                    console.log(err)
+                                }
+                            })
 
-            db.query('SELECT * FROM basketitems WHERE customerID = ?', [req.session.username], (err, res) => {
-                if (err) {
-                    console.log(err)
-                } else {
-                    for (let i = 0; i < res.length; i++) {
-                        db.query('INSERT INTO orderitems(customerID, productID, quantity, price, orderID) VALUES (?, ?, ?, ?, ?)', [req.session.username, res[i]['productID'], res[i]['quantity'], res[i]['price'], id], (err, res) => {
+                            db.query('UPDATE products SET stock = stock - ? WHERE id = ?', [res[i]['quantity'], res[i]['productID']], (err, res) => {
+                                if (err) {
+                                    console.log(err);
+                                } else {
+                                    console.log(res);
+                                }
+                            })
+                        }
+
+                        db.query('DELETE FROM basketitems WHERE customerID = ?', [req.session.username], (err, res) => {
                             if (err) {
                                 console.log(err)
                             }
                         })
-
-                        db.query('UPDATE products SET stock = stock - ? WHERE id = ?', [res[i]['quantity'], res[i]['productID']], (err, res) => {
-                            if (err) {
-                                console.log(err);
-                            } else {
-                                console.log(res);
-                            }
-                        })
                     }
+                })
+            }
+        })
 
-                    db.query('DELETE FROM basketitems WHERE customerID = ?', [req.session.username], (err, res) => {
-                        if (err) {
-                            console.log(err)
-                        }
-                    })
-                }
-            })
-        }
-    })
-
-    setTimeout(() => {
-        res.redirect('/');
-    }, 500);
-
+        setTimeout(() => {
+            res.redirect('/');
+        }, 500);
+    } else {
+        req.flash('message', 'You have no items in your basket')
+        res.render('basket', {
+            title: 'Error | Giraffe Website',
+            username: req.session.username,
+            loggedin: req.session.loggedin,
+            data: [],
+            basketAmount: basketAmount,
+            message: req.flash('message')
+        });
+    }
 
 })
 
