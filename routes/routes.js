@@ -120,7 +120,7 @@ function getWishlistItems(req, res) {
 
 //home page route functionality
 router.get('/', async (req, res) => {
-    let title = 'Home | Giraffe Website';
+    let title = 'Home | Giraffe Website - Best Stationery for Art';
     let basketAmount = await getBasketAmount(req, res);
 
     res.render('index', {
