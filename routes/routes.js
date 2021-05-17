@@ -120,7 +120,7 @@ function getWishlistItems(req, res) {
 
 //home page route functionality
 router.get('/', async (req, res) => {
-    let title = 'Home | Giraffe Website - Best Stationery for Art';
+    let title = 'Home | Giraffe Website - Best Art Stationery';
     let basketAmount = await getBasketAmount(req, res);
 
     res.render('index', {
@@ -134,8 +134,9 @@ router.get('/', async (req, res) => {
 
 //pen category page functionality
 router.get('/pens', async (req, res) => {
-    let title = 'Pens | Giraffe Website';
+    let title = 'Pens | Giraffe Website - Best Art Stationery ';
     let header = 'Pens';
+    let description = 'These pens are the pens you can safely add to your best art stationery collection knowing that you have the best around.'
     let sql = 'SELECT * FROM products WHERE categoryID = 1';
     let basketAmount = await getBasketAmount(req, res);
     let basketItems = await getBasketItems(req, res);
@@ -153,7 +154,8 @@ router.get('/pens', async (req, res) => {
             basketAmount: basketAmount,
             basketItems: basketItems,
             wishlistItems: wishlistItems,
-            message: req.flash('message')
+            message: req.flash('message'),
+            description: description
         });
     })
 });
@@ -161,8 +163,9 @@ router.get('/pens', async (req, res) => {
 
 //pencil category page functionality
 router.get('/pencils', async (req, res) => {
-    let title = 'Pencils | Giraffe Website';
+    let title = 'Pencils | Giraffe Website - Best Art Stationery';
     let header = 'Pencils';
+    let description = 'These pencils are the pencils you can safely add to your best art stationery collection knowing that you have the best around.'
     let sql = 'SELECT * FROM products WHERE categoryID = 2';
     let basketAmount = await getBasketAmount(req, res);
     let basketItems = await getBasketItems(req, res);
@@ -180,7 +183,8 @@ router.get('/pencils', async (req, res) => {
             basketAmount: basketAmount,
             basketItems: basketItems,
             wishlistItems: wishlistItems,
-            message: req.flash('message')
+            message: req.flash('message'),
+            description: description
         });
     })
 });
@@ -189,8 +193,9 @@ router.get('/pencils', async (req, res) => {
 
 //notebook category page functionality
 router.get('/notebooks', async (req, res) => {
-    let title = 'Notebooks | Giraffe Website';
+    let title = 'Notebooks | Giraffe Website - Best Art Stationery';
     let header = 'Notebooks';
+    let description = 'These notebooks are the notebooks you can safely add to your best art stationery collection knowing that you have the best around.'
     let sql = 'SELECT * FROM products WHERE categoryID = 3';
     let basketAmount = await getBasketAmount(req, res);
     let basketItems = await getBasketItems(req, res);
@@ -208,7 +213,8 @@ router.get('/notebooks', async (req, res) => {
             basketAmount: basketAmount,
             basketItems: basketItems,
             wishlistItems: wishlistItems,
-            message: req.flash('message')
+            message: req.flash('message'),
+            description: description
         });
     })
 });
@@ -217,8 +223,9 @@ router.get('/notebooks', async (req, res) => {
 
 //art equipment category page functionality
 router.get('/art-equipment', async (req, res) => {
-    let title = 'Art Equipment | Giraffe Website';
+    let title = 'Art Equipment | Giraffe Website - Best Art Stationery';
     let header = 'Art Equipment';
+    let description = 'The art equipment here is the best art equipment that you can safely add to your best art stationery collection knowing that you have the best around.'
     let sql = 'SELECT * FROM products WHERE categoryID = 4';
     let basketAmount = await getBasketAmount(req, res);
     let basketItems = await getBasketItems(req, res);
@@ -236,7 +243,8 @@ router.get('/art-equipment', async (req, res) => {
             basketAmount: basketAmount,
             basketItems: basketItems,
             wishlistItems: wishlistItems,
-            message: req.flash('message')
+            message: req.flash('message'),
+            description: description
         });
     })
 });
@@ -245,8 +253,9 @@ router.get('/art-equipment', async (req, res) => {
 
 //art category page functionality
 router.get('/art', async (req, res) => {
-    let title = 'Art | Giraffe Website';
+    let title = 'Art | Giraffe Website - Best Art Stationery';
     let header = 'Art';
+    let description = 'The art on offer here would be great to show off to people and joke that you have the best art stationery collection and that you made it ;)'
     let sql = 'SELECT * FROM products WHERE categoryID = 14';
     let basketAmount = await getBasketAmount(req, res);
     let basketItems = await getBasketItems(req, res);
@@ -264,7 +273,8 @@ router.get('/art', async (req, res) => {
             basketAmount: basketAmount,
             basketItems: basketItems,
             wishlistItems: wishlistItems,
-            message: req.flash('message')
+            message: req.flash('message'),
+            description: description
         });
     })
 });
@@ -273,8 +283,9 @@ router.get('/art', async (req, res) => {
 
 //card category page functionality
 router.get('/cards', async (req, res) => {
-    let title = 'Cards | Giraffe Website';
+    let title = 'Cards | Giraffe Website - Best Art Stationery';
     let header = 'Cards';
+    let description = 'These cards are perfect to gift to your friends and family, these would be perfect alongisde a gift to help your friends and family have the best art stationery!'
     let sql = 'SELECT * FROM products WHERE categoryID = 24';
     let basketAmount = await getBasketAmount(req, res);
     let basketItems = await getBasketItems(req, res);
@@ -292,7 +303,8 @@ router.get('/cards', async (req, res) => {
             basketAmount: basketAmount,
             basketItems: basketItems,
             wishlistItems: wishlistItems,
-            message: req.flash('message')
+            message: req.flash('message'),
+            description: description
         });
     })
 });
@@ -302,8 +314,9 @@ router.get('/cards', async (req, res) => {
 
 //bag category page functionality
 router.get('/bags', async (req, res) => {
-    let title = 'Bags | Giraffe Website';
+    let title = 'Bags | Giraffe Website - Best Art Stationery';
     let header = 'Bags';
+    let description = 'These bags are the best bags around and may help to carry around the best art stationery that you own!'
     let sql = 'SELECT * FROM products WHERE categoryID = 34';
     let basketAmount = await getBasketAmount(req, res);
     let basketItems = await getBasketItems(req, res);
@@ -321,7 +334,8 @@ router.get('/bags', async (req, res) => {
             basketAmount: basketAmount,
             basketItems: basketItems,
             wishlistItems: wishlistItems,
-            message: req.flash('message')
+            message: req.flash('message'),
+            description: description
         });
     })
 });

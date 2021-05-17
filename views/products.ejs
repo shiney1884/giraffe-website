@@ -1,7 +1,8 @@
 <%- include('header'); -%>
 <div class="page-content">
-    <div class="product-hero hero">
-        <h4 class="product-header"><%= header %></h4>
+    <div class="product-hero">
+        <h1 class="product-header"><%= header %></h1>
+        <p class="product-description"><%= description %></p>
     </div>
     <div id="products" class="products">
         <% if(message) { %>
@@ -11,7 +12,7 @@
         <form class="product-form" action="/actions" method="post">
             <div id="<%= data[i]['id'] %>" class="product">
                 <a class="img-btn" href='<%= data[i]["url"] %>'><img class="product-img"
-                        src="images/<%= data[i]['imageSrc'] %>" alt=""></a>
+                        src="images/<%= data[i]['imageSrc'] %>" alt="Best Art Stationery Product - <%= data[i]['name'] %>"></a>
                 <input type="hidden" name='id' value='<%= data[i]["id"] %>'>
                 <a class="name-btn" href='<%= data[i]["url"] %>'><%= data[i]['name'] %></a>
                 <div class="product-info">

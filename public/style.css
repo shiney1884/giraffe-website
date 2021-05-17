@@ -288,7 +288,7 @@ footer a {
 
 .hero {
     width: 100vw;
-    height: 25vh;
+    min-height: 25vh;
     position: relative;
     display: flex;
     flex-direction: column;
@@ -297,16 +297,12 @@ footer a {
     z-index: 1;
 }
 
-.hero-text {
-    color: #fff;
-}
-
-.hero::before {
+.home-page-hero::before {
     content: '';
     background: url(images/notebook-img.jpg);
     background-size: cover;
     background-position: center;
-    height: 25vh;
+    height: 100%;
     position: absolute;
     top: 0;
     right: 0;
@@ -467,7 +463,7 @@ footer a {
     background: url(images/art-equipment.jpg);
     background-size: cover;
     background-position: center;
-    height: 25vh;
+    height: 100%;
     position: absolute;
     top: 0;
     right: 0;
@@ -559,19 +555,30 @@ footer a {
 
 /* product hero */
 
+.product-hero {
+    width: 100vw;
+    min-height: 40vh;
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    z-index: 1;
+}
+
 .product-hero::after {
     content: '';
     background: url(images/notebook-cat-img.jpg);
     background-size: cover;
     background-position: center;
-    height: 25vh;
+    height: 100%;
     position: absolute;
     top: 0;
     right: 0;
     bottom: 0;
     left: 0;
     z-index: -1;
-    opacity: 0.25;
+    opacity: 0.2;
 }
 
 .product-header {
@@ -579,6 +586,17 @@ footer a {
     color: #B46325;
     background-color: #F2B613;
     padding: 10px
+}
+
+.product-description {
+    /* background-color: #fff; */
+    color: #000;
+    margin-top: 10px;
+    padding: 10px;
+    width: 80vw;
+    text-align: center;
+    font-weight: 400;
+    letter-spacing: 0.5px;
 }
 
 
@@ -640,6 +658,7 @@ footer a {
     flex-basis: 40%;
     /* border: 2px solid red; */
 }
+
 
 .product:hover {
     cursor: pointer;
