@@ -220,24 +220,6 @@ nav {
     opacity: 1;
 }
 
-
-/* full page product-copywrite */
-
-.full-page-copywrite {
-    min-height: 80vh;
-    background-color: #000;
-    z-index: 100;
-    width: 100%;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-}
-
-
-.full-page-copywrite h1 {
-    color: #fff;
-}
-
 /* footer */
 
 footer {
